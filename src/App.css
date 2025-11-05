@@ -1,0 +1,1217 @@
+/* =======================================
+   VARIABLES DE COLOR Y ESTILO GLOBAL
+======================================= */
+:root {
+  --color-primary-1: #d46060;    
+  --color-primary-2: #ffffff;    
+  --color-accent: #4deed3;       
+  --color-bg: #ffffff;          
+  --color-card: #9d818a;        
+  --color-text: #222;            
+  
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  --transition: 0.3s ease;
+  --font-title: 'Poppins', sans-serif;
+  --font-body: 'Quicksand', sans-serif;
+}
+
+/* =======================================
+   ESTILO GLOBAL
+======================================= */
+body {
+  font-family: var(--font-body);
+  background: linear-gradient(135deg, var(--color-primary-1), var(--color-primary-2), var(--color-bg), var(--color-accent));
+  color: var(--color-text);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  animation: fadeBody 1s ease-in-out;
+}
+
+@keyframes fadeBody {
+  from { opacity: 0; transform: scale(1.02); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* =======================================
+   HEADER Y NAVEGACIÓN
+======================================= */
+
+
+/* CORRIGE el ancho y el recorte lateral */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;  /* 🔹 Evita desbordamiento horizontal */
+  font-family: system-ui, Arial, sans-serif;
+}
+
+/* HEADER sin provocar recorte derecho */
+header {
+  position: relative;
+  width: 100%;          /* 🔹 ya no 100vw */
+  background: #fff7ea;  /* tu color original */
+  padding: 10px 20px;
+  box-sizing: border-box;
+  overflow: visible;
+  z-index: 10;
+}
+
+/* Estructura interna */
+header > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* Botones del header */
+header button {
+  margin: 5px;
+}
+
+/* Corrige carrito */
+#carrito-icono {
+  position: relative;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+#carrito-mini {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 5px 8px rgba(0,0,0,0.1);
+  display: none;
+  padding: 10px;
+  width: 220px;
+  z-index: 1000;
+}
+
+/* Margen inferior entre header y contenido */
+main, #content {
+  margin-top: 130px;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-x: hidden; /* 🔹 evita que el contenido empuje los lados */
+}
+
+/* Nav centrado */
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+
+/* --- CENTRAR CONTENIDO DE SECCIONES --- */
+section {
+  width: 100%;
+  max-width: 1200px;      /* 🔹 Limita el ancho central */
+  margin: 0 auto;         /* 🔹 Centra horizontalmente */
+  padding: 40px 20px;
+  box-sizing: border-box;
+  text-align: center;     /* 🔹 Centra texto por defecto */
+}
+
+/* Para artículos, párrafos, imágenes dentro de secciones */
+section p,
+section h2,
+section h3,
+section img,
+section div {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Si alguna sección usa grid o flex, mantenla centrada */
+section .contenido,
+section .bloque,
+section .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+#tituloPapeleria {
+  font-family: 'Fredoka One', cursive;
+  font-size: 4.8rem;
+  text-align: center;
+  letter-spacing: 3px;
+  text-shadow: 
+    4px 4px 0px rgba(255, 183, 197, 0.4),
+    8px 8px 0px rgba(255, 209, 220, 0.3),
+    12px 12px 0px rgba(199, 206, 234, 0.2);
+  background: linear-gradient(135deg, 
+    #FF6B9D 0%, 
+    #FF9EBD 25%, 
+    #FFB7C5 50%, 
+    #C7CEEA 75%, 
+    #B5EAD7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: brilloArcoiris 3s ease-in-out infinite;
+  margin: 10px 0 20px 0;
+  padding: 0;
+  display: block;
+  width: 100%;
+  position: static;
+}
+
+/* Efecto de brillo con colores vibrantes */
+@keyframes brilloArcoiris {
+  0%, 100% {
+    text-shadow: 
+      4px 4px 0px rgba(255, 107, 157, 0.4),
+      8px 8px 0px rgba(255, 158, 189, 0.3),
+      12px 12px 0px rgba(199, 206, 234, 0.2),
+      0 0 15px rgba(255, 107, 157, 0.6),
+      0 0 30px rgba(255, 158, 189, 0.4);
+    filter: brightness(1);
+  }
+  50% {
+    text-shadow: 
+      4px 4px 0px rgba(255, 107, 157, 0.6),
+      8px 8px 0px rgba(255, 158, 189, 0.5),
+      12px 12px 0px rgba(199, 206, 234, 0.4),
+      0 0 25px rgba(255, 107, 157, 0.8),
+      0 0 45px rgba(255, 158, 189, 0.6);
+    filter: brightness(1.2);
+  }
+}
+
+/* Efecto hover */
+#tituloPapeleria:hover {
+  animation: brilloArcoiris 0.8s ease-in-out infinite;
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+/* Versión responsive */
+@media (max-width: 768px) {
+  #tituloPapeleria {
+    font-size: 3.5rem;
+    margin: 5px 0 15px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  #tituloPapeleria {
+    font-size: 2.8rem;
+    letter-spacing: 2px;
+    margin: 5px 0 10px 0;
+  }
+}
+
+/* Asegura que nada se desplace por un margen oculto */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: hidden;  /* sin barra lateral */
+}
+
+header h1 {
+  font-family: 'Amatic SC', cursive;
+  font-size: 4rem;
+  color: #ff6f61;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.15);
+  animation: balanceo 2s ease-in-out infinite alternate;
+}
+
+@keyframes balanceo {
+  from { transform: rotate(-2deg); }
+  to { transform: rotate(2deg); }
+}
+
+
+
+
+header {
+  background: #fff9e6; /* Color tipo papel */
+  border: 2px solid #d2b48c;
+  border-radius: 0; /* Sin esquinas redondeadas */
+  padding: 20px;
+  margin: 0; /* Elimina margen exterior */
+  position: relative;
+  box-shadow: none; /* Quita sombra para que parezca parte del fondo */
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  text-align: center;
+  width: 100vw; /* Ocupa todo el ancho visible */
+  left: 0;
+  right: 0;
+}
+
+/* Asegura que las líneas de libreta cubran todo el ancho también */
+header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0; /* Cambiado para que inicie desde el borde */
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 24px,
+    #d2b48c 25px
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Efecto espiral a la izquierda (ajustado para que no se corte) */
+header::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 0; /* Cambiado para pegarlo al borde */
+  width: 8px;
+  height: calc(100% - 20px);
+  background: repeating-linear-gradient(
+    to bottom,
+    #aaa 0,
+    #aaa 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  border-radius: 4px;
+}
+
+header h1 {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  margin: 0;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* Animación de entrada */
+@keyframes slideDown {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+header { animation: slideDown 1s ease; }
+
+/* =======================================
+   LOGIN
+======================================= */
+.login-container {
+  background: linear-gradient(145deg, var(--color-card), var(--color-bg));
+  margin-top: 60px;
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  width: 360px;
+  text-align: center;
+  animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.login-container h2 {
+  font-family: var(--font-title);
+  margin-bottom: 20px;
+  color: var(--color-accent);
+  animation: glowText 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glowText {
+  from { text-shadow: 0 0 5px var(--color-accent); }
+  to { text-shadow: 0 0 20px var(--color-primary-2); }
+}
+
+.login-container input {
+  width: 95%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid var(--color-primary-2);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: #333;
+  transition: var(--transition);
+}
+
+.login-container input:focus {
+  outline: none;
+  background: var(--color-primary-1);
+  box-shadow: 0 0 10px var(--color-accent);
+}
+
+.login-container button {
+  font-size: 1.1rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--color-card);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.login-container button:hover {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 25px rgba(255, 202, 212, 0.7);
+}
+
+
+
+/* =======================================
+   BOTONES GLOASS / BOTONES GENERALES
+======================================= */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+button, .agregar, .inicio-btn, .logout-btn, #chatbox-input button, #carritoPago button {
+   background-color: #4CAF50; /* Cambia a un color que combine con tu diseño */
+    color: white;              /* Color del texto */
+    padding: 5px 10px;         /* Más pequeño que el estándar */
+    font-size: 12px;           /* Tamaño de letra reducido */
+    border: none;              /* Quitar bordes por defecto */
+    border-radius: 5px;        /* Bordes redondeados */
+    cursor: pointer;
+    margin: 2px;               /* Espaciado entre botones */
+    transition: background-color 0.3s ease; /* Efecto al pasar el mouse */
+}
+
+.btn-primary, .agregar, #carritoPago button {
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: var(--color-card);
+  font-weight: 700;
+}
+
+.btn-primary:hover, .agregar:hover, #carritoPago button:hover {
+  background: rgba(255,255,255,0.6);
+  box-shadow: 0 0 30px rgba(255,202,212,0.8);
+  transform: scale(1.05);
+}
+
+.btn-secondary, .logout-btn, .inicio-btn {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #000000;
+  font-weight: 600;
+}
+
+.btn-secondary:hover, .logout-btn:hover, .inicio-btn:hover {
+  background: rgba(255,255,255,0.35);
+  box-shadow: 0 0 20px var(--color-accent);
+  transform: scale(1.06);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* =======================================
+   CARRUSEL
+======================================= */
+.carrusel {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: 40px auto;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  background: var(--color-card);
+}
+
+.carrusel-contenedor {
+  display: flex;
+  overflow: hidden;
+  background: transparent;
+}
+
+.carrusel-img {
+  max-width: 100%;
+  display: none;
+}
+
+.carrusel-img.active {
+  display: block;
+}
+
+.carrusel button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.carrusel button:hover {
+  background: rgba(255,255,255,0.5);
+}
+
+/* =======================================
+   CHATBOT / BOTÓN FLOTANTE
+======================================= */
+#chatbot-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-primary-2));
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 50%;
+  font-size: 22px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  cursor: pointer;
+  transition: 0.3s ease;
+  animation: float 2.5s ease-in-out infinite;
+  z-index: 1000;
+}
+
+#chatbot-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px var(--color-accent);
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+#chatbox {
+  position: fixed;
+  bottom: 90px;
+  right: 25px;
+  width: 320px;
+  max-height: 450px;
+  background: var(--color-card);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  animation: fadeInUp 0.5s ease forwards;
+  z-index: 1000;
+}
+
+#chatbox-header {
+  background: linear-gradient(90deg, var(--color-primary-1), var(--color-primary-2));
+  color: rgb(0, 0, 0);
+  padding: 12px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 12px 12px 0 0;
+  letter-spacing: 1px;
+}
+
+#chatbox-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: rgba(0,0,0,0.2);
+  font-size: 14px;
+  color: #000000;
+}
+
+#chatbox-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+#chatbox-messages::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 6px;
+}
+
+#chatbox-input {
+  display: flex;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.3);
+}
+
+#chatbox-input input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
+
+#chatbox-input input::placeholder {
+  color: #ccc;
+}
+
+#chatbox-input button {
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  padding: 12px 14px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+#chatbox-input button:hover {
+  background: var(--color-primary-2);
+}
+
+/* =======================================
+   PRODUCTOS / IMÁGENES
+======================================= */
+.producto {
+  position: relative;
+  width: 220px;
+  text-align: center;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.img-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.img-container img {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.descripcion {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  padding: 8px;
+  font-size: 13px;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.3s ease;
+  border-radius: 0 0 10px 10px;
+  pointer-events: none;
+}
+
+.img-container:hover .descripcion {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.img-container:hover img {
+  transform: scale(1.05);
+}
+
+.agregar {
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 5;
+}
+
+.agregar:hover {
+  background: var(--color-primary-1);
+  box-shadow: 0 0 10px var(--color-accent);
+}
+
+/* =======================================
+   CARRITO / PAGO
+======================================= */
+#carritoPago {
+  background: var(--color-card);
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  max-width: 400px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+#carritoPago button {
+  background: var(--color-primary-2);
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+#carritoPago button:hover {
+  background: var(--color-accent);
+}
+
+/* =======================================
+   NAV / MENÚ
+======================================= */
+nav {
+  background: linear-gradient(90deg, var(--color-primary-2), var(--color-bg));
+  box-shadow: var(--shadow);
+  width: 100%;
+  padding: 0.5rem 0;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  position: relative;
+  animation: slideIn 0.6s ease both;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+nav a {
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: var(--color-card);
+  font-size: 1rem;
+  padding: 10px 16px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.3);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  display: inline-block;
+}
+
+nav a:hover {
+  background: var(--color-accent);
+  color: white;
+  box-shadow: 0 0 15px var(--color-accent);
+  transform: translateY(-2px);
+}
+
+nav a:focus {
+  outline: none;
+  box-shadow: 0 0 10px var(--color-primary-1);
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav a {
+    width: 80%;
+    text-align: center;
+  }
+}
+
+/* =======================================
+   DASHBOARD
+======================================= */
+.dashboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.dashboard-container .card {
+  flex: 1 1 200px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  text-align: center;
+}
+
+.dashboard-container .card:hover {
+  transform: translateY(-5px);
+}
+
+.dashboard-container .card h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.dashboard-container .card p {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #555;
+}
+
+.dashboard-mini {
+  margin-top: 20px;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+/* =======================================
+   PORTAFOLIO
+======================================= */
+.portafolio {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin: 20px 0;
+}
+
+.portafolio .perfil {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.portafolio .perfil-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid #333;
+}
+
+.portafolio h3 {
+  margin: 0;
+  color: #222;
+}
+
+.portafolio p {
+  margin: 5px 0 0 0;
+  color: #555;
+}
+
+.portafolio .proyectos {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.portafolio .proyecto {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.portafolio .proyecto:hover {
+  transform: translateY(-3px);
+}
+
+.portafolio .proyecto h4 {
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.portafolio .proyecto p {
+  color: #555;
+}
+
+/* =======================================
+   TARJETAS / BLOBS
+======================================= */
+.card {
+  position: relative;
+  width: 220px;
+  height: 280px;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15px;
+  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+  background: #f0f0f0;
+  text-align: center;
+}
+
+.bg {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 210px;
+  height: 270px;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(24px);
+  border-radius: 10px;
+}
+
+.blob {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #ff0000;
+  opacity: 0.5;
+  filter: blur(12px);
+  animation: blob-bounce 5s infinite ease;
+}
+
+@keyframes blob-bounce {
+  0% { transform: translate(-100%, -100%) translate3d(0,0,0); }
+  25% { transform: translate(-100%, -100%) translate3d(100%,0,0); }
+  50% { transform: translate(-100%, -100%) translate3d(100%,100%,0); }
+  75% { transform: translate(-100%, -100%) translate3d(0,100%,0); }
+  100% { transform: translate(-100%, -100%) translate3d(0,0,0); }
+}
+
+/* === Sección tipo libreta === */
+#content {
+  background: #fffaf5;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  margin: 20px auto;
+  padding: 20px 40px;
+  width: 95%;           /* 🔹 ahora casi todo el ancho */
+  max-width: 1300px;    /* 🔹 limita si la pantalla es muy grande */
+  min-height: 80vh;     /* 🔹 ocupa casi toda la altura */
+  border: 3px dashed #ffd6a5; /* ✏️ estilo tipo libreta */
+  background-image: linear-gradient(to bottom, #fff 97%, #ffe5ec 3%);
+  background-size: 100% 40px; /* líneas tipo renglones */
+}
+
+/* Si quieres que toque las orillas totalmente: */
+body.fullscreen #content {
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+
+
+/* =======================================
+   BOTONES COLOR / MODO CLARO / OSCURO
+======================================= */
+.color-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.color-btn:hover {
+  background-color: #555;
+}
+
+/* 🌞 MODO CLARO (por defecto) */
+body {
+  background-color: #f4f4f4;
+  color: hsl(0, 100%, 89%);
+}
+
+/* 🌙 MODO OSCURO */
+body.modo-oscuro {
+  background-color: #f3a3a3;
+  color: #f1f1f1;
+}
+
+body.modo-oscuro header {
+  background-color: #ffd1d1;
+}
+
+body.modo-oscuro .color-btn {
+  background-color: #f1f1f1;
+  color: #121212;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =======================================
+   BOTONES FORMA GOMA CON ANIMACIONES
+======================================= */
+.inicio-btn,
+.logout-btn,
+button,
+.btn-goma {
+  background: linear-gradient(145deg, #fbe3e8, #fcd9df); /* Rosa goma */
+  color: #5a4a4a;
+  border: none;
+  padding: 10px 26px;
+  border-radius: 45px; /* forma ovalada */
+  font-family: 'Baloo 2', cursive;
+  font-size: 14px;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow:
+    inset 2px 2px 5px rgba(255,255,255,0.6),
+    3px 3px 6px rgba(0,0,0,0.15);
+  transition: all 0.25s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ✨ Reflejo brillante */
+.inicio-btn::after,
+.logout-btn::after,
+button::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  width: 80%;
+  height: 40%;
+  background: rgba(255,255,255,0.3);
+  border-radius: 40px;
+  filter: blur(3px);
+}
+
+/* 🩷 efecto goma animado al pasar */
+.inicio-btn:hover,
+.logout-btn:hover,
+button:hover {
+  animation: goma 0.5s ease;
+  transform: scale(1.05);
+  background: linear-gradient(145deg, #fcd9df, #fbe3e8);
+  box-shadow:
+    inset 2px 2px 4px rgba(255,255,255,0.5),
+    4px 4px 8px rgba(0,0,0,0.2);
+}
+
+/* 🧡 efecto rebote al hacer clic */
+.inicio-btn:active,
+.logout-btn:active,
+button:active {
+  animation: rebote 0.25s ease;
+  transform: scale(0.92);
+  box-shadow:
+    inset 3px 3px 5px rgba(0,0,0,0.15),
+    1px 1px 3px rgba(255,255,255,0.5);
+}
+
+/* 🌈 variaciones de color (como diferentes gomas) */
+.inicio-btn {
+  background: linear-gradient(145deg, #d4f1f9, #bde9f7); /* goma celeste */
+}
+
+.logout-btn {
+  background: linear-gradient(145deg, #ffe8c2, #ffd9a0); /* goma durazno */
+}
+
+button.goma-verde {
+  background: linear-gradient(145deg, #d3f8d3, #b6efb8); /* goma menta */
+}
+
+button.goma-lila {
+  background: linear-gradient(145deg, #e9d6ff, #d4bfff); /* goma lila */
+}
+
+/* 🌸 Animaciones suaves tipo goma */
+@keyframes goma {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.1); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1.05); }
+}
+
+@keyframes rebote {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+/* 🌸 Animaciones suaves */
+@keyframes goma {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.1); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1.05); }
+}
+
+@keyframes rebote {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+/* 🎀 Contenedor lateral para los botones */
+.botonera-lateral {
+  position: fixed;
+  top: 50px;
+  left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999;
+}
+
+/* ✨ Estilo base para los tres botones */
+#logout,
+#cambiarColor,
+#inventario,
+#verProveedores {
+  background: linear-gradient(135deg, #ffe8e8, #fff5f5);
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 13px;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 14px;
+  color: #4a4a4a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: goma 2.5s infinite;
+}
+
+/* 💕 Hover con efecto de rebote */
+#logout:hover,
+#cambiarColor:hover,
+#inventario:hover {
+  background: linear-gradient(135deg, #ffdcdc, #fff1f1);
+  animation: rebote 0.3s ease;
+}
+
+/* 🌿 Estilo específico para cerrar sesión */
+#logout {
+  background: linear-gradient(135deg, #ffd5d5, #ffeaea);
+  color: #a44;
+}
+
+/* 🪜 Efecto escalera (posición visual) */
+#logout { transform: translateX(0); }
+#cambiarColor { transform: translateX(10px); }
+#inventario { transform: translateX(20px); }
+
+/* 💎 Ajuste de tamaño general */
+#logout,
+#cambiarColor,
+#inventario {
+  width: 130px;
+  text-align: center;
+}
+
+
+/* =======================================
+   ESTILO GLOBAL - SOLO FONDO MODIFICADO
+======================================= */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: system-ui, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+body {
+  font-family: var(--font-body);
+  background: #fffaf5; /* Color base tipo papel */
+  color: var(--color-text);
+  /* Efecto de libreta completo - MODIFICADO */
+  background-image: 
+    /* Líneas horizontales tipo renglones - AHORA OCUPA TODA LA PÁGINA */
+    linear-gradient(to bottom, transparent 95%, rgba(210, 180, 140, 0.3) 5%),
+    /* Margen izquierdo para espiral - AHORA OCUPA TODA LA PÁGINA */
+    linear-gradient(to right, #f8f8f8 60px, transparent 60px);
+  background-size: 100% 40px, 100% 100%;
+  background-attachment: local;
+  line-height: 40px;
+  position: relative;
+}
+
+/* Espiral lateral fija - MODIFICADO PARA TODA LA PÁGINA */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 20px;
+  width: 8px;
+  height: 100vh;
+  background: repeating-linear-gradient(
+    to bottom,
+    #aaa 0,
+    #aaa 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* =======================================
+   HEADER Y NAVEGACIÓN - MODIFICADO PARA CUBRIR BORDES
+======================================= */
+/* HEADER que cubre todo el ancho hasta los bordes */
+header {
+  position: relative;
+  width: 100vw; /* 🔹 Cambiado a 100vw para cubrir bordes */
+  margin-left: calc(-50vw + 50%); /* 🔹 Centrado forzado */
+  left: 0;
+  right: 0;
+  background: #fff7ea;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  overflow: visible;
+  z-index: 10;
+}
+
+/* NAVEGACIÓN que cubre todo el ancho hasta los bordes */
+nav {
+  position: relative;
+  width: 100vw; /* 🔹 Cambiado a 100vw para cubrir bordes */
+  margin-left: calc(-50vw + 50%); /* 🔹 Centrado forzado */
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg, var(--color-primary-2), var(--color-bg));
+  box-shadow: var(--shadow);
+  padding: 0.5rem 0;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
