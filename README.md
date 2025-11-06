@@ -1,6 +1,6 @@
-# Nombre del Proyecto 🎓
+# PAPELERIA KAREN
 
-## 📋 Información Institucional
+##  Información Institucional
 
 | **Campo** | **Información** |
 |-----------|-----------------|
@@ -14,15 +14,15 @@
 | **Periodo** | [Agosto-Diciembre] |
 
 
-### ✨ Características Principales
+###  Características Principales
 - **Interfaz moderna** desarrollada con React
 - **Diseño responsive** adaptable a diferentes dispositivos
 - **Funcionalidades** específicas del proyecto académico
 - **Código modular** y mantenible
 
-## 🛠️ Tecnologías Utilizadas
+## Lenguajes Utilizados
 
-| **Tecnología** | **Versión** | **Propósito** |
+| **Lenguajes** | **Versión** | **Propósito** |
 |----------------|-------------|---------------|
 | React | 18.x | Framework principal |
 | JavaScript ES6+ | - | Lenguaje de programación |
@@ -90,4 +90,3 @@ src/
   App.js
   App.css
 
-  

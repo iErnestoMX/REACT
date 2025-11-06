@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { obtenerFavoritos, eliminarDeFavoritos } from '../../utils/favoritosUtils';
 import { obtenerCarrito, guardarCarrito, obtenerInventario, guardarInventario } from '../../utils/carritoUtils';
+import { notificacionExito, notificacionError, notificacionCarrito, notificacionInfo } from '../../utils/notificacionesUtils';
 
 const Favoritos = ({ onUpdateFavoritos }) => {
   const [favoritos, setFavoritos] = useState([]);
@@ -25,7 +26,7 @@ const Favoritos = ({ onUpdateFavoritos }) => {
   const eliminarFavorito = (nombreProducto) => {
     eliminarDeFavoritos(nombreProducto);
     onUpdateFavoritos?.();
-    alert(`❌ ${nombreProducto} eliminado de favoritos`);
+    notificacionExito('Favorito Eliminado', `${nombreProducto} eliminado de favoritos`);
   };
 
   const agregarAlCarrito = (producto) => {
@@ -35,7 +36,7 @@ const Favoritos = ({ onUpdateFavoritos }) => {
     // Verificar stock
     const productoInventario = inventario.find(prod => prod.nombre === producto.nombre);
     if (!productoInventario || productoInventario.cantidad < 1) {
-      alert(`❌ No hay stock disponible de ${producto.nombre}`);
+      notificacionError('Sin Stock', `No hay stock disponible de ${producto.nombre}`);
       return;
     }
 
@@ -47,7 +48,10 @@ const Favoritos = ({ onUpdateFavoritos }) => {
       if (productoInventario.cantidad > itemExistente.qty) {
         itemExistente.qty += 1;
       } else {
-        alert(`❌ No hay suficiente stock. Solo hay ${productoInventario.cantidad} unidades disponibles.`);
+        notificacionError(
+          'Stock Insuficiente', 
+          `Solo hay ${productoInventario.cantidad} unidades disponibles de ${producto.nombre}`
+        );
         return;
       }
     } else {
@@ -74,14 +78,17 @@ const Favoritos = ({ onUpdateFavoritos }) => {
     window.dispatchEvent(new Event('storage'));
     onUpdateFavoritos?.();
     
-    alert(`✅ ${producto.nombre} agregado al carrito`);
+    notificacionCarrito(
+      'Producto Agregado', 
+      `${producto.nombre} agregado al carrito\nStock restante: ${productoInventario.cantidad - 1}`
+    );
   };
 
   const vaciarFavoritos = () => {
     localStorage.setItem('favoritos', JSON.stringify([]));
     setFavoritos([]);
     onUpdateFavoritos?.();
-    alert('✅ Lista de favoritos vaciada');
+    notificacionInfo('Lista Vacía', 'Todos los favoritos han sido eliminados');
   };
 
   if (favoritos.length === 0) {
@@ -98,9 +105,8 @@ const Favoritos = ({ onUpdateFavoritos }) => {
 
   return (
     <>
-      <header>
         <h2 style={{textAlign: 'center'}}>Favoritos ({favoritos.length})</h2>
-      </header>
+      
 
       <div style={{display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '20px', padding: '20px'}}>
         {favoritos.map((item, index) => {

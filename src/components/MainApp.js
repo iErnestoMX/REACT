@@ -3,6 +3,7 @@ import Header from './Header';
 import GestionUsuarios from './sections/GestionUsuarios';
 import { actualizarContadorCarrito } from '../utils/carritoUtils';
 import Content from './Content';
+import Notificaciones from './Notificaciones'; // Importar el componente de notificaciones
 
 const MainApp = ({ onLogout }) => {
   const [currentSection, setCurrentSection] = useState('inicio');
@@ -39,6 +40,9 @@ const MainApp = ({ onLogout }) => {
 
   return (
     <div>
+      {/* Componente de Notificaciones - se muestra en todas las secciones */}
+      <Notificaciones />
+      
       <Header 
         usuarioActual={usuarioActual}
         carritoCount={carritoCount}

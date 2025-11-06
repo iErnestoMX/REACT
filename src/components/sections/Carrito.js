@@ -1,5 +1,8 @@
 import React from 'react';
 import { obtenerCarrito, guardarCarrito, obtenerInventario, guardarInventario } from '../../utils/carritoUtils';
+import { registrarVenta } from '../../utils/ventasUtils';
+import { agregarCliente, buscarClientePorEmail } from '../../utils/clientesUtils';
+import { notificacionExito, notificacionError, notificacionInfo } from '../../utils/notificacionesUtils';
 
 const Carrito = ({ onUpdateCarrito }) => {
   const carrito = obtenerCarrito();
@@ -27,7 +30,10 @@ const Carrito = ({ onUpdateCarrito }) => {
     if (diferencia > 0) {
       const productoInventario = inventario.find(prod => prod.nombre === item.name);
       if (productoInventario && productoInventario.cantidad < diferencia) {
-        alert(`❌ No hay suficiente stock. Solo hay ${productoInventario.cantidad} unidades disponibles.`);
+        notificacionError(
+          'Stock Insuficiente', 
+          `Solo hay ${productoInventario.cantidad} unidades disponibles`
+        );
         return;
       }
     }
@@ -62,7 +68,7 @@ const Carrito = ({ onUpdateCarrito }) => {
     guardarCarrito(carritoActual);
     onUpdateCarrito();
     
-    alert(`✅ ${itemEliminado.name} eliminado del carrito y reintegrado al inventario`);
+      notificacionExito('Producto Eliminado', `${itemEliminado.name} eliminado del carrito`);
   };
 
   const vaciarCarrito = () => {
@@ -73,27 +79,80 @@ const Carrito = ({ onUpdateCarrito }) => {
     
     guardarCarrito([]);
     onUpdateCarrito();
-    alert('✅ Carrito vaciado y todos los productos reintegrados al inventario');
+    notificacionInfo('Carrito Vaciado', 'Todos los productos reintegrados al inventario');
   };
 
   const realizarCompra = () => {
     if (carrito.length === 0) {
-      alert('❌ El carrito está vacío');
+      notificacionError('Carrito Vacío', 'Agrega productos antes de realizar la compra');
       return;
     }
 
-    // Mostrar resumen de compra
+
     const total = carrito.reduce((sum, item) => sum + item.price * item.qty, 0);
     const resumen = carrito.map(item => 
       `${item.name} x${item.qty} - $${item.price * item.qty}`
     ).join('\n');
 
-    if (window.confirm(`🛒 RESUMEN DE COMPRA:\n\n${resumen}\n\n💵 TOTAL: $${total}\n\n¿Confirmar compra?`)) {
-      // Aquí podrías agregar lógica de pago, por ahora solo vaciamos el carrito
-      guardarCarrito([]);
-      onUpdateCarrito();
-      alert('✅ ¡Compra realizada con éxito! Los productos han sido descontados del inventario.');
-      window.dispatchEvent(new Event('storage'));
+    // Solicitar información del cliente
+    const clienteEmail = prompt('📧 Ingrese el email del cliente:');
+    if (!clienteEmail) {
+      notificacionError('Email Requerido', 'Se requiere email del cliente para registrar la venta');
+      return;
+    }
+
+
+    // Validar formato de email básico
+    if (!clienteEmail.includes('@') || !clienteEmail.includes('.')) {
+      notificacionError('Email Inválido', 'Por favor ingrese un email válido');
+      return;
+    }
+
+    const clienteNombre = prompt('👤 Ingrese el nombre del cliente:') || 'Cliente';
+    const clienteTelefono = prompt('📞 Ingrese el teléfono del cliente (opcional):') || '';
+
+    if (window.confirm(`🛒 RESUMEN DE COMPRA:\n\n👤 Cliente: ${clienteNombre}\n📧 Email: ${clienteEmail}\n\n${resumen}\n\n💵 TOTAL: $${total}\n\n¿Confirmar compra?`)) {
+      
+      try {
+        // Registrar o encontrar cliente
+        let cliente = buscarClientePorEmail(clienteEmail);
+        if (!cliente) {
+          cliente = agregarCliente({
+            nombre: clienteNombre,
+            email: clienteEmail,
+            telefono: clienteTelefono
+          });
+        }
+
+        // Registrar la venta
+        const venta = registrarVenta({
+          cliente: clienteNombre,
+          clienteEmail: clienteEmail,
+          clienteTelefono: clienteTelefono,
+          productos: carrito.map(item => ({
+            nombre: item.name,
+            cantidad: item.qty,
+            precio: item.price,
+            total: item.price * item.qty
+          })),
+          total: total,
+          items: carrito.length
+        });
+
+        // Vaciar carrito después de registrar la venta
+        guardarCarrito([]);
+        onUpdateCarrito();
+        
+        notificacionExito(
+          '¡Compra Exitosa!', 
+          `Venta #${venta.id.slice(-6)} registrada\nCliente: ${clienteNombre}\nTotal: $${total}`
+        );
+        window.dispatchEvent(new Event('storage'));
+        
+      } catch (error) {
+        notificacionError('Error en Compra', 'Por favor intente nuevamente');
+        console.error('Error en realizarCompra:', error);
+      }
     }
   };
 
@@ -102,7 +161,7 @@ const Carrito = ({ onUpdateCarrito }) => {
   if (carrito.length === 0) {
     return (
       <>
-        <header><h2>Carrito</h2></header>
+       <h2>Carrito</h2>
         <div style={{textAlign: 'center', padding: '40px'}}>
           <h3>🛒 Tu carrito está vacío</h3>
           <p>Agrega algunos productos para continuar</p>
@@ -113,17 +172,7 @@ const Carrito = ({ onUpdateCarrito }) => {
 
   return (
     <>
-      <header><h2 style={{textAlign: 'center'}}>🛒 Carrito de compras</h2></header>
-      
-      <div style={{ 
-        marginBottom: '20px', 
-        padding: '10px', 
-        backgroundColor: '#e7f3ff', 
-        borderRadius: '5px',
-        textAlign: 'center'
-      }}>
-        <strong>💡 Información:</strong> Al eliminar productos del carrito, se reintegran automáticamente al inventario.
-      </div>
+      <h2 style={{textAlign: 'center'}}>Carrito de compras</h2>
 
       <div style={{display: 'flex', justifyContent: 'center'}}>
         <table border="1" style={{textAlign: 'center', width: '90%', maxWidth: '800px'}}>
@@ -203,6 +252,16 @@ const Carrito = ({ onUpdateCarrito }) => {
       
       <div style={{textAlign: 'center', marginTop: '20px'}}>
         <h3>💵 Total general: ${total}</h3>
+        
+        <div style={{
+          marginBottom: '20px',
+          padding: '15px',
+          backgroundColor: '#fff3cd',
+          borderRadius: '5px',
+          display: 'inline-block'
+        }}>
+          <strong>📝 Nota:</strong> Al realizar la compra se solicitará tus datos como gmail, nombre y telefono 
+        </div>
         
         <div style={{display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '20px', flexWrap: 'wrap'}}>
           <button 

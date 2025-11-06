@@ -3,6 +3,7 @@ import Login from './components/Login';
 import Registro from './components/Registro';
 import Recuperar from './components/Recuperar';
 import MainApp from './components/MainApp';
+import Notificaciones from './components/Notificaciones';
 import './App.css';
 
 function App() {

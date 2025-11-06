@@ -1,3 +1,4 @@
+// components/Content.js
 import React from 'react';
 import Articulos from './sections/Articulos';
 import Carrito from './sections/Carrito';
@@ -8,7 +9,8 @@ import Tarjetas from './sections/Tarjetas';
 import Inicio from './sections/Inicio';
 import TarjetaPresentacion from './sections/TarjetaPresentacion';
 import Portafolio from './sections/Portafolio';
-import Favoritos from './sections/Favoritos'; // Agregar este import
+import Favoritos from './sections/Favoritos';
+import RegistroVentas from './sections/RegistroVentas'; 
 
 const Content = ({ currentSection, onChangeSection, onUpdateCarrito }) => {
   const renderSection = () => {
@@ -17,8 +19,10 @@ const Content = ({ currentSection, onChangeSection, onUpdateCarrito }) => {
         return <Articulos onUpdateCarrito={onUpdateCarrito} />;
       case 'carrito':
         return <Carrito onUpdateCarrito={onUpdateCarrito} />;
-      case 'favoritos': // Agregar este caso
+      case 'favoritos':
         return <Favoritos onUpdateFavoritos={onUpdateCarrito} />;
+      case 'registro-ventas':
+        return <RegistroVentas />;
       case 'inventario':
         return <Inventario />;
       case 'contacto':

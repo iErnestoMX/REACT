@@ -23,9 +23,6 @@ const Header = ({ usuarioActual, carritoCount, onLogout, onChangeSection }) => {
       <button id="logout" className="logout-btn" onClick={onLogout}>
         Cerrar sesión
       </button>
-      <button id="cambiarColor" onClick={handleCambiarColor}>
-        Cambiar color
-      </button>
       
       {usuarioActual?.tipo === 'admin' && (
         <>
@@ -117,6 +114,10 @@ const Header = ({ usuarioActual, carritoCount, onLogout, onChangeSection }) => {
           )}
           <li><a href="#" onClick={() => onChangeSection('portafolio')}><p style={{ fontFamily: 'Comic Sans MS' }}>Portafolio</p></a></li>
           <li><a href="#" onClick={() => onChangeSection('contacto')}><p style={{ fontFamily: 'Comic Sans MS' }}>Contacto</p></a></li>
+
+{usuarioActual?.tipo === 'admin' && (
+  <li><a href="#" onClick={() => onChangeSection('registro-ventas')}><p style={{ fontFamily: 'Comic Sans MS' }}>Ventas</p></a></li>
+)}
         </ul>
       </nav>
     </header>
