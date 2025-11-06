@@ -1,70 +1,93 @@
-# Getting Started with Create React App
+# Nombre del Proyecto 🎓
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📋 Información Institucional
 
-## Available Scripts
+| **Campo** | **Información** |
+|-----------|-----------------|
+| **Institución** | Tecnológico Nacional de México<br>Campus Tláhuac |
+| **Carrera** | Ingeniería en Sistemas Computacionales |
+| **Materia** | [Desarrollo FrontEnd] |
+| **Docente** | [Padilla Juarez Jacqueline] |
+| **Alumnos** | [Arenas Olvera Jorge Eduardo]<br>[Molotla Colin Aangel Kaleb]<br>[Rayas Batalla Ernesto Adrian]<br>[Rodriguez Castro Alfredo]<br>[Sanchez Toriz Victor Eduardo]
+| **Grupo** | [7S1] |
+| **Semestre** | [8 Semestre] |
+| **Periodo** | [Agosto-Diciembre] |
 
-In the project directory, you can run:
 
-### `npm start`
+### ✨ Características Principales
+- **Interfaz moderna** desarrollada con React
+- **Diseño responsive** adaptable a diferentes dispositivos
+- **Funcionalidades** específicas del proyecto académico
+- **Código modular** y mantenible
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠️ Tecnologías Utilizadas
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| **Tecnología** | **Versión** | **Propósito** |
+|----------------|-------------|---------------|
+| React | 18.x | Framework principal |
+| JavaScript ES6+ | - | Lenguaje de programación |
+| HTML5 | - | Estructura web |
+| CSS3 | - | Estilos y diseño |
+| Node.js | 16.x o superior | Entorno de ejecución |
+| npm | 8.x o superior | Gestor de paquetes |
 
-### `npm test`
+## 📥 Instalación del Proyecto
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerrequisitos
+Antes de comenzar, asegúrate de tener instalado:
+- **Node.js** (versión 16 o superior)
+- **npm** (versión 8 o superior)
+- **Git** para clonar el repositorio
 
-### `npm run build`
+### Verificación de Prerrequisitos
+```bash
+# Verificar Node.js
+node --version
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Verificar npm
+npm --version
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Verificar Git
+git --version
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+git clone https://github.com/iErnestoMX/REACT.git
+cd REACT-PROYECTO-PAPELERIA
 
-### `npm run eject`
+#Instalar dependendicas
+npm install
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#Verificacione de instalacion
+npm list --depth=0
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Iniciar servidor de desarrollo
+npm start
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#Estructura del proyecto
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+REACT-PROYECTO-PAPELERIA/
+src/
+  components/
+    Login.js
+    Registro.js
+    Recuperar.js
+    MainApp.js
+    Header.js
+    Content.js
+    sections/
+      Inicio.js
+      Articulos.js
+      Carrito.js
+      Inventario.js
+      Contacto.js
+      Dashboard.js
+      Tarjetas.js          
+      MenuPrincipal.js
+      TarjetaPresentacion.js
+      Portafolio.js
+  utils/
+    carritoUtils.js
+    favoritoUtils.js
+  App.js
+  App.css
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  
