@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { obtenerCarrito, guardarCarrito, obtenerInventario, guardarInventario } from '../../utils/carritoUtils';
+import { obtenerCarrito, guardarCarrito } from '../../utils/carritoUtils';
 import { agregarAFavoritos, eliminarDeFavoritos, estaEnFavoritos } from '../../utils/favoritosUtils';
 import { notificacionCarrito, notificacionFavorito, notificacionError } from '../../utils/notificacionesUtils';
+
 
 const Articulos = ({ onUpdateCarrito }) => {
   const [articulos, setArticulos] = useState([]);
@@ -10,6 +11,8 @@ const Articulos = ({ onUpdateCarrito }) => {
   const [favoritos, setFavoritos] = useState({});
   const [imagenesActuales, setImagenesActuales] = useState({});
   
+
+
   // Estados para filtros
   const [busqueda, setBusqueda] = useState('');
   const [categoria, setCategoria] = useState('todos');

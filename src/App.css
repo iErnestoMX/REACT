@@ -96,57 +96,9 @@ header button {
   z-index: 1000;
 }
 
-/* Margen inferior entre header y contenido */
-main, #content {
-  margin-top: 130px;
-  padding: 20px;
-  box-sizing: border-box;
-  overflow-x: hidden; /* 🔹 evita que el contenido empuje los lados */
-}
-
-/* Nav centrado */
-nav ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  list-style: none;
-  padding: 0;
-  margin: 10px 0;
-}
 
 
-/* --- CENTRAR CONTENIDO DE SECCIONES --- */
-section {
-  width: 100%;
-  max-width: 1200px;      /* 🔹 Limita el ancho central */
-  margin: 0 auto;         /* 🔹 Centra horizontalmente */
-  padding: 40px 20px;
-  box-sizing: border-box;
-  text-align: center;     /* 🔹 Centra texto por defecto */
-}
-
-/* Para artículos, párrafos, imágenes dentro de secciones */
-section p,
-section h2,
-section h3,
-section img,
-section div {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Si alguna sección usa grid o flex, mantenla centrada */
-section .contenido,
-section .bloque,
-section .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-
+/*titulo de la papeleria y animaciones*/
 #tituloPapeleria {
   font-family: 'Fredoka One', cursive;
   font-size: 4.8rem;
@@ -173,7 +125,6 @@ section .container {
   position: static;
 }
 
-/* Efecto de brillo con colores vibrantes */
 @keyframes brilloArcoiris {
   0%, 100% {
     text-shadow: 
@@ -195,14 +146,12 @@ section .container {
   }
 }
 
-/* Efecto hover */
 #tituloPapeleria:hover {
   animation: brilloArcoiris 0.8s ease-in-out infinite;
   transform: scale(1.02);
   transition: all 0.3s ease;
 }
 
-/* Versión responsive */
 @media (max-width: 768px) {
   #tituloPapeleria {
     font-size: 3.5rem;
@@ -218,13 +167,12 @@ section .container {
   }
 }
 
-/* Asegura que nada se desplace por un margen oculto */
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  overflow-x: hidden;  /* sin barra lateral */
+  overflow-x: hidden; 
 }
 
 header h1 {
@@ -243,23 +191,23 @@ header h1 {
 
 
 
-
+/*HEADER DE LA PAPELERIA DONDE ESTAN BOTONES Y ETC*/
 header {
-  background: #fff9e6; /* Color tipo papel */
+  background: #fff9e6;
   border: 2px solid #d2b48c;
-  border-radius: 0; /* Sin esquinas redondeadas */
+  border-radius: 0; 
   padding: 20px;
-  margin: 0; /* Elimina margen exterior */
+  margin: 0; 
   position: relative;
-  box-shadow: none; /* Quita sombra para que parezca parte del fondo */
+  box-shadow: none; 
   font-family: 'Comic Sans MS', cursive, sans-serif;
   text-align: center;
-  width: 100vw; /* Ocupa todo el ancho visible */
+  width: 100vw; 
   left: 0;
   right: 0;
 }
 
-/* Asegura que las líneas de libreta cubran todo el ancho también */
+/*lineas de BANNER DE LA PAPELERIA*/
 header::before {
   content: "";
   position: absolute;
@@ -275,33 +223,6 @@ header::before {
   );
   z-index: 0;
   pointer-events: none;
-}
-
-/* Efecto espiral a la izquierda (ajustado para que no se corte) */
-header::after {
-  content: "";
-  position: absolute;
-  top: 10px;
-  left: 0; /* Cambiado para pegarlo al borde */
-  width: 8px;
-  height: calc(100% - 20px);
-  background: repeating-linear-gradient(
-    to bottom,
-    #aaa 0,
-    #aaa 4px,
-    transparent 4px,
-    transparent 8px
-  );
-  border-radius: 4px;
-}
-
-header h1 {
-  font-family: var(--font-title);
-  font-size: 2rem;
-  margin: 0;
-  letter-spacing: 1px;
-  position: relative;
-  z-index: 1;
 }
 
 
@@ -379,9 +300,9 @@ header { animation: slideDown 1s ease; }
   background: rgba(255, 255, 255, 0.5);
   box-shadow: 0 0 25px rgba(255, 202, 212, 0.7);
 }
-/* =======================================
-   BOTONES PAPELERÍA - COLORES VIBRANTES (MÁS PEQUEÑOS)
-======================================= */
+
+
+/* BOTONES PAPELERÍA */
 button, .agregar, .inicio-btn, .logout-btn, 
 #chatbox-input button, #carritoPago button,
 .btn-primary, .btn-secondary, 
@@ -405,12 +326,6 @@ button, .agregar, .inicio-btn, .logout-btn,
     letter-spacing: 0.3px;
 }
 
-/* ELIMINAR FONDOS ROSAS EXISTENTES */
-button:not(.btn-primary):not(.btn-secondary):not(.agregar):not(.inicio-btn):not(.logout-btn) {
-    background: linear-gradient(145deg, #4A90E2, #357ABD) !important;
-}
-
-/* HOVER GENERAL */
 button:hover, .agregar:hover, .inicio-btn:hover, .logout-btn:hover, 
 #chatbox-input button:hover, #carritoPago button:hover,
 .btn-primary:hover, .btn-secondary:hover,
@@ -423,11 +338,7 @@ button:hover, .agregar:hover, .inicio-btn:hover, .logout-btn:hover,
         inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
 }
 
-/* =======================================
-   VARIACIONES ESPECÍFICAS POR TIPO DE BOTÓN
-======================================= */
 
-/* BOTONES PRINCIPALES - AZUL */
 .btn-primary, .agregar, #carritoPago button {
     background: linear-gradient(145deg, #4A90E2, #357ABD) !important;
 }
@@ -436,7 +347,6 @@ button:hover, .agregar:hover, .inicio-btn:hover, .logout-btn:hover,
     background: linear-gradient(145deg, #357ABD, #4A90E2) !important;
 }
 
-/* BOTONES SECUNDARIOS - VERDE */
 .btn-secondary, .inicio-btn {
     background: linear-gradient(145deg, #2ECC71, #27AE60) !important;
     box-shadow: 
@@ -451,7 +361,6 @@ button:hover, .agregar:hover, .inicio-btn:hover, .logout-btn:hover,
         0 0 0 2px rgba(46, 204, 113, 0.2) !important;
 }
 
-/* BOTONES DE ACCIÓN - NARANJA */
 .logout-btn, #logout {
     background: linear-gradient(145deg, #FF6B35, #E55627) !important;
     box-shadow: 
@@ -466,7 +375,6 @@ button:hover, .agregar:hover, .inicio-btn:hover, .logout-btn:hover,
         0 0 0 2px rgba(255, 107, 53, 0.2) !important;
 }
 
-/* BOTONES DE UTILIDAD - PÚRPURA */
 #cambiarColor, #inventario, #verProveedores {
     background: linear-gradient(145deg, #9B59B6, #8E44AD) !important;
     box-shadow: 
@@ -483,7 +391,6 @@ button:hover, .agregar:hover, .inicio-btn:hover, .logout-btn:hover,
         0 0 0 2px rgba(155, 89, 182, 0.2) !important;
 }
 
-/* BOTONES CHATBOX - TURQUESA */
 #chatbox-input button {
     background: linear-gradient(145deg, #1ABC9C, #16A085) !important;
     box-shadow: 
@@ -498,7 +405,6 @@ button:hover, .agregar:hover, .inicio-btn:hover, .logout-btn:hover,
         0 0 0 3px rgba(26, 188, 156, 0.2) !important;
 }
 
-/* BOTONES CARRUSEL */
 .carrusel button {
     background: rgba(74, 144, 226, 0.9) !important;
     box-shadow: 0 4px 15px rgba(74, 144, 226, 0.5) !important;
@@ -508,27 +414,7 @@ button:hover, .agregar:hover, .inicio-btn:hover, .logout-btn:hover,
     background: rgba(74, 144, 226, 1) !important;
 }
 
-/* =======================================
-   ELIMINAR ESTILOS ROSAS EXISTENTES
-======================================= */
 
-/* Eliminar gradientes rosas del CSS original */
-.inicio-btn, .logout-btn, button, .btn-goma {
-    background: linear-gradient(145deg, #4A90E2, #357ABD) !important;
-}
-
-/* Eliminar efectos hover rosas */
-.inicio-btn:hover, .logout-btn:hover, button:hover {
-    background: linear-gradient(145deg, #357ABD, #4A90E2) !important;
-    box-shadow: 
-        0 8px 25px rgba(74, 144, 226, 0.6),
-        0 0 0 3px rgba(74, 144, 226, 0.2) !important;
-}
-
-/* Eliminar estilos específicos de goma */
-.btn-goma, .inicio-btn, .logout-btn {
-    background: linear-gradient(145deg, #4A90E2, #357ABD) !important;
-}
 
 /* =======================================
    ANIMACIONES Y EFECTOS
@@ -577,6 +463,7 @@ button:active, .agregar:active, .inicio-btn:active {
         inset 0 2px 5px rgba(0, 0, 0, 0.2) !important;
     transition: all 0.1s ease;
 }
+
 
 /* =======================================
    BOTONES GLOASS / BOTONES GENERALES
@@ -776,6 +663,7 @@ nav a:focus {
   border: 3px dashed #ffd6a5; /* ✏️ estilo tipo libreta */
   background-image: linear-gradient(to bottom, #fff 97%, #ffe5ec 3%);
   background-size: 100% 40px; /* líneas tipo renglones */
+
 }
 
 /* Si quieres que toque las orillas totalmente: */
@@ -786,7 +674,13 @@ body.fullscreen #content {
   border: none;
 }
 
-
+/* Margen inferior entre header y contenido */
+main, #content {
+  margin-top: 0px;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden; /* 🔹 evita que el contenido empuje los lados */
+}
 
 /* =======================================
    BOTONES FORMA GOMA CON ANIMACIONES
@@ -1017,18 +911,7 @@ header {
   z-index: 10;
 }
 
-/* NAVEGACIÓN que cubre todo el ancho hasta los bordes */
-nav {
-  position: relative;
-  width: 100vw; /* 🔹 Cambiado a 100vw para cubrir bordes */
-  margin-left: calc(-50vw + 50%); /* 🔹 Centrado forzado */
-  left: 0;
-  right: 0;
-  background: linear-gradient(90deg, var(--color-primary-2), var(--color-bg));
-  box-shadow: var(--shadow);
-  padding: 0.5rem 0;
-  border-radius: 0 0 var(--radius-md) var(--radius-md);
-}
+
 
 
 .productos-container {
@@ -1141,4 +1024,74 @@ nav {
 
 .no-results p {
   color: #888;
+}
+
+
+
+.main-app-with-ads {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-layout {
+  display: flex;
+  flex: 1;
+  min-height: calc(100vh - 80px); /* Ajusta según la altura de tu header */
+}
+
+.left-sidebar-ads,
+.right-sidebar-ads {
+  width: 280px;
+  padding: 20px 15px;
+  background: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.main-content-with-ads {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+/* Asegurar que el contenido se vea bien con los anuncios */
+.main-content-with-ads > div:first-child {
+  margin-bottom: 15px;
+}
+
+.main-content-with-ads > div:last-child {
+  margin-top: 15px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .right-sidebar-ads {
+    display: none;
+  }
+  
+  .left-sidebar-ads {
+    width: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-layout {
+    flex-direction: column;
+  }
+  
+  .left-sidebar-ads {
+    width: 100%;
+    order: 2;
+    padding: 15px;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  
+  .left-sidebar-ads .ad-banner {
+    min-width: 200px;
+  }
 }

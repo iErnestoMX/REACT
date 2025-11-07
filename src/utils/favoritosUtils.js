@@ -1,4 +1,4 @@
-// src/utils/favoritosUtils.js
+// utils/favoritosUtils.js
 export const obtenerFavoritos = () => {
   if (typeof window === 'undefined') return [];
   try {

@@ -1,15 +1,6 @@
 import React from 'react';
 
 const Header = ({ usuarioActual, carritoCount, onLogout, onChangeSection }) => {
-  const handleCambiarColor = () => {
-    document.body.classList.toggle("modo-oscuro");
-    if (document.body.classList.contains("modo-oscuro")) {
-      localStorage.setItem("modo", "oscuro");
-    } else {
-      localStorage.setItem("modo", "claro");
-    }
-  };
-
   const handleGestionarUsuarios = () => {
     if (usuarioActual?.tipo === 'admin') {
       onChangeSection('gestion-usuarios');
@@ -107,7 +98,6 @@ const Header = ({ usuarioActual, carritoCount, onLogout, onChangeSection }) => {
           <li><a href="#" onClick={() => onChangeSection('articulos')}><p style={{ fontFamily: 'Comic Sans MS' }}>Articulos</p></a></li>
           <li><a href="#" onClick={() => onChangeSection('tarjetas')}><p style={{ fontFamily: 'Comic Sans MS' }}>Tarjetas</p></a></li>
           <li><a href="#" onClick={() => onChangeSection('tarjeta')}><p style={{ fontFamily: 'Comic Sans MS' }}>Presentaciones</p></a></li>
-          {/* Agregar Favoritos al menú de navegación */}
           <li><a href="#" onClick={() => onChangeSection('favoritos')}><p style={{ fontFamily: 'Comic Sans MS' }}>Favoritos</p></a></li>
           {usuarioActual?.tipo === 'admin' && (
             <li><a href="#" onClick={() => onChangeSection('dashboard')}><p style={{ fontFamily: 'Comic Sans MS' }}>Dashboard</p></a></li>

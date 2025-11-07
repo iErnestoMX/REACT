@@ -76,11 +76,12 @@ const Tarjetas = () => {
 
   return (
     <section id="tarjetas-seccion">
-        <h2>Tarjetas Personalizadas</h2>
+        <h2 style={{ textAlign: 'center' }}>Tarjetas Personalizadas</h2>
 
       {/* Navegación entre vistas */}
       <div style={{ 
         display: 'flex', 
+
         justifyContent: 'center', 
         gap: '20px', 
         marginBottom: '30px',
