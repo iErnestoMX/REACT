@@ -12,14 +12,14 @@ const MainApp = ({ onLogout }) => {
   const [usuarioActual, setUsuarioActual] = useState(null);
 
   useEffect(() => {
-    // Obtener usuario actual
+    
     const usuario = JSON.parse(localStorage.getItem("usuarioActual"));
     setUsuarioActual(usuario);
     
-    // Actualizar contador del carrito
+   
     actualizarContadorCarrito(setCarritoCount);
 
-    // Inicializar anuncios si no existen
+    
     if (!localStorage.getItem("anuncios")) {
       const anunciosIniciales = [
         { id: 1, texto: "🔥 Oferta Especial: 50% de descuento", tipo: "sidebar" },
