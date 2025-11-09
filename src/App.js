@@ -4,7 +4,7 @@ import Registro from './components/Registro';
 import Recuperar from './components/Recuperar';
 import MainApp from './components/MainApp';
 import Notificaciones from './components/Notificaciones';
-import AdBanner from './components/AdBanner'; // Nuevo componente
+import AdBanner from './components/AdBanner';
 import './App.css';
 
 function App() {
@@ -55,56 +55,39 @@ function App() {
     setCurrentView('login');
   };
 
-  // Obtener anuncios
-  const getAnuncios = () => {
-    return JSON.parse(localStorage.getItem("anuncios")) || [];
-  };
-
   if (loggedIn) {
     return <MainApp onLogout={handleLogout} />;
   }
 
-  // Componente para páginas de autenticación con anuncios
-  const AuthWithAds = ({ children }) => (
-    <div className="auth-container">
-      <div className="auth-content">
-        {children}
-      </div>
-      <div className="auth-ads">
-        <AdBanner 
-          size="square" 
-          content={getAnuncios()[0]?.texto || "¡Bienvenido!"}
-        />
-        <AdBanner 
-          size="sidebar" 
-          content={getAnuncios()[1]?.texto || "Descubre nuestras ofertas"}
-        />
-      </div>
-    </div>
-  );
-
+  // Renderizar páginas de autenticación SIN ANUNCIOS
   switch (currentView) {
     case 'registro':
       return (
-        <AuthWithAds>
-          <Registro onBackToLogin={() => setCurrentView('login')} />
-        </AuthWithAds>
+        <div className="auth-container">
+          <div className="auth-content">
+            <Registro onBackToLogin={() => setCurrentView('login')} />
+          </div>
+        </div>
       );
     case 'recuperar':
       return (
-        <AuthWithAds>
-          <Recuperar onBackToLogin={() => setCurrentView('login')} />
-        </AuthWithAds>
+        <div className="auth-container">
+          <div className="auth-content">
+            <Recuperar onBackToLogin={() => setCurrentView('login')} />
+          </div>
+        </div>
       );
     default:
       return (
-        <AuthWithAds>
-          <Login 
-            onLoginSuccess={handleLoginSuccess} 
-            onShowRegistro={() => setCurrentView('registro')} 
-            onShowRecuperar={() => setCurrentView('recuperar')} 
-          />
-        </AuthWithAds>
+        <div className="auth-container">
+          <div className="auth-content">
+            <Login 
+              onLoginSuccess={handleLoginSuccess} 
+              onShowRegistro={() => setCurrentView('registro')} 
+              onShowRecuperar={() => setCurrentView('recuperar')} 
+            />
+          </div>
+        </div>
       );
   }
 }

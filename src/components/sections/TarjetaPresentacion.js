@@ -6,47 +6,54 @@ const ArticulosTemporada = () => {
       nombre: "Esferas Navideñas", 
       precio: "$45", 
       descripcion: "Set de 12 esferas brillantes",
-      imagen: "https://images.unsplash.com/photo-1604881988758-f76ad2f7aac1?w=200&h=150&fit=crop",
+      imagen: "https://i.postimg.cc/JzVYmPW1/214620-d.jpg",
       stock: "Disponible"
     },
     { 
       nombre: "Luces LED Navideñas", 
       precio: "$120", 
       descripcion: "Tira de luces multicolor 5m",
-      imagen: "https://images.unsplash.com/photo-1574359411659-619743e166b8?w=200&h=150&fit=crop",
+      imagen: "https://i.postimg.cc/d0H4YgpH/Imagen-Lucez.jpg",
       stock: "Disponible"
     },
     { 
       nombre: "Árbol de Navidad", 
       precio: "$650", 
       descripcion: "Árbol artificial 1.80m",
-      imagen: "https://images.unsplash.com/photo-1606836133735-11c6419d6e6a?w=200&h=150&fit=crop",
+      imagen: "https://i.postimg.cc/s2tv0QhT/813arlp-Ns-SL.jpg",
       stock: "Últimas unidades"
     },
     { 
       nombre: "Corona Navideña", 
       precio: "$85", 
       descripcion: "Corona para puerta con adornos",
-      imagen: "https://images.unsplash.com/photo-1542605127-2a0b0f4df8c7?w=200&h=150&fit=crop",
+      imagen: "https://i.postimg.cc/kMygWhT5/71Nf-URFBXAL-AC-UF894-1000-QL80.jpg",
       stock: "Disponible"
     },
     { 
-      nombre: "Calcetines Navideños", 
+      nombre: "Bolsa Navideña", 
       precio: "$35", 
       descripcion: "Pack de 4 calcetines para regalos",
-      imagen: "https://images.unsplash.com/photo-1574359411659-619743e166b8?w=200&h=150&fit=crop",
+      imagen: "https://i.postimg.cc/59LBr4Y6/descarga-removebg-preview.png",
       stock: "Disponible"
     },
     { 
       nombre: "Villancicos CD", 
       precio: "$60", 
       descripcion: "Colección de villancicos clásicos",
-      imagen: "https://images.unsplash.com/photo-1574359411659-619743e166b8?w=200&h=150&fit=crop",
+      imagen: "https://i.postimg.cc/RFMjmGK0/D-NQ-NP-855813-MLM89486942505-082025-O.webp",
+      stock: "Disponible"
+    },
+        { 
+      nombre: "Papel Navideño", 
+      precio: "$60", 
+      descripcion: "Papel Navideño 4 en paquetes",
+      imagen: "https://i.postimg.cc/LXf1GDsQ/papel-navideno-beumont-couche-70x100cm-9438hr-sku-349031.jpg",
       stock: "Disponible"
     }
   ];
 
-  // Dividir productos en filas de 4
+  
   const filas = [];
   for (let i = 0; i < productosNavidad.length; i += 4) {
     filas.push(productosNavidad.slice(i, i + 4));
@@ -58,7 +65,7 @@ const ArticulosTemporada = () => {
         🎄 Artículos de Temporada - Navidad 🎄
       </h2>
       
-      {/* Contenedor principal con filas */}
+    
       <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
         {filas.map((fila, filaIndex) => (
           <div 
@@ -152,36 +159,14 @@ const ArticulosTemporada = () => {
                     {producto.stock}
                   </span>
                 </div>
-                <button style={{
-                  width: '100%',
-                  marginTop: '12px',
-                  padding: '10px',
-                  background: 'linear-gradient(135deg, #d63031, #e17055)',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '8px',
-                  fontSize: '0.9em',
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.background = 'linear-gradient(135deg, #e17055, #d63031)';
-                  e.target.style.transform = 'scale(1.05)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = 'linear-gradient(135deg, #d63031, #e17055)';
-                  e.target.style.transform = 'scale(1)';
-                }}>
-                  🛒 Agregar
-                </button>
+  
               </div>
             ))}
           </div>
         ))}
       </div>
       
-      {/* Oferta especial */}
+      
       <div style={{
         textAlign: 'center', 
         marginTop: '30px',

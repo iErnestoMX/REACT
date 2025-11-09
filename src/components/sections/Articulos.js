@@ -12,8 +12,6 @@ const Articulos = ({ onUpdateCarrito }) => {
   const [imagenesActuales, setImagenesActuales] = useState({});
   
 
-
-  // Estados para filtros
   const [busqueda, setBusqueda] = useState('');
   const [categoria, setCategoria] = useState('todos');
   const [soloEnStock, setSoloEnStock] = useState(false);
@@ -22,7 +20,7 @@ const Articulos = ({ onUpdateCarrito }) => {
   const articulosContainerRef = useRef(null);
   const ARTICULOS_POR_FILA = 4;
 
-  // Imágenes extra para cada artículo
+
   const imagenesExtra = {
     "Colores": [
       "https://i.postimg.cc/QMYctmWy/Colores.png",
@@ -68,7 +66,43 @@ const Articulos = ({ onUpdateCarrito }) => {
       "https://i.postimg.cc/JzWNbNK0/Pegamento-Blanco.png",
       "https://i.postimg.cc/7LQyrxZT/pegamento-Bully.png",
       "https://i.postimg.cc/9M65zJTy/Pegamento-Dixon.png"
+    ],
+    "Pincel": [
+      "https://i.postimg.cc/5tvCJSb1/Pincel.png",
+      "https://i.postimg.cc/XqdtZRYK/best-artist-paint-brushes-2-removebg-preview.png",
+      "https://i.postimg.cc/ZKP1Jzgx/pinceles-removebg-preview.png"
+    ],
+    "Esferas Navideñas": [
+      "https://i.postimg.cc/JzVYmPW1/214620-d.jpg",
+      "https://resources.sanborns.com.mx/medios-plazavip/t1/1734401243DNQNP976451MLM79985864992102024Ojpg?scale=50&qlty=75",
+      "https://http2.mlstatic.com/D_NQ_NP_769807-MLU74023754004_012024-O.webp"
+    ],
+    "Luces LED": [
+      "https://i.postimg.cc/d0H4YgpH/Imagen-Lucez.jpg",
+      "https://m.media-amazon.com/images/I/91A3owIWeyL._AC_UF894,1000_QL80_.jpg",
+      "https://lamercedimportadora.mx/wp-content/uploads/2024/09/L564016-04.jpg"
+    ],
+    "Arbol de Navidad": [
+      "https://i.postimg.cc/s2tv0QhT/813arlp-Ns-SL.jpg",
+      "https://houzerstore.com.mx/cdn/shop/files/MKZ-ARBM3-190V.jpg?v=1750438853",
+      "https://www.costco.com.mx/medias/sys_master/products/h56/hd9/360893566124062.jpg"
+    ],
+    "Corona Navidad": [
+      "https://i.postimg.cc/kMygWhT5/71Nf-URFBXAL-AC-UF894-1000-QL80.jpg",
+      "https://i.etsystatic.com/13909799/r/il/d618b1/5561736651/il_570xN.5561736651_f4t9.jpg",
+      "https://waldos.com.mx/cdn/shop/files/100092988COMBI_1.jpg?v=1699039359&width=1214"
+    ],
+    "Bolsa Navideña": [
+      "https://i.postimg.cc/59LBr4Y6/descarga-removebg-preview.png",
+      "https://waldos.com.mx/cdn/shop/files/100092411BSANTA--_2.jpg?v=1697211578",
+      "https://img.kwcdn.com/product/fancy/3521b422-37c5-401b-9b7c-60df58d8d479.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp"
+    ],
+    "Papel Navideño": [
+      "https://i.postimg.cc/LXf1GDsQ/papel-navideno-beumont-couche-70x100cm-9438hr-sku-349031.jpg",
+      "https://m.media-amazon.com/images/I/71VAmcVcXdL.jpg",
+      "https://media.istockphoto.com/id/1430709087/es/vector/fondo-rojo-de-garabatos-navide%C3%B1os-adecuado-para-el-dise%C3%B1o-de-envases-papel-tapiz-o-como.jpg?s=612x612&w=0&k=20&c=CZetA8hSFHSf1I0GOxYqq6owSFgiKtTTt446JQIKFgQ="
     ]
+    
   };
 
   useEffect(() => {
@@ -82,6 +116,14 @@ const Articulos = ({ onUpdateCarrito }) => {
       { nombre: "Hojas de carpeta", price: 50, img: "https://i.postimg.cc/wjtCmdfx/Hojas-de-carpeta.png", desc: "Papel de alta calidad para archivar documentos.", categoria: "papel" },
       { nombre: "Plastilina", price: 18, img: "https://i.postimg.cc/3wTtxMPQ/Plastilina.png", desc: "Colores vibrantes y textura suave.", categoria: "material-artistico" },
       { nombre: "Pegamento blanco", price: 25, img: "https://i.postimg.cc/JzWNbNK0/Pegamento-Blanco.png", desc: "Adhesivo fuerte y de secado rápido.", categoria: "adhesivos" },
+      { nombre: "Pincel", price: 15, img: "https://i.postimg.cc/5tvCJSb1/Pincel.png", desc: "El mejor material de pinceles.", categoria: "escritura" },
+      { nombre: "Esferas Navideñas", price: 50, img: "https://i.postimg.cc/JzVYmPW1/214620-d.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
+      { nombre: "Luces LED", price: 110, img: "https://i.postimg.cc/d0H4YgpH/Imagen-Lucez.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
+      { nombre: "Arbol de Navidad", price: 800, img: "https://i.postimg.cc/s2tv0QhT/813arlp-Ns-SL.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
+      { nombre: "Corona Navidad", price: 120, img: "https://i.postimg.cc/kMygWhT5/71Nf-URFBXAL-AC-UF894-1000-QL80.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
+      { nombre: "Bolsa Navideña", price: 20, img: "https://i.postimg.cc/59LBr4Y6/descarga-removebg-preview.png", desc: "El mejor material de pinceles.", categoria: "papel" },
+      { nombre: "Papel Navideño", price: 15, img: "https://i.postimg.cc/LXf1GDsQ/papel-navideno-beumont-couche-70x100cm-9438hr-sku-349031.jpg", desc: "El mejor material de pinceles.", categoria: "papel" }
+      
     ];
     setArticulos(articulosData);
     localStorage.setItem("articulos", JSON.stringify(articulosData));
@@ -250,7 +292,6 @@ const Articulos = ({ onUpdateCarrito }) => {
       <h2>Artículos</h2>
       <p>Se muestran imágenes de los <strong>artículos en venta</strong> y <em>su costo</em>, de la <abbr title="Papelería Karen">PapeKaren</abbr></p>
 
-      {/* FILTROS COMPACTOS EN LÍNEA ARRIBA */}
       <div style={{
         background: 'linear-gradient(135deg, #fff7ea, #ffffff)',
         padding: '15px',
@@ -266,7 +307,7 @@ const Articulos = ({ onUpdateCarrito }) => {
           flexWrap: 'wrap',
           justifyContent: 'center'
         }}>
-          {/* Barra de búsqueda */}
+
           <div style={{ position: 'relative', flex: '1', minWidth: '200px', maxWidth: '300px' }}>
             <input
               type="text"
@@ -275,8 +316,8 @@ const Articulos = ({ onUpdateCarrito }) => {
               onChange={(e) => setBusqueda(e.target.value)}
               style={{
                 width: '100%',
-                padding: '8px 12px',
-                paddingLeft: '35px',
+                padding: '8px 8px',
+                paddingLeft: '0px',
                 border: '2px solid #d2b48c',
                 borderRadius: '20px',
                 fontSize: '14px',
@@ -286,7 +327,7 @@ const Articulos = ({ onUpdateCarrito }) => {
             />
           </div>
 
-          {/* Select de categoría */}
+  
           <select
             value={categoria}
             onChange={(e) => setCategoria(e.target.value)}
@@ -302,18 +343,18 @@ const Articulos = ({ onUpdateCarrito }) => {
           >
             {categorias.map(cat => (
               <option key={cat} value={cat}>
-                {cat === 'todos' ? '📁 Todas' : 
-                 cat === 'material-artistico' ? '🎨 Arte' :
-                 cat === 'escritura' ? '✏️ Escritura' :
-                 cat === 'oficina' ? '📎 Oficina' :
-                 cat === 'adhesivos' ? '🧴 Adhesivos' :
-                 cat === 'papel' ? '📄 Papel' :
-                 cat === 'cuadernos' ? '📓 Cuadernos' : cat}
+                {cat === 'todos' ? 'Todas' : 
+                 cat === 'material-artistico' ? 'Arte' :
+                 cat === 'escritura' ? 'Escritura' :
+                 cat === 'oficina' ? 'Oficina' :
+                 cat === 'adhesivos' ? 'Adhesivos' :
+                 cat === 'papel' ? 'Papel' :
+                 cat === 'cuadernos' ? 'Cuadernos' : cat}
               </option>
             ))}
           </select>
 
-          {/* Checkboxes en línea */}
+  
           <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
             <label style={{
               display: 'flex',
@@ -352,7 +393,6 @@ const Articulos = ({ onUpdateCarrito }) => {
             </label>
           </div>
 
-          {/* Botón limpiar */}
           <button
             onClick={() => {
               setBusqueda('');
@@ -375,7 +415,7 @@ const Articulos = ({ onUpdateCarrito }) => {
             🗑️ Limpiar
           </button>
 
-          {/* Contador de resultados */}
+      
           <div style={{
             fontSize: '14px',
             color: '#666',
@@ -390,7 +430,7 @@ const Articulos = ({ onUpdateCarrito }) => {
         </div>
       </div>
 
-      {/* Controles del carrusel */}
+    
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -450,7 +490,6 @@ const Articulos = ({ onUpdateCarrito }) => {
         </button>
       </div>
 
-      {/* Mensaje cuando no hay resultados */}
       {articulosFiltrados.length === 0 && (
         <div style={{
           textAlign: 'center',
@@ -465,7 +504,7 @@ const Articulos = ({ onUpdateCarrito }) => {
         </div>
       )}
 
-      {/* Contenedor horizontal de artículos */}
+     
       {articulosFiltrados.length > 0 && (
         <div 
           ref={articulosContainerRef}
@@ -518,7 +557,7 @@ const Articulos = ({ onUpdateCarrito }) => {
                   }
                 }}
               >
-                {/* Botón de favorito */}
+           
                 <button 
                   onClick={(e) => {
                     e.stopPropagation();
@@ -546,7 +585,7 @@ const Articulos = ({ onUpdateCarrito }) => {
                   {esFavorito ? '⭐' : '☆'}
                 </button>
 
-                {/* Contenedor de imagen */}
+                
                 <div style={{
                   width: '100%',
                   height: '150px',
@@ -589,7 +628,7 @@ const Articulos = ({ onUpdateCarrito }) => {
                   )}
                 </div>
 
-                {/* Información del producto */}
+           
                 <div style={{
                   flex: 1,
                   display: 'flex',
@@ -636,7 +675,7 @@ const Articulos = ({ onUpdateCarrito }) => {
                     {articulo.desc}
                   </p>
 
-                  {/* Indicador de stock */}
+                
                   <div style={{
                     padding: '5px 10px',
                     backgroundColor: sinStock ? '#ff6b6b' : 
@@ -653,7 +692,6 @@ const Articulos = ({ onUpdateCarrito }) => {
                      `📦 Stock: ${cantidadDisponible}`}
                   </div>
 
-                  {/* Botones de acción */}
                   <div style={{
                     display: 'flex',
                     gap: '8px',
@@ -709,8 +747,6 @@ const Articulos = ({ onUpdateCarrito }) => {
         </div>
       )}
 
-      {/* Resto del código... */}
-      {/* Indicadores de navegación */}
       {articulosFiltrados.length > 0 && (
         <div style={{
           display: 'flex',
@@ -736,7 +772,6 @@ const Articulos = ({ onUpdateCarrito }) => {
         </div>
       )}
 
-      {/* Botón volver al inicio */}
       <div style={{ 
         width: '100%', 
         textAlign: 'center', 
@@ -760,7 +795,7 @@ const Articulos = ({ onUpdateCarrito }) => {
         </button>
       </div>
 
-      {/* Ocultar scrollbar */}
+    
       <style>
         {`
           div::-webkit-scrollbar {

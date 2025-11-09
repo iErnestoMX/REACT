@@ -95,14 +95,13 @@ const Header = ({ usuarioActual, carritoCount, onLogout, onChangeSection }) => {
 
       <nav>
         <ul>
+          <li><a href="#" onClick={() => onChangeSection('tarjeta')}><p style={{ fontFamily: 'Comic Sans MS' }}>Principal</p></a></li>
           <li><a href="#" onClick={() => onChangeSection('articulos')}><p style={{ fontFamily: 'Comic Sans MS' }}>Articulos</p></a></li>
           <li><a href="#" onClick={() => onChangeSection('tarjetas')}><p style={{ fontFamily: 'Comic Sans MS' }}>Tarjetas</p></a></li>
-          <li><a href="#" onClick={() => onChangeSection('tarjeta')}><p style={{ fontFamily: 'Comic Sans MS' }}>Presentaciones</p></a></li>
           <li><a href="#" onClick={() => onChangeSection('favoritos')}><p style={{ fontFamily: 'Comic Sans MS' }}>Favoritos</p></a></li>
           {usuarioActual?.tipo === 'admin' && (
             <li><a href="#" onClick={() => onChangeSection('dashboard')}><p style={{ fontFamily: 'Comic Sans MS' }}>Dashboard</p></a></li>
           )}
-          <li><a href="#" onClick={() => onChangeSection('portafolio')}><p style={{ fontFamily: 'Comic Sans MS' }}>Portafolio</p></a></li>
           <li><a href="#" onClick={() => onChangeSection('contacto')}><p style={{ fontFamily: 'Comic Sans MS' }}>Contacto</p></a></li>
 
 {usuarioActual?.tipo === 'admin' && (

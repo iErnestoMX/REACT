@@ -1,4 +1,4 @@
-// components/Content.js
+
 import React from 'react';
 import Articulos from './sections/Articulos';
 import Carrito from './sections/Carrito';
@@ -8,7 +8,6 @@ import Dashboard from './sections/Dashboard';
 import Tarjetas from './sections/Tarjetas';
 import Inicio from './sections/Inicio';
 import TarjetaPresentacion from './sections/TarjetaPresentacion';
-import Portafolio from './sections/Portafolio';
 import Favoritos from './sections/Favoritos';
 import RegistroVentas from './sections/RegistroVentas'; 
 
@@ -33,10 +32,8 @@ const Content = ({ currentSection, onChangeSection, onUpdateCarrito }) => {
         return <Tarjetas />;
       case 'tarjeta':
         return <TarjetaPresentacion />;
-      case 'portafolio':
-        return <Portafolio />;
       default:
-        return <Inicio onChangeSection={onChangeSection} />;
+        return <TarjetaPresentacion onChangeSection={onChangeSection} />;
     }
   };
 
