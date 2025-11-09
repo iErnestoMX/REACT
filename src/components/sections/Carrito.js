@@ -7,7 +7,7 @@ import { notificacionExito, notificacionError, notificacionInfo } from '../../ut
 const Carrito = ({ onUpdateCarrito }) => {
   const carrito = obtenerCarrito();
   const inventario = obtenerInventario();
-  
+
   const reintegrarAlInventario = (nombreProducto, cantidad) => {
     const inventarioActual = obtenerInventario();
     const productoIndex = inventarioActual.findIndex(item => item.nombre === nombreProducto);
@@ -25,7 +25,6 @@ const Carrito = ({ onUpdateCarrito }) => {
 
     if (nuevaCantidad < 1) return;
     
-    // Verificar si hay suficiente stock para aumentar la cantidad
     if (diferencia > 0) {
       const productoInventario = inventario.find(prod => prod.nombre === item.name);
       if (productoInventario && productoInventario.cantidad < diferencia) {
