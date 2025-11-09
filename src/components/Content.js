@@ -30,8 +30,6 @@ const Content = ({ currentSection, onChangeSection, onUpdateCarrito }) => {
         return <Dashboard />;
       case 'tarjetas':
         return <Tarjetas />;
-      case 'tarjeta':
-        return <TarjetaPresentacion />;
       default:
         return <TarjetaPresentacion onChangeSection={onChangeSection} />;
     }
