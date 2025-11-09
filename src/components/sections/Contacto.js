@@ -6,8 +6,6 @@ const Contacto = () => {
 
   const renderContent = () => {
     switch (currentView) {
-      case 'formulario':
-        return <FormularioContacto />;
       case 'mapa':
         return <Mapa />;
       case 'calendario':
@@ -26,12 +24,7 @@ const Contacto = () => {
       <h2 className="contacto-titulo">📞 Contáctanos</h2>
       
       <div className="contacto-botones-container">
-        <button 
-          onClick={() => setCurrentView('formulario')}
-          className="contacto-boton"
-        >
-          📝 Formulario
-        </button>
+
         <button 
           onClick={() => setCurrentView('mapa')}
           className="contacto-boton"
@@ -52,7 +45,7 @@ const Contacto = () => {
 
       <div className="whatsapp-container">
         <a 
-          href="https://wa.me/554570355?text=Hola!!,%20quiero%20informes%20de%20los%20artículos%20en%20venta%20de%20la%20Papelería%20Karen,%20por%20favor." 
+          href="https://wa.me/5530770406?text=Hola!!,%20quiero%20informes%20de%20los%20artículos%20en%20venta%20de%20la%20Papelería%20Karen,%20por%20favor." 
           target="_blank" 
           rel="noopener noreferrer"
           className="whatsapp-link"
@@ -60,115 +53,22 @@ const Contacto = () => {
           💬 WhatsApp
         </a>
       </div>
+
+        <footer>
+        <small>&copy; Arenas Olvera Jorge Eduardo, Molotla colin Angel Kaleb, Rayas Batalla Ernesto Adrian, Rodriguez Catro Alfredo, Sanchez Toriz Victor Eduardo</small>
+        <address>Contacto: <a href="mailto:papeleriakaren@gmail.com">papeleriakaren@gmail.com</a></address>
+      </footer>
+      
+      <ul>
+        <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+        <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">Twitter/X</a></li>
+      </ul>
+
     </>
   );
 };
 
-// Subcomponentes de Contacto
-const FormularioContacto = () => {
-  const [formData, setFormData] = useState({
-    correo: '',
-    mensaje: '',
-    tema: '',
-    pais: '',
-    acepto: false
-  });
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Formulario enviado (funcionalidad de envío pendiente)');
-  };
-
-  return (
-    <>
-      <h3>📝 Envíanos un mensaje</h3>
-      <form onSubmit={handleSubmit} className="formulario-contacto">
-        <label htmlFor="correo">Correo</label>
-        <input 
-          id="correo" 
-          name="correo" 
-          type="email" 
-          required 
-          placeholder="tu@correo.com" 
-          autoComplete="email"
-          value={formData.correo}
-          onChange={handleChange}
-          className="formulario-input"
-        />
-
-        <label htmlFor="mensaje">Mensaje</label>
-        <textarea 
-          id="mensaje" 
-          name="mensaje" 
-          rows="3" 
-          placeholder="Escribe tu mensaje…"
-          value={formData.mensaje}
-          onChange={handleChange}
-          className="formulario-textarea"
-        />
-
-        <fieldset className="formulario-fieldset">
-          <legend>Preferencias</legend>
-          <label className="formulario-radio-label">
-            <input 
-              type="radio" 
-              name="tema" 
-              value="claro"
-              checked={formData.tema === 'claro'}
-              onChange={handleChange}
-              className="formulario-radio"
-            /> Claro
-          </label>
-          <label className="formulario-radio-label">
-            <input 
-              type="radio" 
-              name="tema" 
-              value="oscuro"
-              checked={formData.tema === 'oscuro'}
-              onChange={handleChange}
-              className="formulario-radio"
-            /> Oscuro
-          </label>
-        </fieldset>
-
-        <label htmlFor="pais">País</label>
-        <select 
-          id="pais" 
-          name="pais" 
-          required
-          value={formData.pais}
-          onChange={handleChange}
-          className="formulario-select"
-        >
-          <option value="">Selecciona…</option>
-          <option value="México">México</option>
-          <option value="Colombia">Colombia</option>
-          <option value="Perú">Perú</option>
-        </select>
-
-        <label className="formulario-checkbox-label">
-          <input 
-            type="checkbox" 
-            name="acepto" 
-            required
-            checked={formData.acepto}
-            onChange={handleChange}
-            className="formulario-checkbox"
-          /> Acepto términos
-        </label>
-        <button type="submit" className="formulario-boton">Enviar</button>
-      </form>
-    </>
-  );
-};
 
 const Mapa = () => (
   <>

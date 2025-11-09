@@ -122,13 +122,17 @@ const ArticulosTemporada = () => {
           </div>
         ))}
       </div>
-      
+
+    
+
       <div className="articulos-temporada-oferta">
         <h3 className="articulos-temporada-oferta-titulo">🎁 ¡Oferta Especial de Navidad! 🎁</h3>
         <p className="articulos-temporada-oferta-texto">
           Compra 3 artículos y obtén un 20% de descuento + envío gratis
         </p>
       </div>
+
+      
     </>
   );
 };

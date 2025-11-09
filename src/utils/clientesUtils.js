@@ -1,4 +1,4 @@
-// utils/clientesUtils.js
+
 export const obtenerClientes = () => {
   if (typeof window === 'undefined') return [];
   try {

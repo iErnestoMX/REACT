@@ -110,6 +110,8 @@ const Header = ({ usuarioActual, carritoCount, onLogout, onChangeSection }) => {
 )}
         </ul>
       </nav>
+
+      
     </header>
   );
 };

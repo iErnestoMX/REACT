@@ -23,7 +23,7 @@ const Inventario = () => {
   useEffect(() => {
     mostrarInventario();
     
-    // Escuchar cambios en el inventario
+
     const handleStorageChange = () => {
       mostrarInventario();
     };
@@ -64,7 +64,6 @@ const Inventario = () => {
     guardarInventario(inventarioActual);
     mostrarInventario();
 
-    // Limpiar campos
     setNombre('');
     setPrecio('');
     setCantidad('');
@@ -167,7 +166,7 @@ const Inventario = () => {
         </div>
       </div>
 
-      {/* Tabla de inventario */}
+ 
       <table className="tabla-inventario">
         <thead>
           <tr className="tabla-header">
@@ -217,8 +216,7 @@ const Inventario = () => {
           )}
         </tbody>
       </table>
-
-      {/* Botón para reiniciar inventario */}
+      
       {inventario.length > 0 && (
         <div className="reiniciar-container">
           <button 

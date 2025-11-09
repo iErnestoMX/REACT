@@ -18,7 +18,7 @@ const Dashboard = () => {
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     
-    // Título
+ 
     ctx.fillStyle = '#333';
     ctx.font = '14px Arial';
     ctx.textAlign = 'center';
@@ -30,7 +30,7 @@ const Dashboard = () => {
       ctx.fillStyle = color;
       ctx.fillRect(x, ctx.canvas.height - h - 30, anchoBarra, h);
       
-      // Valor
+
       ctx.fillStyle = '#333';
       ctx.font = '12px Arial';
       ctx.textAlign = 'center';
@@ -44,7 +44,7 @@ const Dashboard = () => {
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     
-    // Título
+
     ctx.fillStyle = '#333';
     ctx.font = '14px Arial';
     ctx.textAlign = 'center';
@@ -64,7 +64,7 @@ const Dashboard = () => {
         ctx.lineTo(x, y);
       }
       
-      // Puntos
+ 
       ctx.fillStyle = color;
       ctx.beginPath();
       ctx.arc(x, y, 4, 0, Math.PI * 2);
@@ -152,7 +152,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Información adicional */}
       <div className="dashboard-info">
         <h4>Información del Dashboard</h4>
         <div className="info-items">
@@ -189,7 +188,6 @@ const Dashboard = () => {
   );
 };
 
-// Componente GestorProveedores
 const GestorProveedores = ({ onBack }) => {
   const [proveedores, setProveedores] = useState(JSON.parse(localStorage.getItem("proveedores")) || []);
   const [nombreProveedor, setNombreProveedor] = useState('');

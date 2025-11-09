@@ -78,7 +78,7 @@ const MainApp = ({ onLogout }) => {
       />
       
       <div className="app-layout">
-        {/* Sidebar izquierdo con anuncios */}
+
         <aside className="left-sidebar-ads">
           <AdBanner 
             size="sidebar" 
@@ -97,7 +97,6 @@ const MainApp = ({ onLogout }) => {
           />
         </aside>
 
-        {/* Contenido principal */}
         <main className="main-content-with-ads">
           <Content 
             currentSection={currentSection}
@@ -105,7 +104,7 @@ const MainApp = ({ onLogout }) => {
             onUpdateCarrito={handleUpdateCarrito}
           />
 
-          {/* Anuncio banner inferior */}
+
           <AdBanner 
             size="banner" 
             content="🎉 ¡Clientes satisfechos! ⭐⭐⭐⭐⭐"
@@ -113,11 +112,10 @@ const MainApp = ({ onLogout }) => {
           />
         </main>
 
-        {/* Sidebar derecho con anuncios */}
         <aside className="right-sidebar-ads">
           <AdBanner 
             size="sidebar" 
-            content="📞 Soporte técnico 24/7"
+            content="Atencion al usuario ⭐⭐⭐⭐⭐"
             image="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
           />
           <AdBanner 

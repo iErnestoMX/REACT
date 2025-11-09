@@ -12,10 +12,9 @@ const Favoritos = ({ onUpdateFavoritos }) => {
       setFavoritos(obtenerFavoritos());
     };
 
-    // Cargar favoritos iniciales
     actualizarFavoritos();
 
-    // Escuchar eventos de actualización
+
     window.addEventListener('favoritosActualizados', actualizarFavoritos);
     
     return () => {
@@ -32,19 +31,17 @@ const Favoritos = ({ onUpdateFavoritos }) => {
   const agregarAlCarrito = (producto) => {
     const carrito = obtenerCarrito();
     const inventario = obtenerInventario();
-    
-    // Verificar stock
+  
     const productoInventario = inventario.find(prod => prod.nombre === producto.nombre);
     if (!productoInventario || productoInventario.cantidad < 1) {
       notificacionError('Sin Stock', `No hay stock disponible de ${producto.nombre}`);
       return;
     }
 
-    // Verificar si ya está en el carrito
     const itemExistente = carrito.find(item => item.name === producto.nombre);
     
     if (itemExistente) {
-      // Si ya existe, aumentar cantidad si hay stock
+    
       if (productoInventario.cantidad > itemExistente.qty) {
         itemExistente.qty += 1;
       } else {
@@ -55,7 +52,7 @@ const Favoritos = ({ onUpdateFavoritos }) => {
         return;
       }
     } else {
-      // Si no existe, agregar nuevo item
+    
       carrito.push({
         name: producto.nombre,
         qty: 1,
@@ -64,7 +61,7 @@ const Favoritos = ({ onUpdateFavoritos }) => {
       });
     }
 
-    // Actualizar inventario
+   
     const inventarioActualizado = inventario.map(prod => 
       prod.nombre === producto.nombre 
         ? { ...prod, cantidad: prod.cantidad - 1 }
@@ -73,8 +70,7 @@ const Favoritos = ({ onUpdateFavoritos }) => {
 
     guardarInventario(inventarioActualizado);
     guardarCarrito(carrito);
-    
-    // Disparar eventos para actualizar otros componentes
+   
     window.dispatchEvent(new Event('storage'));
     onUpdateFavoritos?.();
     
@@ -107,15 +103,9 @@ const Favoritos = ({ onUpdateFavoritos }) => {
     <>
       <div className="favoritos-header">
         <h2>Favoritos ({favoritos.length})</h2>
-        <button 
-          onClick={vaciarFavoritos}
-          className="btn-vaciar-favoritos"
-        >
-          🗑️ Vaciar Lista
-        </button>
       </div>
 
-      {/* Contenedor horizontal con scroll */}
+
       <div className="favoritos-container">
         {favoritos.map((item, index) => {
           const inventario = obtenerInventario();
@@ -169,6 +159,12 @@ const Favoritos = ({ onUpdateFavoritos }) => {
           );
         })}
       </div>
+              <button 
+          onClick={vaciarFavoritos}
+          className="btn-vaciar-favoritos"
+        >
+          🗑️ Vaciar Lista
+        </button>
     </>
   );
 };
