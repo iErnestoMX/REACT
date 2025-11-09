@@ -471,120 +471,118 @@ nav {
   border-radius: 0 0 var(--radius-md) var(--radius-md);
 }
 
+/* 🔥 ESTILOS FUERTES PARA MANTENER NAV HORIZONTAL EN TODOS LOS DISPOSITIVOS 🔥 */
 nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
+  list-style: none !important;
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 1rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-direction: row !important;
 }
 
-/* 🔥 ESTILOS RESPONSIVE HORIZONTAL PARA TODOS LOS DISPOSITIVOS 🔥 */
-
-/* Escritorio grande */
-@media (min-width: 1201px) {
+/* Para tablets - mantener horizontal */
+@media (max-width: 1024px) {
   nav ul {
-    gap: 1.5rem;
+    flex-wrap: wrap !important;
+    gap: 0.8rem !important;
   }
 }
 
-/* Escritorio estándar */
-@media (max-width: 1200px) and (min-width: 1025px) {
+/* Para móviles - mantener horizontal con scroll si es necesario */
+@media (max-width: 768px) {
   nav ul {
-    gap: 1.2rem;
-  }
-}
-
-/* Tablets */
-@media (max-width: 1024px) and (min-width: 769px) {
-  nav ul {
-    gap: 1rem;
-  }
-}
-
-/* Tablets pequeñas y móviles grandes */
-@media (max-width: 768px) and (min-width: 481px) {
-  nav ul {
-    gap: 0.8rem;
-    flex-wrap: wrap;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    justify-content: flex-start !important;
+    gap: 0.6rem !important;
+    padding: 10px 5px !important;
+    -webkit-overflow-scrolling: touch !important;
+    white-space: nowrap !important;
   }
   
   nav ul li {
-    flex: 0 0 auto; /* Mantiene tamaño automático */
-  }
-}
-
-/* Móviles horizontales */
-@media (max-width: 480px) {
-  nav ul {
-    gap: 0.5rem;
-    flex-wrap: nowrap; /* 🔹 IMPORTANTE: Evita que se rompa en varias líneas */
-    overflow-x: auto; /* 🔹 Permite scroll horizontal si es necesario */
-    justify-content: flex-start; /* 🔹 Alinea a la izquierda para scroll */
-    padding: 10px 5px;
-    -webkit-overflow-scrolling: touch; /* 🔹 Scroll suave en iOS */
-  }
-  
-  nav ul li {
-    flex: 0 0 auto; /* 🔹 Mantiene el tamaño original de cada item */
-    white-space: nowrap; /* 🔹 Evita que el texto se rompa */
-  }
-  
-  /* Hacer los enlaces más compactos para móviles */
-  nav ul li a {
-    padding: 8px 12px;
-    font-size: 0.85em;
-    min-height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-/* Móviles muy pequeños */
-@media (max-width: 360px) {
-  nav ul {
-    gap: 0.4rem;
+    display: inline-block !important;
+    float: none !important;
+    flex: 0 0 auto !important;
   }
   
   nav ul li a {
-    padding: 6px 10px;
-    font-size: 0.8em;
-    min-height: 38px;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    padding: 8px 12px !important;
   }
 }
 
-/* Scroll horizontal personalizado para móviles */
+/* Para móviles pequeños */
 @media (max-width: 480px) {
+  nav ul {
+    gap: 0.4rem !important;
+  }
+  
+  nav ul li a {
+    padding: 6px 10px !important;
+    font-size: 0.8em !important;
+  }
+}
+
+/* Ocultar scrollbar pero mantener funcionalidad */
+@media (max-width: 768px) {
   nav ul::-webkit-scrollbar {
-    height: 4px;
+    display: none !important;
   }
   
-  nav ul::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-  }
-  
-  nav ul::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 2px;
+  nav ul {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
   }
 }
 
-/* Efectos hover solo en dispositivos con hover */
-@media (hover: hover) {
-  nav ul li a:hover {
-    transform: translateY(-2px);
-    transition: transform 0.2s ease;
-  }
+
+/* Estilos ultra específicos */
+header nav ul,
+nav ul,
+ul[class*="nav"],
+ul[class*="menu"] {
+  list-style: none !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 1rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-/* Asegurar que el contenedor nav no se desborde */
-nav {
-  width: 100%;
-  overflow: hidden;
+/* Para móviles - override cualquier estilo que lo ponga vertical */
+@media (max-width: 768px) {
+  header nav ul,
+  nav ul,
+  ul[class*="nav"],
+  ul[class*="menu"] {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    transform: none !important;
+    display: flex !important;
+  }
+  
+  header nav ul li,
+  nav ul li,
+  ul[class*="nav"] li,
+  ul[class*="menu"] li {
+    display: inline-block !important;
+    float: none !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+  }
 }
 
 nav li {

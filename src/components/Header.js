@@ -95,6 +95,7 @@ const Header = ({ usuarioActual, carritoCount, onLogout, onChangeSection }) => {
 
       <nav>
         <ul>
+          
           <li><a href="#" onClick={() => onChangeSection('tarjeta')}><p style={{ fontFamily: 'Comic Sans MS' }}>Principal</p></a></li>
           <li><a href="#" onClick={() => onChangeSection('articulos')}><p style={{ fontFamily: 'Comic Sans MS' }}>Articulos</p></a></li>
           <li><a href="#" onClick={() => onChangeSection('tarjetas')}><p style={{ fontFamily: 'Comic Sans MS' }}>Tarjetas</p></a></li>
