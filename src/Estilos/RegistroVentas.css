@@ -199,3 +199,177 @@
   margin-bottom: 3px;
   font-size: 13px;
 }
+
+/* SOLO AGREGAR ESTOS ESTILOS PARA EL DISEÑO HORIZONTAL */
+
+.lista-ventas-horizontal {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.venta-card-horizontal {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-left: 4px solid #007bff;
+  transition: all 0.3s ease;
+  gap: 20px;
+}
+
+.venta-card-horizontal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.venta-header-horizontal {
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+  flex-shrink: 0;
+}
+
+.venta-id-horizontal {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.venta-fecha-horizontal {
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+}
+
+.venta-cliente-horizontal {
+  flex: 1;
+  min-width: 200px;
+}
+
+.cliente-info {
+  font-size: 14px;
+}
+
+.cliente-info strong {
+  color: #333;
+}
+
+.cliente-info small {
+  color: #666;
+}
+
+.venta-productos-horizontal {
+  flex: 2;
+  min-width: 250px;
+}
+
+.venta-productos-horizontal strong {
+  font-size: 14px;
+  color: #333;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.productos-lista-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.producto-chip {
+  background: #f8f9fa;
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 12px;
+  color: #495057;
+  border: 1px solid #e9ecef;
+}
+
+.producto-mas {
+  background: #007bff;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.venta-total-horizontal {
+  text-align: center;
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.total-monto-horizontal {
+  font-size: 18px;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.total-items-horizontal {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* Responsive para diseño horizontal */
+@media (max-width: 1024px) {
+  .venta-card-horizontal {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .venta-header-horizontal,
+  .venta-cliente-horizontal,
+  .venta-productos-horizontal,
+  .venta-total-horizontal {
+    min-width: auto;
+    flex: 1 1 calc(50% - 10px);
+  }
+}
+
+@media (max-width: 768px) {
+  .venta-card-horizontal {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .venta-header-horizontal,
+  .venta-cliente-horizontal,
+  .venta-productos-horizontal,
+  .venta-total-horizontal {
+    flex: 1 1 100%;
+  }
+  
+  .venta-total-horizontal {
+    text-align: left;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    width: 100%;
+  }
+}
+
+/* Scrollbar personalizado */
+.lista-ventas-horizontal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.lista-ventas-horizontal::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.lista-ventas-horizontal::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.lista-ventas-horizontal::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

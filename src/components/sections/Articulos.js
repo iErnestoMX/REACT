@@ -122,8 +122,10 @@ const Articulos = ({ onUpdateCarrito }) => {
       { nombre: "Papel Navideño", price: 15, img: "https://i.postimg.cc/LXf1GDsQ/papel-navideno-beumont-couche-70x100cm-9438hr-sku-349031.jpg", desc: "El mejor material de pinceles.", categoria: "papel" }
       
     ];
+     localStorage.setItem("articulos", JSON.stringify(articulosData));
+     
     setArticulos(articulosData);
-    localStorage.setItem("articulos", JSON.stringify(articulosData));
+  
 
     const imagenesIniciales = {};
     articulosData.forEach(articulo => {
@@ -197,6 +199,8 @@ const Articulos = ({ onUpdateCarrito }) => {
     };
   }, [articulos]);
 
+
+  
   const toggleFavorito = (articulo) => {
     if (favoritos[articulo.nombre]) {
       eliminarDeFavoritos(articulo.nombre);

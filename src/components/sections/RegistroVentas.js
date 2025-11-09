@@ -147,56 +147,65 @@ const RegistroVentas = () => {
         )}
       </div>
 
-      <div className="historial-ventas">
-        <h3>📋 Historial de Ventas</h3>
-        
-        {ventas.length === 0 ? (
-          <div className="sin-ventas">
-            <p>No hay ventas registradas</p>
+{/* SOLO ESTA PARTE CAMBIÉ A HORIZONTAL */}
+<div className="historial-ventas">
+  <h3>📋 Historial de Ventas</h3>
+  
+  {ventas.length === 0 ? (
+    <div className="sin-ventas">
+      <p>No hay ventas registradas</p>
+    </div>
+  ) : (
+    <div className="lista-ventas-horizontal">
+      {ventas.map((venta) => (
+        <div 
+          key={venta.id}
+          className="venta-card-horizontal"
+        >
+          <div className="venta-header-horizontal">
+            <div className="venta-id-horizontal">
+              <strong>🆔 Venta #{venta.id.slice(-6)}</strong>
+            </div>
+            <div className="venta-fecha-horizontal">
+              <small>📅 {formatearFecha(venta.fecha)}</small>
+            </div>
           </div>
-        ) : (
-          <div className="lista-ventas">
-            {ventas.map((venta) => (
-              <div 
-                key={venta.id}
-                className="venta-card"
-              >
-                <div className="venta-header">
-                  <div className="venta-info">
-                    <strong>🆔 Venta #{venta.id.slice(-6)}</strong>
-                    <br />
-                    <small>📅 {formatearFecha(venta.fecha)}</small>
-                  </div>
-                  <div className="venta-total">
-                    <strong className="total-monto">
-                      ${venta.total.toFixed(2)}
-                    </strong>
-                    <br />
-                    <small>{venta.items} productos</small>
-                  </div>
-                </div>
 
-                <div className="venta-cliente">
-                  <strong>👤 Cliente:</strong> {venta.cliente}
-                  <br />
-                  <strong>📧 Email:</strong> {venta.clienteEmail}
-                </div>
-
-                <div className="venta-productos">
-                  <strong>🛍️ Productos:</strong>
-                  <ul className="lista-productos">
-                    {venta.productos.map((producto, index) => (
-                      <li key={index}>
-                        {producto.nombre} x{producto.cantidad} - ${producto.total.toFixed(2)}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
+          <div className="venta-cliente-horizontal">
+            <div className="cliente-info">
+              <strong>👤 {venta.cliente}</strong>
+              <br />
+              <small>📧 {venta.clienteEmail}</small>
+            </div>
           </div>
-        )}
-      </div>
+
+          <div className="venta-productos-horizontal">
+            <strong>🛍️ Productos ({venta.items})</strong>
+            <div className="productos-lista-horizontal">
+              {venta.productos.map((producto, index) => (
+                <div key={index} className="producto-item-horizontal">
+                  <span className="producto-nombre">{producto.nombre}</span>
+                  <span className="producto-detalle">
+                    x{producto.cantidad} - ${producto.total.toFixed(2)}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="venta-total-horizontal">
+            <div className="total-monto-horizontal">
+              ${venta.total.toFixed(2)}
+            </div>
+            <div className="total-items-horizontal">
+              {venta.items} productos
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
     </>
   );
 };
