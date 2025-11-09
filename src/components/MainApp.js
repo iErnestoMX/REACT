@@ -39,12 +39,11 @@ const MainApp = ({ onLogout }) => {
     setCurrentSection(section);
   };
 
-  // Obtener anuncios
   const getAnuncios = () => {
     return JSON.parse(localStorage.getItem("anuncios")) || [];
   };
 
-  // Si la sección actual es "gestion-usuarios", mostrar ese componente
+  
   if (currentSection === 'gestion-usuarios') {
     return <GestionUsuarios onBack={() => setCurrentSection('inicio')} />;
   }
