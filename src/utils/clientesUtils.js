@@ -21,7 +21,7 @@ export const guardarClientes = (clientes) => {
 export const agregarCliente = (cliente) => {
   const clientes = obtenerClientes();
   
-  // Verificar si el cliente ya existe
+
   const existe = clientes.some(c => c.email === cliente.email);
   
   if (!existe) {
