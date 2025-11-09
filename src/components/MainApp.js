@@ -10,15 +10,11 @@ const MainApp = ({ onLogout }) => {
   const [currentSection, setCurrentSection] = useState('inicio');
   const [carritoCount, setCarritoCount] = useState(0);
   const [usuarioActual, setUsuarioActual] = useState(null);
-  const [mostrarAnuncios, setMostrarAnuncios] = useState(false);
 
   useEffect(() => {
     // Obtener usuario actual
     const usuario = JSON.parse(localStorage.getItem("usuarioActual"));
     setUsuarioActual(usuario);
-    
-    // Solo mostrar anuncios si hay un usuario logueado
-    setMostrarAnuncios(!!usuario);
     
     // Actualizar contador del carrito
     actualizarContadorCarrito(setCarritoCount);
@@ -66,26 +62,24 @@ const MainApp = ({ onLogout }) => {
       />
       
       <div className="app-layout">
-        {/* Sidebar izquierdo con anuncios - SOLO SI mostrarAnuncios ES true */}
-        {mostrarAnuncios && (
-          <aside className="left-sidebar-ads">
-            <AdBanner 
-              size="sidebar" 
-              content={getAnuncios()[0]?.texto}
-            />
-            <AdBanner 
-              size="square" 
-              content={getAnuncios()[1]?.texto}
-            />
-            <AdBanner 
-              size="square" 
-              content="💳 Aceptamos todas las tarjetas"
-            />
-          </aside>
-        )}
+        {/* Sidebar izquierdo con anuncios */}
+        <aside className="left-sidebar-ads">
+          <AdBanner 
+            size="sidebar" 
+            content={getAnuncios()[0]?.texto}
+          />
+          <AdBanner 
+            size="square" 
+            content={getAnuncios()[1]?.texto}
+          />
+          <AdBanner 
+            size="square" 
+            content="💳 Aceptamos todas las tarjetas"
+          />
+        </aside>
 
         {/* Contenido principal */}
-        <main className={`main-content-with-ads ${!mostrarAnuncios ? 'full-width' : ''}`}>
+        <main className="main-content-with-ads">
           {/* ✅ SOLO EL CONTENIDO SIN BANNER ARRIBA ✅ */}
           <Content 
             currentSection={currentSection}
@@ -93,32 +87,28 @@ const MainApp = ({ onLogout }) => {
             onUpdateCarrito={handleUpdateCarrito}
           />
 
-          {/* Anuncio banner inferior - SOLO SI mostrarAnuncios ES true */}
-          {mostrarAnuncios && (
-            <AdBanner 
-              size="banner" 
-              content="🎉 ¡Clientes satisfechos! ⭐⭐⭐⭐⭐"
-            />
-          )}
+          {/* Anuncio banner inferior */}
+          <AdBanner 
+            size="banner" 
+            content="🎉 ¡Clientes satisfechos! ⭐⭐⭐⭐⭐"
+          />
         </main>
 
-        {/* Sidebar derecho con anuncios - SOLO SI mostrarAnuncios ES true */}
-        {mostrarAnuncios && (
-          <aside className="right-sidebar-ads">
-            <AdBanner 
-              size="square" 
-              content={getAnuncios()[3]?.texto}
-            />
-            <AdBanner 
-              size="sidebar" 
-              content="📞 Soporte técnico 24/7"
-            />
-            <AdBanner 
-              size="square" 
-              content="🛡️ Compra 100% segura"
-            />
-          </aside>
-        )}
+        {/* Sidebar derecho con anuncios */}
+        <aside className="right-sidebar-ads">
+          <AdBanner 
+            size="square" 
+            content={getAnuncios()[3]?.texto}
+          />
+          <AdBanner 
+            size="sidebar" 
+            content="📞 Soporte técnico 24/7"
+          />
+          <AdBanner 
+            size="square" 
+            content="🛡️ Compra 100% segura"
+          />
+        </aside>
       </div>
     </div>
   );
