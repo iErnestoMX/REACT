@@ -36,6 +36,7 @@ const Content = ({ currentSection, onChangeSection, onUpdateCarrito }) => {
     }
   };
 
+
   return (
     <main id="content">
       {renderSection()}

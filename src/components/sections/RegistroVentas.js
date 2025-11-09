@@ -147,7 +147,6 @@ const RegistroVentas = () => {
         )}
       </div>
 
-      {/* Lista de ventas */}
       <div className="historial-ventas">
         <h3>📋 Historial de Ventas</h3>
         

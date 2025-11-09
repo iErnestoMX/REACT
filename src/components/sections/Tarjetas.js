@@ -79,7 +79,6 @@ const Tarjetas = () => {
     <section id="tarjetas-seccion" className="tarjetas-seccion">
         <h2 className="tarjetas-titulo">Tarjetas Personalizadas</h2>
 
-      {/* Navegación entre vistas */}
       <div className="tarjetas-navegacion">
         <button 
           onClick={() => setVistaActual('configurar')}
@@ -95,11 +94,11 @@ const Tarjetas = () => {
         </button>
       </div>
 
-      {/* Vista de Configuración */}
+
       {vistaActual === 'configurar' && (
         <div id="tarjeta-configurator" className="tarjetas-configurator">
           <div className="tarjetas-contenedor-principal">
-            {/* Panel de controles */}
+
             <div className="tarjetas-panel-controles">
               <h3 className="tarjetas-panel-titulo">Personalizar Tarjeta</h3>
               
@@ -174,8 +173,6 @@ const Tarjetas = () => {
                 💾 Guardar Tarjeta
               </button>
             </div>
-
-            {/* Vista previa */}
             <div className="tarjetas-vista-previa">
               <h3 className="tarjetas-vista-previa-titulo">Vista Previa</h3>
               <canvas 
@@ -193,7 +190,6 @@ const Tarjetas = () => {
         </div>
       )}
 
-      {/* Vista de Mis Tarjetas */}
       {vistaActual === 'mis-tarjetas' && (
         <div id="mis-tarjetas" className="tarjetas-mis-tarjetas">
           {tarjetas.length === 0 ? (

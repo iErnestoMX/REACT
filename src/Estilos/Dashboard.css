@@ -1,6 +1,4 @@
-/* Dashboard.css - Estilos exactos de tu código original */
 
-/* Botón Actualizar */
 .dashboard-actualizar {
   text-align: center;
   margin-bottom: 20px;
@@ -19,7 +17,6 @@
   background-color: #0056b3;
 }
 
-/* Tarjetas del Dashboard */
 .dashboard-cards {
   display: flex;
   flex-direction: row;
@@ -78,7 +75,6 @@
   margin-top: 10px;
 }
 
-/* Información Adicional */
 .dashboard-info {
   margin-top: 30px;
   padding: 20px;
@@ -124,7 +120,6 @@
   color: #ffc107;
 }
 
-/* Botón Proveedores */
 .dashboard-proveedores {
   width: 100%;
   text-align: center;
@@ -145,7 +140,6 @@
   background-color: #5a2d91;
 }
 
-/* Gestor de Proveedores */
 .gestor-proveedores {
   max-width: 600px;
   margin: 0 auto;
@@ -183,7 +177,6 @@
   background: #0056b3;
 }
 
-/* Lista de Proveedores */
 .lista-proveedores {
   list-style: none;
   padding: 0;
@@ -226,7 +219,6 @@
   background-color: #218838;
 }
 
-/* Ticket Proveedor */
 .ticket-proveedor {
   border: 1px dashed #333;
   padding: 10px;
@@ -259,7 +251,6 @@
   margin-top: 10px;
 }
 
-/* Botón Volver */
 .btn-volver {
   padding: 10px 20px;
   background: #6c757d;

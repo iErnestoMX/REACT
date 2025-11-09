@@ -1,4 +1,4 @@
-// utils/ventasUtils.js
+
 export const obtenerVentas = () => {
   if (typeof window === 'undefined') return [];
   try {
@@ -26,7 +26,7 @@ export const registrarVenta = (venta) => {
     ...venta
   };
   
-  ventas.unshift(nuevaVenta); // Agregar al inicio
+  ventas.unshift(nuevaVenta); 
   guardarVentas(ventas);
   return nuevaVenta;
 };

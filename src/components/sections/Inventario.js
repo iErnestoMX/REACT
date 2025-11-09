@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../Estilos/Inventario.css';
 
 const Inventario = () => {
@@ -7,30 +7,43 @@ const Inventario = () => {
   const [precio, setPrecio] = useState('');
   const [cantidad, setCantidad] = useState('');
 
-  const obtenerInventario = () => {
-    return JSON.parse(localStorage.getItem("inventario")) || [];
-  };
-
-  const guardarInventario = (inv) => {
-    localStorage.setItem("inventario", JSON.stringify(inv));
-  };
-
-  const mostrarInventario = useCallback(() => {
-    const inventarioActual = obtenerInventario();
-    setInventario(inventarioActual);
-  }, []);
-
+  // Cargar inventario al iniciar
   useEffect(() => {
-    mostrarInventario();
-    
-
-    const handleStorageChange = () => {
-      mostrarInventario();
+    const cargarInventario = () => {
+      try {
+        const inventarioGuardado = localStorage.getItem("inventario");
+        console.log('Datos crudos de localStorage:', inventarioGuardado); // 🔍 DEBUG
+        
+        if (inventarioGuardado) {
+          const inventarioParseado = JSON.parse(inventarioGuardado);
+          console.log('Inventario parseado:', inventarioParseado); // 🔍 DEBUG
+          setInventario(inventarioParseado);
+        } else {
+          setInventario([]);
+        }
+      } catch (error) {
+        console.error('Error cargando inventario:', error);
+        setInventario([]);
+      }
     };
 
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, [mostrarInventario]);
+    cargarInventario();
+  }, []);
+
+  const guardarInventario = (nuevoInventario) => {
+    try {
+      console.log('Guardando:', nuevoInventario); // 🔍 DEBUG
+      localStorage.setItem("inventario", JSON.stringify(nuevoInventario));
+      setInventario(nuevoInventario); // 🔄 Actualizar estado inmediatamente
+      
+      // Verificar que se guardó correctamente
+      const verificado = localStorage.getItem("inventario");
+      console.log('Verificado después de guardar:', verificado); // 🔍 DEBUG
+    } catch (error) {
+      console.error('Error guardando inventario:', error);
+      alert('Error al guardar el inventario');
+    }
+  };
 
   const agregarProducto = () => {
     const nombreTrim = nombre.trim();
@@ -47,23 +60,28 @@ const Inventario = () => {
       return;
     }
 
-    const inventarioActual = obtenerInventario();
-    const existente = inventarioActual.find(p => p.nombre === nombreTrim);
+    const nuevoProducto = {
+      nombre: nombreTrim,
+      precio: precioNum,
+      cantidad: cantidadNum,
+      id: Date.now() 
+    };
+
+    const inventarioActual = [...inventario];
+    const existenteIndex = inventarioActual.findIndex(p => p.nombre.toLowerCase() === nombreTrim.toLowerCase());
     
-    if (existente) {
-      existente.cantidad += cantidadNum;
-      existente.precio = precioNum;
+    if (existenteIndex !== -1) {
+      
+      inventarioActual[existenteIndex].cantidad += cantidadNum;
+      inventarioActual[existenteIndex].precio = precioNum;
     } else {
-      inventarioActual.push({ 
-        nombre: nombreTrim, 
-        precio: precioNum, 
-        cantidad: cantidadNum 
-      });
+    
+      inventarioActual.push(nuevoProducto);
     }
 
     guardarInventario(inventarioActual);
-    mostrarInventario();
 
+   
     setNombre('');
     setPrecio('');
     setCantidad('');
@@ -71,9 +89,10 @@ const Inventario = () => {
     alert(`✅ Producto "${nombreTrim}" agregado al inventario`);
   };
 
-  const editarProducto = (i) => {
-    const producto = inventario[i];
+  const editarProducto = (index) => {
+    const producto = inventario[index];
     const nuevaCantidad = prompt(`Nueva cantidad para "${producto.nombre}":`, producto.cantidad);
+    
     if (nuevaCantidad === null) return;
     
     const cantidadNum = parseInt(nuevaCantidad);
@@ -82,22 +101,18 @@ const Inventario = () => {
       return;
     }
 
-    const inventarioActual = obtenerInventario();
-    inventarioActual[i].cantidad = cantidadNum;
+    const inventarioActual = [...inventario];
+    inventarioActual[index].cantidad = cantidadNum;
     guardarInventario(inventarioActual);
-    mostrarInventario();
     
     alert(`✅ Cantidad de "${producto.nombre}" actualizada a ${cantidadNum}`);
   };
 
-  const eliminarProducto = (i) => {
-    const producto = inventario[i];
+  const eliminarProducto = (index) => {
+    const producto = inventario[index];
     if (window.confirm(`¿Estás seguro de que quieres eliminar "${producto.nombre}" del inventario?`)) {
-      const inventarioActual = obtenerInventario();
-      inventarioActual.splice(i, 1);
+      const inventarioActual = inventario.filter((_, i) => i !== index);
       guardarInventario(inventarioActual);
-      mostrarInventario();
-      
       alert(`✅ Producto "${producto.nombre}" eliminado del inventario`);
     }
   };
@@ -105,7 +120,7 @@ const Inventario = () => {
   const reiniciarInventario = () => {
     if (window.confirm("¿Estás seguro de que quieres reiniciar todo el inventario? Se perderán todos los datos.")) {
       localStorage.removeItem("inventario");
-      mostrarInventario();
+      setInventario([]);
       alert("✅ Inventario reiniciado");
     }
   };
@@ -131,8 +146,6 @@ const Inventario = () => {
           <p className="resumen-valor">${totalValorInventario.toFixed(2)}</p>
         </div>
       </div>
-
-      {/* Formulario para agregar productos */}
       <div className="formulario-inventario">
         <h3>Agregar Nuevo Producto</h3>
         <div className="formulario-campos">
@@ -216,7 +229,7 @@ const Inventario = () => {
           )}
         </tbody>
       </table>
-      
+
       {inventario.length > 0 && (
         <div className="reiniciar-container">
           <button 

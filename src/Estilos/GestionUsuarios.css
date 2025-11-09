@@ -1,6 +1,3 @@
-/* GestionUsuarios.css - Estilos exactos de tu código original */
-
-/* Contenedor Principal */
 .gestion-usuarios-container {
   padding: 20px;
   max-width: 1200px;
@@ -8,7 +5,6 @@
   min-height: 100vh;
 }
 
-/* Header */
 .gestion-usuarios-header {
   text-align: center;
   margin-bottom: 30px;
@@ -26,7 +22,6 @@
   margin: 0;
 }
 
-/* Resumen de Usuarios */
 .resumen-usuarios {
   display: flex;
   justify-content: center;
@@ -71,7 +66,6 @@
   color: #dc3545;
 }
 
-/* Botón Crear Admin */
 .crear-admin-container {
   text-align: center;
   margin-bottom: 30px;
@@ -95,7 +89,6 @@
   transform: translateY(-2px);
 }
 
-/* Contenedor Listas */
 .usuarios-listas-container {
   display: flex;
   flex-direction: column;
@@ -103,7 +96,6 @@
   align-items: center;
 }
 
-/* Listas de Usuarios */
 .lista-administradores,
 .lista-compradores {
   width: 100%;
@@ -125,14 +117,12 @@
   color: #28a745;
 }
 
-/* Grid de Usuarios */
 .usuarios-grid {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-/* Tarjetas de Usuario */
 .usuario-card {
   border-radius: 10px;
   padding: 20px;
@@ -149,7 +139,6 @@
   background-color: #f8fff9;
 }
 
-/* Header de Usuario */
 .usuario-header {
   display: flex;
   justify-content: space-between;
@@ -165,7 +154,6 @@
   font-size: 1.1rem;
 }
 
-/* Badges */
 .badge-admin {
   color: #dc3545;
   font-size: 0.9rem;
@@ -184,7 +172,6 @@
   border-radius: 12px;
 }
 
-/* Botones */
 .btn-eliminar {
   padding: 8px 16px;
   background-color: #dc3545;
@@ -200,7 +187,6 @@
   background-color: #c82333;
 }
 
-/* Acciones de Usuario */
 .usuario-acciones {
   text-align: center;
 }
@@ -237,7 +223,6 @@
   background-color: #0056b3;
 }
 
-/* Lista Vacía */
 .lista-vacia {
   text-align: center;
   color: #666;
@@ -246,7 +231,6 @@
   border-radius: 8px;
 }
 
-/* Botón Volver */
 .volver-container {
   text-align: center;
   margin-top: 30px;

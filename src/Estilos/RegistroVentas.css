@@ -1,11 +1,8 @@
-/* RegistroVentas.css - Estilos exactos de tu código original */
 
-/* Título */
 .ventas-titulo {
   text-align: center;
 }
 
-/* Estadísticas */
 .estadisticas-ventas {
   display: flex;
   gap: 20px;
@@ -45,7 +42,6 @@
   font-size: 14px;
 }
 
-/* Filtros */
 .filtros-ventas {
   background: #f8f9fa;
   padding: 20px;
@@ -118,8 +114,6 @@
   font-weight: bold;
   color: #333;
 }
-
-/* Historial de Ventas */
 .historial-ventas h3 {
   margin-bottom: 15px;
 }
@@ -135,7 +129,6 @@
   overflow-y: auto;
 }
 
-/* Tarjetas de Venta */
 .venta-card {
   border: 1px solid #e0e0e0;
   border-radius: 8px;

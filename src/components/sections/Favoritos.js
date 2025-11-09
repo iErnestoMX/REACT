@@ -159,7 +159,7 @@ const Favoritos = ({ onUpdateFavoritos }) => {
           );
         })}
       </div>
-              <button 
+        <button 
           onClick={vaciarFavoritos}
           className="btn-vaciar-favoritos"
         >

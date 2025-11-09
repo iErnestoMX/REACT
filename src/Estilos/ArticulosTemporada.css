@@ -99,9 +99,7 @@
   margin: 0;
 }
 
-/* 🔥 ESTILOS RESPONSIVE AGREGADOS 🔥 */
 
-/* Tablets */
 @media (max-width: 1024px) {
   .articulos-temporada-fila {
     grid-template-columns: repeat(3, 1fr);
@@ -109,7 +107,6 @@
   }
 }
 
-/* Tablets pequeñas */
 @media (max-width: 768px) {
   .articulos-temporada-fila {
     grid-template-columns: repeat(2, 1fr);
@@ -133,7 +130,6 @@
   }
 }
 
-/* Móviles */
 @media (max-width: 480px) {
   .articulos-temporada-fila {
     grid-template-columns: 1fr;
@@ -186,7 +182,6 @@
   }
 }
 
-/* Móviles muy pequeños */
 @media (max-width: 360px) {
   .articulos-temporada-contenedor {
     gap: 15px;

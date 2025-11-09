@@ -1,4 +1,4 @@
-// utils/carritoUtils.js
+
 export const obtenerCarrito = () => {
   const username = localStorage.getItem("loggedIn");
   return JSON.parse(localStorage.getItem(`carrito_${username}`)) || [];

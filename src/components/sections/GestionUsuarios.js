@@ -24,7 +24,7 @@ const GestionUsuarios = ({ onBack }) => {
       setUsuarios(usuariosActualizados);
       localStorage.setItem("usuarios", JSON.stringify(usuariosActualizados));
       
-      // También eliminar el carrito del usuario si existe
+    
       localStorage.removeItem(`carrito_${username}`);
       localStorage.removeItem(`tarjetas_${username}`);
       
@@ -79,13 +79,13 @@ const GestionUsuarios = ({ onBack }) => {
 
   return (
     <div className="gestion-usuarios-container">
-      {/* Header centrado */}
+
       <header className="gestion-usuarios-header">
         <h2>👥 Gestión de Usuarios</h2>
         <p>Administra los usuarios del sistema</p>
       </header>
 
-      {/* Resumen centrado */}
+
       <div className="resumen-usuarios">
         <div className="resumen-item">
           <h3>Total Usuarios</h3>
@@ -101,7 +101,7 @@ const GestionUsuarios = ({ onBack }) => {
         </div>
       </div>
 
-      {/* Botón para crear nuevo admin - Centrado */}
+  
       <div className="crear-admin-container">
         <button 
           onClick={crearUsuarioAdmin}
@@ -111,9 +111,8 @@ const GestionUsuarios = ({ onBack }) => {
         </button>
       </div>
 
-      {/* Contenedor principal centrado */}
       <div className="usuarios-listas-container">
-        {/* Lista de Administradores */}
+
         <div className="lista-administradores">
           <h3>👑 Administradores ({usuariosAdmins.length})</h3>
           {usuariosAdmins.length === 0 ? (
@@ -157,7 +156,6 @@ const GestionUsuarios = ({ onBack }) => {
           )}
         </div>
 
-        {/* Lista de Compradores */}
         <div className="lista-compradores">
           <h3>🛒 Compradores ({usuariosCompradores.length})</h3>
           {usuariosCompradores.length === 0 ? (

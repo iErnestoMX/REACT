@@ -27,7 +27,6 @@ const Header = ({ usuarioActual, carritoCount, onLogout, onChangeSection }) => {
       )}
 
       <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-        {/* Botón de Favoritos */}
         <div 
           id="favoritos-icono" 
           style={{ 
@@ -43,8 +42,6 @@ const Header = ({ usuarioActual, carritoCount, onLogout, onChangeSection }) => {
         >
           
         </div>
-
-        {/* Icono del Carrito */}
         <div 
           id="carrito-icono" 
           style={{ 

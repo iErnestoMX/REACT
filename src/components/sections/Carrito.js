@@ -47,8 +47,6 @@ const Carrito = ({ onUpdateCarrito }) => {
       return prod;
     });
     guardarInventario(inventarioActual);
-
-    // Actualizar carrito
     carritoActual[index].qty = nuevaCantidad;
     guardarCarrito(carritoActual);
     onUpdateCarrito();
@@ -58,10 +56,10 @@ const Carrito = ({ onUpdateCarrito }) => {
     const carritoActual = obtenerCarrito();
     const itemEliminado = carritoActual[index];
     
-    // Reintegrar al inventario
+
     reintegrarAlInventario(itemEliminado.name, itemEliminado.qty);
     
-    // Eliminar del carrito
+
     carritoActual.splice(index, 1);
     guardarCarrito(carritoActual);
     onUpdateCarrito();
@@ -70,7 +68,7 @@ const Carrito = ({ onUpdateCarrito }) => {
   };
 
   const vaciarCarrito = () => {
-    // Reintegrar todos los productos al inventario
+
     carrito.forEach(item => {
       reintegrarAlInventario(item.name, item.qty);
     });
@@ -91,14 +89,14 @@ const Carrito = ({ onUpdateCarrito }) => {
       `${item.name} x${item.qty} - $${item.price * item.qty}`
     ).join('\n');
 
-    // Solicitar información del cliente
+ 
     const clienteEmail = prompt('📧 Ingrese el email del cliente:');
     if (!clienteEmail) {
       notificacionError('Email Requerido', 'Se requiere email del cliente para registrar la venta');
       return;
     }
 
-    // Validar formato de email básico
+
     if (!clienteEmail.includes('@') || !clienteEmail.includes('.')) {
       notificacionError('Email Inválido', 'Por favor ingrese un email válido');
       return;
@@ -110,7 +108,7 @@ const Carrito = ({ onUpdateCarrito }) => {
     if (window.confirm(`🛒 RESUMEN DE COMPRA:\n\n👤 Cliente: ${clienteNombre}\n📧 Email: ${clienteEmail}\n\n${resumen}\n\n💵 TOTAL: $${total}\n\n¿Confirmar compra?`)) {
       
       try {
-        // Registrar o encontrar cliente
+    
         let cliente = buscarClientePorEmail(clienteEmail);
         if (!cliente) {
           cliente = agregarCliente({
@@ -120,7 +118,7 @@ const Carrito = ({ onUpdateCarrito }) => {
           });
         }
 
-        // Registrar la venta
+   
         const venta = registrarVenta({
           cliente: clienteNombre,
           clienteEmail: clienteEmail,
@@ -135,7 +133,7 @@ const Carrito = ({ onUpdateCarrito }) => {
           items: carrito.length
         });
 
-        // Vaciar carrito después de registrar la venta
+    
         guardarCarrito([]);
         onUpdateCarrito();
         

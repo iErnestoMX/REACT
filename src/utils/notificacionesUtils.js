@@ -1,6 +1,4 @@
-// utils/notificacionesUtils.js
 
-// Tipos de notificaciones
 export const TIPOS_NOTIFICACION = {
   EXITO: 'exito',
   ERROR: 'error',
@@ -10,7 +8,6 @@ export const TIPOS_NOTIFICACION = {
   CARRITO: 'carrito'
 };
 
-// Estilos para cada tipo de notificación
 export const estilosNotificacion = {
   [TIPOS_NOTIFICACION.EXITO]: {
     background: 'linear-gradient(135deg, #4CAF50, #45a049)',
@@ -44,7 +41,6 @@ export const estilosNotificacion = {
   }
 };
 
-// Función para cerrar notificación
 const cerrarNotificacion = (id) => {
   const notificacion = document.getElementById(id);
   if (notificacion) {
@@ -60,7 +56,6 @@ const cerrarNotificacion = (id) => {
   }
 };
 
-// Función principal para mostrar notificaciones
 export const mostrarNotificacion = (titulo, mensaje, tipo = TIPOS_NOTIFICACION.INFO, duracion = 4000) => {
   const container = document.getElementById('notificaciones-container');
   if (!container) {
@@ -71,7 +66,6 @@ export const mostrarNotificacion = (titulo, mensaje, tipo = TIPOS_NOTIFICACION.I
   const estilos = estilosNotificacion[tipo] || estilosNotificacion[TIPOS_NOTIFICACION.INFO];
   const id = 'notificacion-' + Date.now();
 
-  // Crear elemento de notificación
   const notificacion = document.createElement('div');
   notificacion.id = id;
   notificacion.innerHTML = `
@@ -136,11 +130,9 @@ export const mostrarNotificacion = (titulo, mensaje, tipo = TIPOS_NOTIFICACION.I
     </div>
   `;
 
-  // Agregar evento al botón de cerrar
   const closeButton = notificacion.querySelector('button');
   closeButton.addEventListener('click', () => cerrarNotificacion(id));
 
-  // Agregar estilos de animación si no existen
   if (!document.getElementById('notificaciones-estilos')) {
     const estilosCSS = document.createElement('style');
     estilosCSS.id = 'notificaciones-estilos';
@@ -160,7 +152,6 @@ export const mostrarNotificacion = (titulo, mensaje, tipo = TIPOS_NOTIFICACION.I
 
   container.appendChild(notificacion);
 
-  // Animación de entrada
   setTimeout(() => {
     const elementoNotificacion = notificacion.querySelector('div');
     if (elementoNotificacion) {
@@ -169,7 +160,6 @@ export const mostrarNotificacion = (titulo, mensaje, tipo = TIPOS_NOTIFICACION.I
     }
   }, 100);
 
-  // Auto-eliminación después de la duración
   setTimeout(() => {
     cerrarNotificacion(id);
   }, duracion);
@@ -177,7 +167,6 @@ export const mostrarNotificacion = (titulo, mensaje, tipo = TIPOS_NOTIFICACION.I
   return id;
 };
 
-// Funciones helper para tipos específicos
 export const notificacionExito = (titulo, mensaje, duracion = 4000) => {
   return mostrarNotificacion(titulo, mensaje, TIPOS_NOTIFICACION.EXITO, duracion);
 };

@@ -1,14 +1,8 @@
 
-/*=====CARRITO ESTILOS=======*/
-
-/* Carrito.css - Estilos exactos de tu código original */
-
-/* Título */
 .carrito-title {
   text-align: center;
 }
 
-/* Carrito Vacío */
 .carrito-vacio {
   text-align: center;
   padding: 40px;
@@ -18,13 +12,11 @@
   margin-bottom: 10px;
 }
 
-/* Contenedor Principal */
 .carrito-container {
   display: flex;
   justify-content: center;
 }
 
-/* Tabla */
 .carrito-table {
   text-align: center;
   width: 90%;
@@ -51,7 +43,6 @@
   border: 1px solid #ddd;
 }
 
-/* Información del Producto */
 .carrito-item-info strong {
   display: block;
   margin-bottom: 5px;
@@ -61,7 +52,6 @@
   color: #666;
 }
 
-/* Imagen del Producto */
 .product-image {
   width: 80px;
   height: 80px;
@@ -69,7 +59,6 @@
   border-radius: 5px;
 }
 
-/* Input de Cantidad */
 .cantidad-input {
   width: 60px;
   padding: 5px;
@@ -78,7 +67,6 @@
   border-radius: 3px;
 }
 
-/* Botón Eliminar */
 .btn-eliminar {
   padding: 8px 15px;
   background-color: #dc3545;
@@ -92,7 +80,6 @@
   background-color: #c82333;
 }
 
-/* Resumen del Carrito */
 .carrito-resumen {
   text-align: center;
   margin-top: 20px;
@@ -110,7 +97,6 @@
   display: inline-block;
 }
 
-/* Botones de Acción */
 .carrito-botones {
   display: flex;
   justify-content: center;

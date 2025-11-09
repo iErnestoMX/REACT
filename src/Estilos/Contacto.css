@@ -1,13 +1,8 @@
 
-/*====CONTACTO======*/
-/* Contacto.css - Estilos exactos de tu código original */
-
-/* Título Principal */
 .contacto-titulo {
   text-align: center;
 }
 
-/* Botones de Navegación */
 .contacto-botones-container {
   display: flex;
   justify-content: center;
@@ -28,7 +23,6 @@
   background: #f0f0f0;
 }
 
-/* Contenido Principal */
 .contacto-contenido {
   margin-top: 20px;
   padding: 15px;
@@ -41,7 +35,6 @@
   text-align: center;
 }
 
-/* WhatsApp */
 .whatsapp-container {
   text-align: center;
   margin-top: 30px;
@@ -61,7 +54,6 @@
   background: #20bd5a;
 }
 
-/* Formulario */
 .formulario-contacto {
   display: flex;
   flex-direction: column;
@@ -89,7 +81,6 @@
   min-height: 80px;
 }
 
-/* Fieldset Preferencias */
 .formulario-fieldset {
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -112,7 +103,6 @@
   margin-right: 5px;
 }
 
-/* Checkbox */
 .formulario-checkbox-label {
   display: flex;
   align-items: center;
@@ -124,7 +114,6 @@
   margin: 0;
 }
 
-/* Botón Enviar */
 .formulario-boton {
   padding: 10px 20px;
   background: #007bff;
@@ -140,13 +129,11 @@
   background: #0056b3;
 }
 
-/* Mapa */
 .mapa-iframe {
   border: 0;
   border-radius: 8px;
 }
 
-/* Calendario */
 .calendario-iframe {
   border: 0;
   border-radius: 10px;

@@ -120,6 +120,7 @@ const Articulos = ({ onUpdateCarrito }) => {
       { nombre: "Corona Navidad", price: 120, img: "https://i.postimg.cc/kMygWhT5/71Nf-URFBXAL-AC-UF894-1000-QL80.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
       { nombre: "Bolsa Navideña", price: 20, img: "https://i.postimg.cc/59LBr4Y6/descarga-removebg-preview.png", desc: "El mejor material de pinceles.", categoria: "papel" },
       { nombre: "Papel Navideño", price: 15, img: "https://i.postimg.cc/LXf1GDsQ/papel-navideno-beumont-couche-70x100cm-9438hr-sku-349031.jpg", desc: "El mejor material de pinceles.", categoria: "papel" }
+      
     ];
     setArticulos(articulosData);
     localStorage.setItem("articulos", JSON.stringify(articulosData));

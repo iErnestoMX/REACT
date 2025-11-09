@@ -1,6 +1,4 @@
-/* Favoritos.css - Estilos exactos de tu código original */
 
-/* Favoritos Vacío */
 .favoritos-vacio {
   text-align: center;
   padding: 40px;
@@ -10,7 +8,6 @@
   margin-bottom: 10px;
 }
 
-/* Header de Favoritos */
 .favoritos-header {
   display: flex;
   justify-content: space-between;
@@ -37,7 +34,6 @@
   background-color: #e0a800;
 }
 
-/* Contenedor de Favoritos */
 .favoritos-container {
   display: flex;
   overflow-x: auto;
@@ -48,7 +44,6 @@
   min-height: 320px;
 }
 
-/* Scrollbar personalizada */
 .favoritos-container::-webkit-scrollbar {
   height: 8px;
 }
@@ -67,7 +62,6 @@
   background: #0056b3;
 }
 
-/* Tarjeta de Favorito */
 .favorito-card {
   border: 2px solid #e0e0e0;
   border-radius: 12px;
@@ -87,7 +81,6 @@
   background-color: #fff5f5;
 }
 
-/* Imagen del Favorito */
 .favorito-imagen {
   width: 100%;
   height: 150px;
@@ -95,7 +88,6 @@
   border-radius: 8px;
 }
 
-/* Nombre del Producto */
 .favorito-nombre {
   margin: 0;
   text-align: center;
@@ -106,7 +98,6 @@
   justify-content: center;
 }
 
-/* Precio */
 .favorito-precio {
   font-size: 18px;
   font-weight: bold;
@@ -115,7 +106,6 @@
   margin: 0;
 }
 
-/* Información de Stock */
 .favorito-stock {
   padding: 5px 10px;
   color: white;
