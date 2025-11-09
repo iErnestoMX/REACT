@@ -7,8 +7,7 @@ import { notificacionExito, notificacionError, notificacionInfo } from '../../ut
 const Carrito = ({ onUpdateCarrito }) => {
   const carrito = obtenerCarrito();
   const inventario = obtenerInventario();
-
-  // Función para reintegrar productos al inventario
+  
   const reintegrarAlInventario = (nombreProducto, cantidad) => {
     const inventarioActual = obtenerInventario();
     const productoIndex = inventarioActual.findIndex(item => item.nombre === nombreProducto);
