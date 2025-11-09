@@ -66,7 +66,6 @@ const RegistroVentas = () => {
     <>
       <h2 className="ventas-titulo">Registro de Ventas</h2>
 
-      {/* Estadísticas rápidas */}
       <div className="estadisticas-ventas">
         <div className="estadistica-card total-general">
           <h3>💰 Total General</h3>
@@ -85,7 +84,7 @@ const RegistroVentas = () => {
         </div>
       </div>
 
-      {/* Filtros */}
+
       <div className="filtros-ventas">
         <h3>🔍 Filtros</h3>
         <div className="filtros-container">
@@ -147,7 +146,7 @@ const RegistroVentas = () => {
         )}
       </div>
 
-{/* SOLO ESTA PARTE CAMBIÉ A HORIZONTAL */}
+
 <div className="historial-ventas">
   <h3>📋 Historial de Ventas</h3>
   

@@ -355,7 +355,6 @@
   }
 }
 
-/* Scrollbar personalizado */
 .lista-ventas-horizontal::-webkit-scrollbar {
   width: 6px;
 }
