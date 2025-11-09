@@ -1,4 +1,4 @@
-// components/Notificaciones.js
+
 import React from 'react';
 
 const Notificaciones = () => {
@@ -13,7 +13,6 @@ const Notificaciones = () => {
       gap: '10px',
       maxWidth: '350px'
     }}>
-      {/* Las notificaciones se agregarán aquí dinámicamente */}
     </div>
   );
 };

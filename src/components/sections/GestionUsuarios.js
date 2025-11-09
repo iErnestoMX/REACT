@@ -367,10 +367,6 @@ const GestionUsuarios = ({ onBack }) => {
           )}
         </div>
       </div>
-
-
-
-      {/* Botón volver - Centrado */}
       <div style={{ textAlign: 'center', marginTop: '30px' }}>
         <button 
           onClick={onBack}

@@ -778,21 +778,7 @@ const Articulos = ({ onUpdateCarrito }) => {
         marginTop: '30px',
         padding: '20px'
       }}>
-        <button 
-          onClick={() => window.history.back()}
-          style={{
-            padding: '12px 24px',
-            backgroundColor: '#6c757d',
-            color: 'white',
-            border: 'none',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            fontSize: '16px',
-            fontFamily: 'Quicksand, sans-serif'
-          }}
-        >
-          ↩️ Volver al inicio
-        </button>
+  
       </div>
 
     
