@@ -1,8 +1,8 @@
-// src/components/sections/Favoritos.js
 import React, { useState, useEffect } from 'react';
 import { obtenerFavoritos, eliminarDeFavoritos } from '../../utils/favoritosUtils';
 import { obtenerCarrito, guardarCarrito, obtenerInventario, guardarInventario } from '../../utils/carritoUtils';
 import { notificacionExito, notificacionError, notificacionCarrito, notificacionInfo } from '../../utils/notificacionesUtils';
+import '../../Estilos/Favoritos.css';
 
 const Favoritos = ({ onUpdateFavoritos }) => {
   const [favoritos, setFavoritos] = useState([]);
@@ -95,7 +95,7 @@ const Favoritos = ({ onUpdateFavoritos }) => {
     return (
       <>
         <h2>Favoritos</h2>
-        <div style={{textAlign: 'center', padding: '40px'}}>
+        <div className="favoritos-vacio">
           <h3>Tu lista de favoritos está vacía</h3>
           <p>Agrega productos a favoritos para verlos aquí</p>
         </div>
@@ -105,40 +105,18 @@ const Favoritos = ({ onUpdateFavoritos }) => {
 
   return (
     <>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: '20px',
-        padding: '0 20px'
-      }}>
-        <h2 style={{margin: 0}}>Favoritos ({favoritos.length})</h2>
+      <div className="favoritos-header">
+        <h2>Favoritos ({favoritos.length})</h2>
         <button 
           onClick={vaciarFavoritos}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#ffc107',
-            color: 'black',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            fontWeight: 'bold'
-          }}
+          className="btn-vaciar-favoritos"
         >
           🗑️ Vaciar Lista
         </button>
       </div>
 
       {/* Contenedor horizontal con scroll */}
-      <div style={{
-        display: 'flex',
-        overflowX: 'auto',
-        gap: '20px',
-        padding: '20px',
-        scrollbarWidth: 'thin',
-        scrollbarColor: '#007bff #f1f1f1',
-        minHeight: '320px'
-      }}>
+      <div className="favoritos-container">
         {favoritos.map((item, index) => {
           const inventario = obtenerInventario();
           const productoInventario = inventario.find(prod => prod.nombre === item.nombre);
@@ -148,102 +126,40 @@ const Favoritos = ({ onUpdateFavoritos }) => {
           return (
             <div 
               key={index}
-              style={{
-                border: `2px solid ${sinStock ? '#ff6b6b' : '#e0e0e0'}`,
-                borderRadius: '12px',
-                padding: '15px',
-                backgroundColor: sinStock ? '#fff5f5' : '#ffffff',
-                boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                width: '250px',
-                minWidth: '250px', // Ancho fijo para cada tarjeta
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '10px',
-                flexShrink: 0 // Evita que las tarjetas se reduzcan
-              }}
+              className={`favorito-card ${sinStock ? 'sin-stock' : ''}`}
             >
               <img 
                 src={item.img} 
                 alt={item.nombre} 
-                style={{
-                  width: '100%',
-                  height: '150px',
-                  objectFit: 'cover',
-                  borderRadius: '8px'
-                }}
+                className="favorito-imagen"
               />
               
-              <h3 style={{
-                margin: '0', 
-                textAlign: 'center',
-                fontSize: '16px',
-                height: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
+              <h3 className="favorito-nombre">
                 {item.nombre}
               </h3>
               
-              <p style={{
-                fontSize: '18px', 
-                fontWeight: 'bold', 
-                color: '#007bff', 
-                textAlign: 'center', 
-                margin: '0'
-              }}>
+              <p className="favorito-precio">
                 ${item.price}
               </p>
               
-              <div style={{
-                padding: '5px 10px',
-                backgroundColor: sinStock ? '#ff6b6b' : 
-                               stockDisponible <= 5 ? '#ffa94d' : '#51cf66',
-                color: 'white',
-                borderRadius: '15px',
-                fontSize: '12px',
-                fontWeight: 'bold',
-                textAlign: 'center'
-              }}>
+              <div className={`favorito-stock ${sinStock ? 'sin-stock' : stockDisponible <= 5 ? 'bajo-stock' : 'en-stock'}`}>
                 {sinStock ? '❌ SIN STOCK' : 
                  stockDisponible <= 5 ? `⚠️ Últimas ${stockDisponible}` : 
                  `📦 Stock: ${stockDisponible}`}
               </div>
 
-              <div style={{
-                display: 'flex', 
-                gap: '8px',
-                marginTop: 'auto'
-              }}>
+              <div className="favorito-acciones">
                 <button 
                   onClick={() => agregarAlCarrito(item)}
                   disabled={sinStock}
-                  style={{
-                    flex: 1,
-                    padding: '8px',
-                    backgroundColor: sinStock ? '#ccc' : '#28a745',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: sinStock ? 'not-allowed' : 'pointer',
-                    fontSize: '12px',
-                    fontWeight: 'bold'
-                  }}
+                  className={`btn-agregar-carrito ${sinStock ? 'deshabilitado' : ''}`}
                 >
                   {sinStock ? '❌ Agotado' : '🛒 Carrito'}
                 </button>
                 
                 <button 
                   onClick={() => eliminarFavorito(item.nombre)}
-                  style={{
-                    padding: '8px 12px',
-                    backgroundColor: '#dc3545',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                    fontSize: '12px'
-                  }}
+                  className="btn-eliminar-favorito"
                   title="Eliminar de favoritos"
                 >
                   ❌
@@ -253,29 +169,6 @@ const Favoritos = ({ onUpdateFavoritos }) => {
           );
         })}
       </div>
-
-      {/* Estilos para la scrollbar */}
-      <style>
-        {`
-          div::-webkit-scrollbar {
-            height: 8px;
-          }
-          
-          div::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-          }
-          
-          div::-webkit-scrollbar-thumb {
-            background: #007bff;
-            border-radius: 10px;
-          }
-          
-          div::-webkit-scrollbar-thumb:hover {
-            background: #0056b3;
-          }
-        `}
-      </style>
     </>
   );
 };

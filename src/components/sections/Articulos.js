@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { obtenerCarrito, guardarCarrito } from '../../utils/carritoUtils';
 import { agregarAFavoritos, eliminarDeFavoritos, estaEnFavoritos } from '../../utils/favoritosUtils';
 import { notificacionCarrito, notificacionFavorito, notificacionError } from '../../utils/notificacionesUtils';
-
+import '../../Estilos/Articulos.css';
 
 const Articulos = ({ onUpdateCarrito }) => {
   const [articulos, setArticulos] = useState([]);
@@ -11,7 +11,6 @@ const Articulos = ({ onUpdateCarrito }) => {
   const [favoritos, setFavoritos] = useState({});
   const [imagenesActuales, setImagenesActuales] = useState({});
   
-
   const [busqueda, setBusqueda] = useState('');
   const [categoria, setCategoria] = useState('todos');
   const [soloEnStock, setSoloEnStock] = useState(false);
@@ -19,7 +18,6 @@ const Articulos = ({ onUpdateCarrito }) => {
 
   const articulosContainerRef = useRef(null);
   const ARTICULOS_POR_FILA = 4;
-
 
   const imagenesExtra = {
     "Colores": [
@@ -102,7 +100,6 @@ const Articulos = ({ onUpdateCarrito }) => {
       "https://m.media-amazon.com/images/I/71VAmcVcXdL.jpg",
       "https://media.istockphoto.com/id/1430709087/es/vector/fondo-rojo-de-garabatos-navide%C3%B1os-adecuado-para-el-dise%C3%B1o-de-envases-papel-tapiz-o-como.jpg?s=612x612&w=0&k=20&c=CZetA8hSFHSf1I0GOxYqq6owSFgiKtTTt446JQIKFgQ="
     ]
-    
   };
 
   useEffect(() => {
@@ -123,7 +120,6 @@ const Articulos = ({ onUpdateCarrito }) => {
       { nombre: "Corona Navidad", price: 120, img: "https://i.postimg.cc/kMygWhT5/71Nf-URFBXAL-AC-UF894-1000-QL80.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
       { nombre: "Bolsa Navideña", price: 20, img: "https://i.postimg.cc/59LBr4Y6/descarga-removebg-preview.png", desc: "El mejor material de pinceles.", categoria: "papel" },
       { nombre: "Papel Navideño", price: 15, img: "https://i.postimg.cc/LXf1GDsQ/papel-navideno-beumont-couche-70x100cm-9438hr-sku-349031.jpg", desc: "El mejor material de pinceles.", categoria: "papel" }
-      
     ];
     setArticulos(articulosData);
     localStorage.setItem("articulos", JSON.stringify(articulosData));
@@ -180,10 +176,6 @@ const Articulos = ({ onUpdateCarrito }) => {
     return filtrados;
   }, [articulos, busqueda, categoria, soloEnStock, soloFavoritos, favoritos, obtenerCantidadDisponible]);
 
-
-
-
-  
   useEffect(() => {
     const intervalos = {};
     
@@ -289,57 +281,27 @@ const Articulos = ({ onUpdateCarrito }) => {
 
   return (
     <>
-      <h2>Artículos</h2>
-      <p>Se muestran imágenes de los <strong>artículos en venta</strong> y <em>su costo</em>, de la <abbr title="Papelería Karen">PapeKaren</abbr></p>
+      <h2 className="articulos-title">Artículos</h2>
+      <p className="articulos-description">
+        Se muestran imágenes de los <strong>artículos en venta</strong> y <em>su costo</em>, de la <abbr title="Papelería Karen">PapeKaren</abbr>
+      </p>
 
-      <div style={{
-        background: 'linear-gradient(135deg, #fff7ea, #ffffff)',
-        padding: '15px',
-        borderRadius: '12px',
-        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-        marginBottom: '20px',
-        border: '1px dashed #ffd6a5'
-      }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '12px',
-          flexWrap: 'wrap',
-          justifyContent: 'center'
-        }}>
-
-          <div style={{ position: 'relative', flex: '1', minWidth: '200px', maxWidth: '300px' }}>
+      <div className="filtros-container">
+        <div className="filtros-content">
+          <div className="search-container">
             <input
               type="text"
               placeholder="🔍 Buscar productos..."
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '8px 8px',
-                paddingLeft: '0px',
-                border: '2px solid #d2b48c',
-                borderRadius: '20px',
-                fontSize: '14px',
-                fontFamily: 'Quicksand, sans-serif',
-                background: 'white'
-              }}
+              className="search-input"
             />
           </div>
 
-  
           <select
             value={categoria}
             onChange={(e) => setCategoria(e.target.value)}
-            style={{
-              padding: '8px 12px',
-              border: '2px solid #d2b48c',
-              borderRadius: '20px',
-              background: 'white',
-              fontFamily: 'Quicksand, sans-serif',
-              fontSize: '14px',
-              minWidth: '140px'
-            }}
+            className="category-select"
           >
             {categorias.map(cat => (
               <option key={cat} value={cat}>
@@ -354,40 +316,23 @@ const Articulos = ({ onUpdateCarrito }) => {
             ))}
           </select>
 
-  
-          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-            <label style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              cursor: 'pointer',
-              fontSize: '14px',
-              fontFamily: 'Quicksand, sans-serif',
-              whiteSpace: 'nowrap'
-            }}>
+          <div className="checkboxes-container">
+            <label className="checkbox-label">
               <input
                 type="checkbox"
                 checked={soloEnStock}
                 onChange={(e) => setSoloEnStock(e.target.checked)}
-                style={{ transform: 'scale(1.1)' }}
+                className="checkbox-input"
               />
               📦 En stock
             </label>
 
-            <label style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              cursor: 'pointer',
-              fontSize: '14px',
-              fontFamily: 'Quicksand, sans-serif',
-              whiteSpace: 'nowrap'
-            }}>
+            <label className="checkbox-label">
               <input
                 type="checkbox"
                 checked={soloFavoritos}
                 onChange={(e) => setSoloFavoritos(e.target.checked)}
-                style={{ transform: 'scale(1.1)' }}
+                className="checkbox-input"
               />
               ⭐ Favoritos
             </label>
@@ -400,123 +345,49 @@ const Articulos = ({ onUpdateCarrito }) => {
               setSoloEnStock(false);
               setSoloFavoritos(false);
             }}
-            style={{
-              padding: '8px 12px',
-              backgroundColor: '#6c757d',
-              color: 'white',
-              border: 'none',
-              borderRadius: '20px',
-              cursor: 'pointer',
-              fontSize: '12px',
-              fontFamily: 'Quicksand, sans-serif',
-              whiteSpace: 'nowrap'
-            }}
-          >
-            🗑️ Limpiar
+            className="clear-filters-btn"
+          >Limpiar
           </button>
 
-      
-          <div style={{
-            fontSize: '14px',
-            color: '#666',
-            fontFamily: 'Quicksand, sans-serif',
-            background: '#f8f9fa',
-            padding: '6px 12px',
-            borderRadius: '15px',
-            whiteSpace: 'nowrap'
-          }}>
+          <div className="product-count">
             {articulosFiltrados.length} productos
           </div>
         </div>
       </div>
 
-    
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '15px',
-        marginBottom: '20px'
-      }}>
+      <div className="navigation-container">
         <button 
           onClick={anterior}
           disabled={indiceInicio === 0}
-          style={{
-            padding: '10px 15px',
-            backgroundColor: indiceInicio === 0 ? '#ccc' : '#007bff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '50%',
-            cursor: indiceInicio === 0 ? 'not-allowed' : 'pointer',
-            fontSize: '16px',
-            width: '45px',
-            height: '45px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
+          className={`nav-btn prev-btn ${indiceInicio === 0 ? 'disabled' : ''}`}
         >
           ◀
         </button>
 
-        <div style={{
-          fontSize: '14px',
-          color: '#666',
-          textAlign: 'center',
-          fontFamily: 'Quicksand, sans-serif'
-        }}>
+        <div className="nav-info">
           Mostrando {indiceInicio + 1}-{Math.min(indiceInicio + ARTICULOS_POR_FILA, articulosFiltrados.length)} de {articulosFiltrados.length} artículos
         </div>
 
         <button 
           onClick={siguiente}
           disabled={indiceInicio + ARTICULOS_POR_FILA >= articulosFiltrados.length}
-          style={{
-            padding: '10px 15px',
-            backgroundColor: indiceInicio + ARTICULOS_POR_FILA >= articulosFiltrados.length ? '#ccc' : '#007bff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '50%',
-            cursor: indiceInicio + ARTICULOS_POR_FILA >= articulosFiltrados.length ? 'not-allowed' : 'pointer',
-            fontSize: '16px',
-            width: '45px',
-            height: '45px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
+          className={`nav-btn next-btn ${indiceInicio + ARTICULOS_POR_FILA >= articulosFiltrados.length ? 'disabled' : ''}`}
         >
           ▶
         </button>
       </div>
 
       {articulosFiltrados.length === 0 && (
-        <div style={{
-          textAlign: 'center',
-          padding: '40px',
-          background: '#f8f9fa',
-          borderRadius: '12px',
-          border: '2px dashed #ddd',
-          marginBottom: '20px'
-        }}>
-          <h3 style={{ color: '#666', marginBottom: '10px', fontSize: '18px' }}>No se encontraron productos</h3>
-          <p style={{ color: '#888', fontSize: '14px' }}>Intenta con otros términos de búsqueda o ajusta los filtros</p>
+        <div className="no-products">
+          <h3>No se encontraron productos</h3>
+          <p>Intenta con otros términos de búsqueda o ajusta los filtros</p>
         </div>
       )}
 
-     
       {articulosFiltrados.length > 0 && (
         <div 
           ref={articulosContainerRef}
-          style={{
-            display: 'flex',
-            gap: '20px',
-            padding: '20px',
-            overflowX: 'auto',
-            justifyContent: 'center',
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none'
-          }}
+          className="articulos-grid"
         >
           {articulosVisibles.map((articulo, index) => {
             const cantidadDisponible = obtenerCantidadDisponible(articulo.nombre);
@@ -529,192 +400,64 @@ const Articulos = ({ onUpdateCarrito }) => {
             return (
               <div 
                 key={index} 
-                style={{
-                  border: `2px solid ${sinStock ? '#ff6b6b' : esFavorito ? '#ff6b8b' : '#e0e0e0'}`,
-                  borderRadius: '12px',
-                  padding: '15px',
-                  backgroundColor: sinStock ? '#fff5f5' : esFavorito ? '#fff0f3' : '#ffffff',
-                  boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                  width: '250px',
-                  minWidth: '250px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  transition: 'transform 0.2s, box-shadow 0.2s',
-                  cursor: 'pointer',
-                  opacity: sinStock ? 0.7 : 1,
-                  position: 'relative'
-                }}
-                onMouseEnter={(e) => {
-                  if (!sinStock) {
-                    e.currentTarget.style.transform = 'translateY(-5px)';
-                    e.currentTarget.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!sinStock) {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-                  }
-                }}
+                className={`articulo-card ${sinStock ? 'out-of-stock' : ''} ${esFavorito ? 'favorite' : ''}`}
               >
-           
                 <button 
                   onClick={(e) => {
                     e.stopPropagation();
                     toggleFavorito(articulo);
                   }}
-                  style={{
-                    position: 'absolute',
-                    top: '10px',
-                    right: '10px',
-                    background: 'rgba(255, 255, 255, 0.9)',
-                    border: 'none',
-                    borderRadius: '50%',
-                    width: '35px',
-                    height: '35px',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '16px',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-                    zIndex: 10
-                  }}
+                  className="favorite-btn"
                   title={esFavorito ? 'Quitar de favoritos' : 'Agregar a favoritos'}
                 >
                   {esFavorito ? '⭐' : '☆'}
                 </button>
 
-                
-                <div style={{
-                  width: '100%',
-                  height: '150px',
-                  overflow: 'hidden',
-                  borderRadius: '8px',
-                  marginBottom: '15px',
-                  position: 'relative'
-                }}>
+                <div className="articulo-image-container">
                   <img 
                     src={imagenActual} 
                     alt={articulo.nombre} 
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover'
-                    }}
+                    className="articulo-image"
                   />
                   {tieneCarrusel && (
-                    <div style={{
-                      position: 'absolute',
-                      bottom: '8px',
-                      left: '50%',
-                      transform: 'translateX(-50%)',
-                      display: 'flex',
-                      gap: '4px',
-                      zIndex: 5
-                    }}>
+                    <div className="carousel-indicators">
                       {imagenes.map((_, imgIndex) => (
                         <div
                           key={imgIndex}
-                          style={{
-                            width: '6px',
-                            height: '6px',
-                            borderRadius: '50%',
-                            backgroundColor: imgIndex === imagenesActuales[articulo.nombre] ? '#007bff' : 'rgba(255,255,255,0.5)',
-                          }}
+                          className={`carousel-dot ${imgIndex === imagenesActuales[articulo.nombre] ? 'active' : ''}`}
                         />
                       ))}
                     </div>
                   )}
                 </div>
 
-           
-                <div style={{
-                  flex: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '8px'
-                }}>
-                  <h3 style={{
-                    margin: '0',
-                    fontSize: '16px',
-                    color: '#333',
-                    textAlign: 'center',
-                    height: '40px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontFamily: 'Quicksand, sans-serif'
-                  }}>
+                <div className="articulo-info">
+                  <h3 className="articulo-name">
                     {articulo.nombre}
                   </h3>
                   
-                  <p style={{
-                    fontSize: '18px',
-                    fontWeight: 'bold',
-                    color: '#007bff',
-                    textAlign: 'center',
-                    margin: '0',
-                    fontFamily: 'Quicksand, sans-serif'
-                  }}>
+                  <p className="articulo-price">
                     ${articulo.price}
                   </p>
 
-                  <p style={{
-                    fontSize: '12px',
-                    color: '#666',
-                    textAlign: 'center',
-                    margin: '0',
-                    height: '36px',
-                    overflow: 'hidden',
-                    display: '-webkit-box',
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: 'vertical',
-                    fontFamily: 'Quicksand, sans-serif'
-                  }}>
+                  <p className="articulo-description">
                     {articulo.desc}
                   </p>
 
-                
-                  <div style={{
-                    padding: '5px 10px',
-                    backgroundColor: sinStock ? '#ff6b6b' : 
-                                   cantidadDisponible <= 5 ? '#ffa94d' : '#51cf66',
-                    color: 'white',
-                    borderRadius: '15px',
-                    fontSize: '11px',
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                    fontFamily: 'Quicksand, sans-serif'
-                  }}>
+                  <div className={`stock-info ${sinStock ? 'out-of-stock' : cantidadDisponible <= 5 ? 'low-stock' : 'in-stock'}`}>
                     {sinStock ? '❌ AGOTADO' : 
                      cantidadDisponible <= 5 ? `⚠️ Últimas ${cantidadDisponible}` : 
                      `📦 Stock: ${cantidadDisponible}`}
                   </div>
 
-                  <div style={{
-                    display: 'flex',
-                    gap: '8px',
-                    marginTop: 'auto'
-                  }}>
+                  <div className="articulo-actions">
                     <button 
                       onClick={(e) => {
                         e.stopPropagation();
                         agregarAlCarrito(articulo);
                       }}
                       disabled={sinStock}
-                      style={{
-                        flex: 1,
-                        padding: '10px',
-                        backgroundColor: sinStock ? '#ccc' : '#007bff',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '6px',
-                        cursor: sinStock ? 'not-allowed' : 'pointer',
-                        fontSize: '12px',
-                        fontWeight: 'bold',
-                        fontFamily: 'Quicksand, sans-serif'
-                      }}
+                      className={`cart-btn ${sinStock ? 'disabled' : ''}`}
                     >
                       {sinStock ? '❌ Agotado' : '🛒 Carrito'}
                     </button>
@@ -724,18 +467,7 @@ const Articulos = ({ onUpdateCarrito }) => {
                         e.stopPropagation();
                         toggleFavorito(articulo);
                       }}
-                      style={{
-                        padding: '10px',
-                        backgroundColor: esFavorito ? '#dc3545' : '#6c757d',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '6px',
-                        cursor: 'pointer',
-                        fontSize: '12px',
-                        fontWeight: 'bold',
-                        minWidth: '40px',
-                        fontFamily: 'Quicksand, sans-serif'
-                      }}
+                      className={`favorite-action-btn ${esFavorito ? 'active' : ''}`}
                     >
                       {esFavorito ? '⭐' : '☆'}
                     </button>
@@ -748,47 +480,16 @@ const Articulos = ({ onUpdateCarrito }) => {
       )}
 
       {articulosFiltrados.length > 0 && (
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '10px',
-          marginTop: '20px'
-        }}>
+        <div className="pagination-dots">
           {Array.from({ length: Math.ceil(articulosFiltrados.length / ARTICULOS_POR_FILA) }, (_, i) => (
             <button
               key={i}
               onClick={() => setIndiceInicio(i * ARTICULOS_POR_FILA)}
-              style={{
-                width: '12px',
-                height: '12px',
-                borderRadius: '50%',
-                border: 'none',
-                backgroundColor: indiceInicio === i * ARTICULOS_POR_FILA ? '#007bff' : '#ccc',
-                cursor: 'pointer'
-              }}
+              className={`pagination-dot ${indiceInicio === i * ARTICULOS_POR_FILA ? 'active' : ''}`}
             />
           ))}
         </div>
       )}
-
-      <div style={{ 
-        width: '100%', 
-        textAlign: 'center', 
-        marginTop: '30px',
-        padding: '20px'
-      }}>
-  
-      </div>
-
-    
-      <style>
-        {`
-          div::-webkit-scrollbar {
-            display: none;
-          }
-        `}
-      </style>
     </>
   );
 };

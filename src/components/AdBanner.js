@@ -1,4 +1,3 @@
-// components/AdBanner.js
 import React from 'react';
 import './AdBanner.css';
 
@@ -16,13 +15,20 @@ const AdBanner = ({ size = 'banner', content, image, link }) => {
       style={{ cursor: link ? 'pointer' : 'default' }}
     >
       {image ? (
-        <img src={image} alt="Anuncio" className="ad-image" />
+        <>
+          <img src={image} alt="Anuncio" className="ad-image" />
+          <div className="ad-overlay">
+            <div className="ad-content">
+              <span className="ad-text">{content || 'Espacio Publicitario'}</span>
+            </div>
+          </div>
+        </>
       ) : (
-        <div className="ad-content">
+        <div className="ad-content-only">
           <span className="ad-text">{content || 'Espacio Publicitario'}</span>
         </div>
       )}
-      <span className="ad-label">Publicidad</span>
+      <span className="ad-label"></span>
     </div>
   );
 };

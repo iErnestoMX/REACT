@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import '../../Estilos/Tarjetas.css';
 
 const Tarjetas = () => {
   const [vistaActual, setVistaActual] = useState('configurar');
@@ -75,42 +76,20 @@ const Tarjetas = () => {
   };
 
   return (
-    <section id="tarjetas-seccion">
-        <h2 style={{ textAlign: 'center' }}>Tarjetas Personalizadas</h2>
+    <section id="tarjetas-seccion" className="tarjetas-seccion">
+        <h2 className="tarjetas-titulo">Tarjetas Personalizadas</h2>
 
       {/* Navegación entre vistas */}
-      <div style={{ 
-        display: 'flex', 
-
-        justifyContent: 'center', 
-        gap: '20px', 
-        marginBottom: '30px',
-        borderBottom: '2px solid #ccc',
-        paddingBottom: '10px'
-      }}>
+      <div className="tarjetas-navegacion">
         <button 
           onClick={() => setVistaActual('configurar')}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: vistaActual === 'configurar' ? '#007bff' : '#f8f9fa',
-            color: vistaActual === 'configurar' ? 'white' : 'black',
-            border: '1px solid #007bff',
-            borderRadius: '5px',
-            cursor: 'pointer'
-          }}
+          className={`tarjetas-boton ${vistaActual === 'configurar' ? 'tarjetas-boton-configurar' : 'tarjetas-boton-inactivo'}`}
         >
           Crear Tarjeta
         </button>
         <button 
           onClick={() => setVistaActual('mis-tarjetas')}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: vistaActual === 'mis-tarjetas' ? '#007bff' : '#f8f9fa',
-            color: vistaActual === 'mis-tarjetas' ? 'white' : 'black',
-            border: '1px solid #007bff',
-            borderRadius: '5px',
-            cursor: 'pointer'
-          }}
+          className={`tarjetas-boton ${vistaActual === 'mis-tarjetas' ? 'tarjetas-boton-mis-tarjetas' : 'tarjetas-boton-inactivo'}`}
         >
           Mis Tarjetas ({tarjetas.length})
         </button>
@@ -118,57 +97,36 @@ const Tarjetas = () => {
 
       {/* Vista de Configuración */}
       {vistaActual === 'configurar' && (
-        <div id="tarjeta-configurator" style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '1.5rem'
-        }}>
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '2rem',
-            justifyContent: 'center',
-            alignItems: 'flex-start'
-          }}>
+        <div id="tarjeta-configurator" className="tarjetas-configurator">
+          <div className="tarjetas-contenedor-principal">
             {/* Panel de controles */}
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1rem',
-              border: '1px solid #ccc',
-              padding: '20px',
-              borderRadius: '10px',
-              backgroundColor: '#f9f9f9',
-              minWidth: '300px'
-            }}>
-              <h3>Personalizar Tarjeta</h3>
+            <div className="tarjetas-panel-controles">
+              <h3 className="tarjetas-panel-titulo">Personalizar Tarjeta</h3>
               
-              <div>
-                <label htmlFor="txtTarjeta">Texto:</label>
+              <div className="tarjetas-control-grupo">
+                <label htmlFor="txtTarjeta" className="tarjetas-label">Texto:</label>
                 <input 
                   type="text" 
                   id="txtTarjeta" 
                   value={texto}
                   onChange={(e) => setTexto(e.target.value)}
-                  style={{ width: '100%', textAlign: 'center', marginTop: '5px' }}
+                  className="tarjetas-input-texto"
                 />
               </div>
 
-              <div>
-                <label htmlFor="colorTexto">Color del texto:</label>
+              <div className="tarjetas-control-grupo">
+                <label htmlFor="colorTexto" className="tarjetas-label">Color del texto:</label>
                 <input 
                   type="color" 
                   id="colorTexto" 
                   value={colorTexto}
                   onChange={(e) => setColorTexto(e.target.value)}
-                  style={{ width: '100%', marginTop: '5px' }}
+                  className="tarjetas-input-color"
                 />
               </div>
 
-              <div>
-                <label htmlFor="fontSize">Tamaño de fuente:</label>
+              <div className="tarjetas-control-grupo">
+                <label htmlFor="fontSize" className="tarjetas-label">Tamaño de fuente:</label>
                 <input 
                   type="range" 
                   id="fontSize" 
@@ -176,18 +134,18 @@ const Tarjetas = () => {
                   max="100" 
                   value={fontSize}
                   onChange={(e) => setFontSize(parseInt(e.target.value))}
-                  style={{ width: '100%', marginTop: '5px' }}
+                  className="tarjetas-input-range"
                 />
                 <span>{fontSize}px</span>
               </div>
 
-              <div>
-                <label htmlFor="tipoLetra">Tipo de letra:</label>
+              <div className="tarjetas-control-grupo">
+                <label htmlFor="tipoLetra" className="tarjetas-label">Tipo de letra:</label>
                 <select 
                   id="tipoLetra" 
                   value={tipoLetra}
                   onChange={(e) => setTipoLetra(e.target.value)}
-                  style={{ width: '100%', marginTop: '5px' }}
+                  className="tarjetas-select"
                 >
                   <option value="Arial">Arial</option>
                   <option value="Courier New">Courier New</option>
@@ -198,53 +156,36 @@ const Tarjetas = () => {
                 </select>
               </div>
 
-              <div>
-                <label htmlFor="bgColor">Color de fondo:</label>
+              <div className="tarjetas-control-grupo">
+                <label htmlFor="bgColor" className="tarjetas-label">Color de fondo:</label>
                 <input 
                   type="color" 
                   id="bgColor" 
                   value={bgColor}
                   onChange={(e) => setBgColor(e.target.value)}
-                  style={{ width: '100%', marginTop: '5px' }}
+                  className="tarjetas-input-color"
                 />
               </div>
 
               <button 
                 onClick={exportarTarjeta}
-                style={{
-                  padding: '10px 20px',
-                  backgroundColor: '#28a745',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '5px',
-                  cursor: 'pointer',
-                  fontSize: '16px'
-                }}
+                className="tarjetas-boton-guardar"
               >
                 💾 Guardar Tarjeta
               </button>
             </div>
 
             {/* Vista previa */}
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '1rem'
-            }}>
-              <h3>Vista Previa</h3>
+            <div className="tarjetas-vista-previa">
+              <h3 className="tarjetas-vista-previa-titulo">Vista Previa</h3>
               <canvas 
                 ref={canvasRef}
                 id="canvasTarjeta" 
                 width="400" 
                 height="250" 
-                style={{ 
-                  border: '2px solid #333',
-                  borderRadius: '10px',
-                  boxShadow: '0 4px 8px rgba(0,0,0,0.2)'
-                }}
+                className="tarjetas-canvas"
               ></canvas>
-              <p style={{ color: '#666', fontSize: '14px' }}>
+              <p className="tarjetas-info-canvas">
                 Tamaño: 400x250 px
               </p>
             </div>
@@ -254,93 +195,44 @@ const Tarjetas = () => {
 
       {/* Vista de Mis Tarjetas */}
       {vistaActual === 'mis-tarjetas' && (
-        <div id="mis-tarjetas">
+        <div id="mis-tarjetas" className="tarjetas-mis-tarjetas">
           {tarjetas.length === 0 ? (
-            <div style={{ 
-              textAlign: 'center', 
-              padding: '40px',
-              color: '#666'
-            }}>
-              <h3>No tienes tarjetas guardadas</h3>
-              <p>Crea tu primera tarjeta personalizada</p>
+            <div className="tarjetas-sin-tarjetas">
+              <h3 className="tarjetas-sin-tarjetas-titulo">No tienes tarjetas guardadas</h3>
+              <p className="tarjetas-sin-tarjetas-texto">Crea tu primera tarjeta personalizada</p>
               <button 
                 onClick={() => setVistaActual('configurar')}
-                style={{
-                  padding: '10px 20px',
-                  backgroundColor: '#007bff',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '5px',
-                  cursor: 'pointer',
-                  marginTop: '10px'
-                }}
+                className="tarjetas-boton-crear"
               >
                 Crear Tarjeta
               </button>
             </div>
           ) : (
             <>
-              <h3 style={{ textAlign: 'center', marginBottom: '20px' }}>
+              <h3 className="tarjetas-lista-titulo">
                 Mis Tarjetas Guardadas ({tarjetas.length})
               </h3>
-              <div style={{ 
-                display: 'flex', 
-                flexWrap: 'wrap', 
-                gap: '20px', 
-                justifyContent: 'center' 
-              }}>
+              <div className="tarjetas-contenedor-lista">
                 {tarjetas.map((dataURL, index) => (
                   <div 
                     key={index}
-                    style={{
-                      border: '1px solid #ccc',
-                      padding: '15px',
-                      textAlign: 'center',
-                      borderRadius: '10px',
-                      backgroundColor: '#f9f9f9',
-                      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                    }}
+                    className="tarjetas-tarjeta-item"
                   >
                     <img 
                       src={dataURL}
                       alt={`Tarjeta ${index + 1}`}
-                      style={{
-                        width: '200px',
-                        height: '125px',
-                        objectFit: 'cover',
-                        border: '1px solid #ddd',
-                        borderRadius: '5px'
-                      }}
+                      className="tarjetas-imagen"
                     />
-                    <div style={{ marginTop: '10px' }}>
+                    <div className="tarjetas-contenedor-botones">
                       <button 
                         onClick={() => descargarTarjeta(dataURL)}
-                        style={{
-                          display: 'block',
-                          width: '100%',
-                          padding: '8px',
-                          backgroundColor: '#17a2b8',
-                          color: 'white',
-                          border: 'none',
-                          borderRadius: '3px',
-                          cursor: 'pointer',
-                          marginBottom: '5px'
-                        }}
+                        className="tarjetas-boton-descargar"
                       >
                         📥 Descargar
                       </button>
                       <button 
                         onClick={() => eliminarTarjeta(dataURL)}
-                        style={{
-                          display: 'block',
-                          width: '100%',
-                          padding: '8px',
-                          backgroundColor: '#dc3545',
-                          color: 'white',
-                          border: 'none',
-                          borderRadius: '3px',
-                          cursor: 'pointer'
-                        }}
+                        className="tarjetas-boton-eliminar"
                       >
                         🗑️ Eliminar
                       </button>

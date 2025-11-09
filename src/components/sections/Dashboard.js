@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { obtenerCarrito, obtenerEstadisticasDashboard } from '../../utils/carritoUtils'; // Cambiado a ../../utils
+import { obtenerCarrito, obtenerEstadisticasDashboard } from '../../utils/carritoUtils';
+import '../../Estilos/Dashboard.css';
 
 const Dashboard = () => {
   const [showProveedores, setShowProveedores] = useState(false);
@@ -9,7 +10,6 @@ const Dashboard = () => {
     ventasMensuales: 0
   });
 
-  // Mover crearGraficasDashboard dentro del useEffect o usar useCallback
   const dibujarGraficaBarras = useCallback((ctx, datos, color, titulo) => {
     const anchoBarra = 25;
     const separacion = 20;
@@ -75,7 +75,6 @@ const Dashboard = () => {
   }, []);
 
   const crearGraficasDashboard = useCallback(() => {
-    // Usar datos reales del dashboard para las gráficas
     setTimeout(() => {
       const datosClientes = [dashboardData.clientesNuevos, dashboardData.clientesNuevos + 2, dashboardData.clientesNuevos + 1];
       const datosArticulos = [dashboardData.articulosStock - 2, dashboardData.articulosStock - 1, dashboardData.articulosStock];
@@ -122,133 +121,66 @@ const Dashboard = () => {
     <>
       <h2>Dashboard</h2>
 
-      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+      <div className="dashboard-actualizar">
         <button 
           onClick={actualizarDashboard}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#007bff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer'
-          }}
+          className="btn-actualizar"
         >
           🔄 Actualizar Dashboard
         </button>
       </div>
 
-      <div className="dashboard-cards" style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'flex-start',
-        flexWrap: 'wrap',
-        gap: '40px',
-        padding: '20px',
-        background: 'linear-gradient(135deg, #fff8e1, #e1f5fe)',
-        borderRadius: '12px',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-      }}>
-        <div className="card" style={{
-          flex: 1,
-          minWidth: '50px',
-          textAlign: 'center',
-          background: '#ffffff',
-          borderRadius: '12px',
-          padding: '15px',
-          boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
-        }}>
+      <div className="dashboard-cards">
+        <div className="dashboard-card">
           <h3>👥 Clientes Registrados</h3>
-          <p style={{ fontSize: '32px', fontWeight: 'bold', color: '#42a5f5', margin: '10px 0' }}>
-            {dashboardData.clientesNuevos}
-          </p>
-          <canvas id="graficaClientes" width="180" height="180" style={{ marginTop: '10px' }}></canvas>
+          <p className="card-number clientes">{dashboardData.clientesNuevos}</p>
+          <canvas id="graficaClientes" width="180" height="180" className="card-canvas"></canvas>
         </div>
 
-        <div className="card" style={{
-          flex: 1,
-          minWidth: '250px',
-          textAlign: 'center',
-          background: '#ffffff',
-          borderRadius: '12px',
-          padding: '15px',
-          boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
-        }}>
+        <div className="dashboard-card">
           <h3>🛒 Artículos en Carritos</h3>
-          <p style={{ fontSize: '32px', fontWeight: 'bold', color: '#ffb74d', margin: '0px 0' }}>
-            {dashboardData.articulosStock}
-          </p>
-          <p style={{ fontSize: '14px', color: '#666' }}>
-            Total en todos los carritos
-          </p>
-          <canvas id="graficaArticulos" width="150" height="180" style={{ marginTop: '0px' }}></canvas>
+          <p className="card-number articulos">{dashboardData.articulosStock}</p>
+          <p className="card-subtitle">Total en todos los carritos</p>
+          <canvas id="graficaArticulos" width="150" height="180" className="card-canvas"></canvas>
         </div>
 
-        <div className="card" style={{
-          flex: 1,
-          minWidth: '250px',
-          textAlign: 'center',
-          background: '#ffffff',
-          borderRadius: '12px',
-          padding: '15px',
-          boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
-        }}>
+        <div className="dashboard-card">
           <h3>💰 Ventas Totales</h3>
-          <p style={{ fontSize: '32px', fontWeight: 'bold', color: '#66bb6a', margin: '0px 0' }}>
-            ${dashboardData.ventasMensuales}
-          </p>
-          <p style={{ fontSize: '14px', color: '#666' }}>
-            Valor total en carritos
-          </p>
-          <canvas id="graficaVentas" width="280" height="180" style={{ marginTop: '0px' }}></canvas>
+          <p className="card-number ventas">${dashboardData.ventasMensuales}</p>
+          <p className="card-subtitle">Valor total en carritos</p>
+          <canvas id="graficaVentas" width="280" height="180" className="card-canvas"></canvas>
         </div>
       </div>
 
       {/* Información adicional */}
-      <div style={{
-        marginTop: '30px',
-        padding: '20px',
-        background: '#f8f9fa',
-        borderRadius: '10px',
-        textAlign: 'center'
-      }}>
+      <div className="dashboard-info">
         <h4>Información del Dashboard</h4>
-        <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: '20px', marginTop: '15px' }}>
-          <div>
+        <div className="info-items">
+          <div className="info-item">
             <strong>Carrito Actual:</strong> 
-            <span style={{ color: '#007bff', marginLeft: '10px' }}>
+            <span className="info-valor carrito">
               {obtenerCarrito().reduce((sum, item) => sum + (item.qty || 0), 0)} artículos
             </span>
           </div>
-          <div>
+          <div className="info-item">
             <strong>Usuarios Totales:</strong> 
-            <span style={{ color: '#28a745', marginLeft: '10px' }}>
+            <span className="info-valor usuarios">
               {JSON.parse(localStorage.getItem("usuarios") || "[]").length}
             </span>
           </div>
-          <div>
+          <div className="info-item">
             <strong>Inventario:</strong> 
-            <span style={{ color: '#ffc107', marginLeft: '10px' }}>
+            <span className="info-valor inventario">
               {JSON.parse(localStorage.getItem("inventario") || "[]").length} productos
             </span>
           </div>
         </div>
       </div>
 
-      <div style={{ width: '100%', textAlign: 'center', marginTop: '20px' }}>
+      <div className="dashboard-proveedores">
         <button 
-          id="verProveedores" 
           onClick={() => setShowProveedores(true)}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#6f42c1',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            margin: '10px'
-          }}
+          className="btn-proveedores"
         >
           👥 Ver Gestor de Proveedores
         </button>
@@ -257,7 +189,7 @@ const Dashboard = () => {
   );
 };
 
-// Componente GestorProveedores (mantener igual)
+// Componente GestorProveedores
 const GestorProveedores = ({ onBack }) => {
   const [proveedores, setProveedores] = useState(JSON.parse(localStorage.getItem("proveedores")) || []);
   const [nombreProveedor, setNombreProveedor] = useState('');
@@ -319,8 +251,8 @@ const GestorProveedores = ({ onBack }) => {
   return (
     <>
       <h2>Gestor de Proveedores de Marcas</h2>
-      <div id="gestor-proveedores" style={{ maxWidth: '600px', margin: '0 auto' }}>
-        <form id="formProveedor" onSubmit={agregarProveedor}>
+      <div className="gestor-proveedores">
+        <form onSubmit={agregarProveedor} className="form-proveedor">
           <label htmlFor="nombreProveedor">Nombre del proveedor:</label>
           <input 
             type="text" 
@@ -343,19 +275,19 @@ const GestorProveedores = ({ onBack }) => {
         </form>
 
         <h3>Lista de Proveedores</h3>
-        <ul id="listaProveedores">
+        <ul className="lista-proveedores">
           {proveedores.map((proveedor, index) => (
-            <li key={index}>
+            <li key={index} className="proveedor-item">
               {proveedor.nombre} — Marca: {proveedor.marca}
               <button 
                 onClick={() => eliminarProveedor(index)}
-                style={{ marginLeft: '10px' }}
+                className="btn-eliminar"
               >
                 Eliminar
               </button>
               <button 
                 onClick={() => verTicket(proveedor)}
-                style={{ marginLeft: '10px' }}
+                className="btn-ticket"
               >
                 Ver Ticket
               </button>
@@ -364,16 +296,11 @@ const GestorProveedores = ({ onBack }) => {
         </ul>
 
         <h3>Ticket del proveedor seleccionado</h3>
-        <div id="ticketProveedor" style={{
-          border: '1px dashed #333',
-          padding: '10px',
-          borderRadius: '8px',
-          background: '#f9f9f9'
-        }}>
+        <div className="ticket-proveedor">
           {ticketProveedor ? (
             <>
               <h4>Ticket de {ticketProveedor.nombre}</h4>
-              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <table className="ticket-table">
                 <thead>
                   <tr>
                     <th>Producto</th>
@@ -391,7 +318,7 @@ const GestorProveedores = ({ onBack }) => {
                   ))}
                 </tbody>
               </table>
-              <p style={{ textAlign: 'right', fontWeight: 'bold' }}>
+              <p className="ticket-total">
                 Total: ${(productos[ticketProveedor.nombre] || []).reduce((acc, prod) => acc + prod.precio, 0)}
               </p>
             </>
@@ -400,7 +327,7 @@ const GestorProveedores = ({ onBack }) => {
           )}
         </div>
 
-        <button onClick={onBack}>Volver al Dashboard</button>
+        <button onClick={onBack} className="btn-volver">Volver al Dashboard</button>
       </div>
     </>
   );

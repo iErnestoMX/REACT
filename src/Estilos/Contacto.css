@@ -1,0 +1,153 @@
+
+/*====CONTACTO======*/
+/* Contacto.css - Estilos exactos de tu código original */
+
+/* Título Principal */
+.contacto-titulo {
+  text-align: center;
+}
+
+/* Botones de Navegación */
+.contacto-botones-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.contacto-boton {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.contacto-boton:hover {
+  background: #f0f0f0;
+}
+
+/* Contenido Principal */
+.contacto-contenido {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #f9f9f9;
+}
+
+.contacto-inicio-texto {
+  text-align: center;
+}
+
+/* WhatsApp */
+.whatsapp-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.whatsapp-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #25D366;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.whatsapp-link:hover {
+  background: #20bd5a;
+}
+
+/* Formulario */
+.formulario-contacto {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: auto;
+}
+
+.formulario-contacto label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.formulario-input,
+.formulario-textarea,
+.formulario-select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.formulario-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Fieldset Preferencias */
+.formulario-fieldset {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.formulario-fieldset legend {
+  font-weight: bold;
+  padding: 0 5px;
+}
+
+.formulario-radio-label {
+  display: inline-block;
+  margin-right: 15px;
+  font-weight: normal;
+}
+
+.formulario-radio {
+  margin-right: 5px;
+}
+
+/* Checkbox */
+.formulario-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: normal;
+}
+
+.formulario-checkbox {
+  margin: 0;
+}
+
+/* Botón Enviar */
+.formulario-boton {
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.formulario-boton:hover {
+  background: #0056b3;
+}
+
+/* Mapa */
+.mapa-iframe {
+  border: 0;
+  border-radius: 8px;
+}
+
+/* Calendario */
+.calendario-iframe {
+  border: 0;
+  border-radius: 10px;
+}

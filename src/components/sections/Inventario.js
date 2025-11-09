@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import '../../Estilos/Inventario.css';
 
 const Inventario = () => {
   const [inventario, setInventario] = useState([]);
@@ -116,77 +117,50 @@ const Inventario = () => {
   return (
     <>
       <h2>Inventario de Productos</h2>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-around',
-        marginBottom: '20px',
-        padding: '15px',
-        backgroundColor: '#f8f9fa',
-        borderRadius: '8px',
-        flexWrap: 'wrap',
-        gap: '10px'
-      }}>
-        <div style={{textAlign: 'center'}}>
-          <h4 style={{margin: '0', color: '#666'}}>Total Productos</h4>
-          <p style={{fontSize: '24px', fontWeight: 'bold', color: '#007bff', margin: '5px 0'}}>
-            {inventario.length}
-          </p>
+      
+      <div className="inventario-resumen">
+        <div className="resumen-item">
+          <h4>Total Productos</h4>
+          <p className="resumen-total">{inventario.length}</p>
         </div>
-        <div style={{textAlign: 'center'}}>
-          <h4 style={{margin: '0', color: '#666'}}>Unidades Totales</h4>
-          <p style={{fontSize: '24px', fontWeight: 'bold', color: '#28a745', margin: '5px 0'}}>
-            {totalProductos}
-          </p>
+        <div className="resumen-item">
+          <h4>Unidades Totales</h4>
+          <p className="resumen-unidades">{totalProductos}</p>
         </div>
-        <div style={{textAlign: 'center'}}>
-          <h4 style={{margin: '0', color: '#666'}}>Valor Total</h4>
-          <p style={{fontSize: '24px', fontWeight: 'bold', color: '#ffc107', margin: '5px 0'}}>
-            ${totalValorInventario.toFixed(2)}
-          </p>
+        <div className="resumen-item">
+          <h4>Valor Total</h4>
+          <p className="resumen-valor">${totalValorInventario.toFixed(2)}</p>
         </div>
       </div>
 
       {/* Formulario para agregar productos */}
-      <div style={{
-        padding: '20px',
-        border: '1px solid #ddd',
-        borderRadius: '8px',
-        backgroundColor: '#f9f9f9',
-        marginBottom: '20px'
-      }}>
+      <div className="formulario-inventario">
         <h3>Agregar Nuevo Producto</h3>
-        <div style={{display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center'}}>
+        <div className="formulario-campos">
           <input 
             type="text" 
             placeholder="Nombre del producto"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
-            style={{padding: '8px', border: '1px solid #ccc', borderRadius: '4px', flex: '1', minWidth: '150px'}}
+            className="campo-nombre"
           />
           <input 
             type="number" 
             placeholder="Precio"
             value={precio}
             onChange={(e) => setPrecio(e.target.value)}
-            style={{padding: '8px', border: '1px solid #ccc', borderRadius: '4px', width: '100px'}}
+            className="campo-precio"
           />
           <input 
             type="number" 
             placeholder="Cantidad"
             value={cantidad}
             onChange={(e) => setCantidad(e.target.value)}
-            style={{padding: '8px', border: '1px solid #ccc', borderRadius: '4px', width: '100px'}}
+            className="campo-cantidad"
           />
           <button 
             onClick={agregarProducto}
-            style={{
-              padding: '8px 15px',
-              backgroundColor: '#007bff',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer'
-            }}
+            className="btn-agregar"
           >
             ➕ Agregar
           </button>
@@ -194,72 +168,46 @@ const Inventario = () => {
       </div>
 
       {/* Tabla de inventario */}
-      <table border="1" width="100%" style={{ 
-        marginTop: '20px', 
-        borderCollapse: 'collapse',
-        backgroundColor: 'white'
-      }}>
+      <table className="tabla-inventario">
         <thead>
-          <tr style={{backgroundColor: '#343a40', color: 'white'}}>
-            <th style={{padding: '12px'}}>Nombre</th>
-            <th style={{padding: '12px'}}>Precio Unitario</th>
-            <th style={{padding: '12px'}}>Cantidad</th>
-            <th style={{padding: '12px'}}>Valor Total</th>
-            <th style={{padding: '12px'}}>Acciones</th>
+          <tr className="tabla-header">
+            <th>Nombre</th>
+            <th>Precio Unitario</th>
+            <th>Cantidad</th>
+            <th>Valor Total</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {inventario.length === 0 ? (
             <tr>
-              <td colSpan="5" style={{padding: '20px', textAlign: 'center', color: '#666'}}>
+              <td colSpan="5" className="tabla-vacia">
                 No hay productos en el inventario
               </td>
             </tr>
           ) : (
             inventario.map((prod, i) => (
-              <tr key={i} style={{borderBottom: '1px solid #ddd'}}>
-                <td style={{padding: '12px', fontWeight: 'bold'}}>{prod.nombre}</td>
-                <td style={{padding: '12px'}}>${(prod.precio ?? 0).toFixed(2)}</td>
-                <td style={{padding: '12px'}}>
-                  <span style={{
-                    padding: '4px 8px',
-                    borderRadius: '12px',
-                    backgroundColor: prod.cantidad <= 5 ? '#ff6b6b' : '#51cf66',
-                    color: 'white',
-                    fontSize: '12px',
-                    fontWeight: 'bold'
-                  }}>
+              <tr key={i} className="fila-producto">
+                <td className="celda-nombre">{prod.nombre}</td>
+                <td className="celda-precio">${(prod.precio ?? 0).toFixed(2)}</td>
+                <td className="celda-cantidad">
+                  <span className={`badge-cantidad ${prod.cantidad <= 5 ? 'bajo-stock' : 'stock-normal'}`}>
                     {prod.cantidad} unidades
                   </span>
                 </td>
-                <td style={{padding: '12px', fontWeight: 'bold'}}>
+                <td className="celda-valor-total">
                   ${(((prod.precio ?? 0) * prod.cantidad) || 0).toFixed(2)}
                 </td>
-                <td style={{padding: '12px'}}>
+                <td className="celda-acciones">
                   <button 
                     onClick={() => editarProducto(i)}
-                    style={{
-                      padding: '6px 12px',
-                      backgroundColor: '#ffc107',
-                      color: 'black',
-                      border: 'none',
-                      borderRadius: '3px',
-                      cursor: 'pointer',
-                      marginRight: '5px'
-                    }}
+                    className="btn-editar"
                   >
                     ✏️ Editar
                   </button>
                   <button 
                     onClick={() => eliminarProducto(i)}
-                    style={{
-                      padding: '6px 12px',
-                      backgroundColor: '#dc3545',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '3px',
-                      cursor: 'pointer'
-                    }}
+                    className="btn-eliminar"
                   >
                     🗑️ Eliminar
                   </button>
@@ -272,17 +220,10 @@ const Inventario = () => {
 
       {/* Botón para reiniciar inventario */}
       {inventario.length > 0 && (
-        <div style={{textAlign: 'center', marginTop: '20px'}}>
+        <div className="reiniciar-container">
           <button 
             onClick={reiniciarInventario}
-            style={{
-              padding: '10px 20px',
-              backgroundColor: '#6c757d',
-              color: 'white',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer'
-            }}
+            className="btn-reiniciar"
           >
             🔄 Reiniciar Inventario
           </button>

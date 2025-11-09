@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../../Estilos/GestionUsuarios.css';
 
 const GestionUsuarios = ({ onBack }) => {
   const [usuarios, setUsuarios] = useState([]);
@@ -77,188 +78,74 @@ const GestionUsuarios = ({ onBack }) => {
   const usuariosAdmins = usuarios.filter(u => u.tipo === "admin");
 
   return (
-    <div style={{ 
-      padding: '20px',
-      maxWidth: '1200px',
-      margin: '0 auto',
-      minHeight: '100vh'
-    }}>
+    <div className="gestion-usuarios-container">
       {/* Header centrado */}
-      <header style={{ textAlign: 'center', marginBottom: '30px' }}>
-        <h2 style={{ 
-          color: '#333',
-          marginBottom: '10px',
-          fontSize: '2rem'
-        }}>
-          👥 Gestión de Usuarios
-        </h2>
-        <p style={{ 
-          color: '#666',
-          fontSize: '1.1rem',
-          margin: 0
-        }}>
-          Administra los usuarios del sistema
-        </p>
+      <header className="gestion-usuarios-header">
+        <h2>👥 Gestión de Usuarios</h2>
+        <p>Administra los usuarios del sistema</p>
       </header>
 
       {/* Resumen centrado */}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '30px',
-        marginBottom: '40px',
-        padding: '25px',
-        backgroundColor: '#f8f9fa',
-        borderRadius: '12px',
-        boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-        flexWrap: 'wrap'
-      }}>
-        <div style={{ textAlign: 'center', minWidth: '120px' }}>
-          <h3 style={{ color: '#007bff', margin: '0 0 5px 0', fontSize: '1rem' }}>Total Usuarios</h3>
-          <p style={{ fontSize: '2rem', fontWeight: 'bold', margin: 0, color: '#007bff' }}>
-            {usuarios.length}
-          </p>
+      <div className="resumen-usuarios">
+        <div className="resumen-item">
+          <h3>Total Usuarios</h3>
+          <p className="resumen-total">{usuarios.length}</p>
         </div>
-        <div style={{ textAlign: 'center', minWidth: '120px' }}>
-          <h3 style={{ color: '#28a745', margin: '0 0 5px 0', fontSize: '1rem' }}>Compradores</h3>
-          <p style={{ fontSize: '2rem', fontWeight: 'bold', margin: 0, color: '#28a745' }}>
-            {usuariosCompradores.length}
-          </p>
+        <div className="resumen-item">
+          <h3>Compradores</h3>
+          <p className="resumen-compradores">{usuariosCompradores.length}</p>
         </div>
-        <div style={{ textAlign: 'center', minWidth: '120px' }}>
-          <h3 style={{ color: '#dc3545', margin: '0 0 5px 0', fontSize: '1rem' }}>Administradores</h3>
-          <p style={{ fontSize: '2rem', fontWeight: 'bold', margin: 0, color: '#dc3545' }}>
-            {usuariosAdmins.length}
-          </p>
+        <div className="resumen-item">
+          <h3>Administradores</h3>
+          <p className="resumen-admins">{usuariosAdmins.length}</p>
         </div>
       </div>
 
       {/* Botón para crear nuevo admin - Centrado */}
-      <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+      <div className="crear-admin-container">
         <button 
           onClick={crearUsuarioAdmin}
-          style={{
-            padding: '12px 24px',
-            backgroundColor: '#6f42c1',
-            color: 'white',
-            border: 'none',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            fontSize: '16px',
-            fontWeight: 'bold',
-            transition: 'all 0.3s',
-            boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
-          }}
-          onMouseEnter={(e) => {
-            e.target.style.backgroundColor = '#5a32a3';
-            e.target.style.transform = 'translateY(-2px)';
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.backgroundColor = '#6f42c1';
-            e.target.style.transform = 'translateY(0)';
-          }}
+          className="btn-crear-admin"
         >
           👑 Crear Nuevo Administrador
         </button>
       </div>
 
       {/* Contenedor principal centrado */}
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '40px',
-        alignItems: 'center'
-      }}>
+      <div className="usuarios-listas-container">
         {/* Lista de Administradores */}
-        <div style={{ 
-          width: '100%',
-          maxWidth: '800px'
-        }}>
-          <h3 style={{ 
-            textAlign: 'center',
-            color: '#dc3545',
-            marginBottom: '20px',
-            fontSize: '1.5rem'
-          }}>
-            👑 Administradores ({usuariosAdmins.length})
-          </h3>
+        <div className="lista-administradores">
+          <h3>👑 Administradores ({usuariosAdmins.length})</h3>
           {usuariosAdmins.length === 0 ? (
-            <div style={{ 
-              textAlign: 'center', 
-              color: '#666', 
-              padding: '40px',
-              backgroundColor: '#f8f9fa',
-              borderRadius: '8px'
-            }}>
+            <div className="lista-vacia">
               No hay administradores en el sistema
             </div>
           ) : (
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '15px'
-            }}>
+            <div className="usuarios-grid">
               {usuariosAdmins.map((usuario, index) => (
-                <div key={index} style={{
-                  border: '2px solid #dc3545',
-                  borderRadius: '10px',
-                  padding: '20px',
-                  backgroundColor: '#fff5f5',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-                }}>
-                  <div style={{ 
-                    display: 'flex', 
-                    justifyContent: 'space-between', 
-                    alignItems: 'center',
-                    marginBottom: '15px'
-                  }}>
-                    <div style={{ textAlign: 'left' }}>
-                      <strong style={{ fontSize: '1.1rem' }}>👤 {usuario.username}</strong>
+                <div key={index} className="usuario-card admin-card">
+                  <div className="usuario-header">
+                    <div className="usuario-info">
+                      <strong>👤 {usuario.username}</strong>
                       <br />
-                      <span style={{ 
-                        color: '#dc3545', 
-                        fontSize: '0.9rem',
-                        fontWeight: 'bold',
-                        backgroundColor: '#ffe6e6',
-                        padding: '2px 8px',
-                        borderRadius: '12px'
-                      }}>
+                      <span className="badge-admin">
                         ADMINISTRADOR
                       </span>
                     </div>
                     {usuario.username !== usuarioActual?.username && (
                       <button 
                         onClick={() => eliminarUsuario(usuario.username)}
-                        style={{
-                          padding: '8px 16px',
-                          backgroundColor: '#dc3545',
-                          color: 'white',
-                          border: 'none',
-                          borderRadius: '6px',
-                          cursor: 'pointer',
-                          fontSize: '0.9rem',
-                          fontWeight: 'bold'
-                        }}
+                        className="btn-eliminar"
                       >
                         🗑️ Eliminar
                       </button>
                     )}
                   </div>
                   {usuario.username !== usuarioActual?.username && (
-                    <div style={{ textAlign: 'center' }}>
+                    <div className="usuario-acciones">
                       <button 
                         onClick={() => cambiarTipoUsuario(usuario.username, 'comprador')}
-                        style={{
-                          width: '100%',
-                          padding: '10px',
-                          backgroundColor: '#ffc107',
-                          color: 'black',
-                          border: 'none',
-                          borderRadius: '6px',
-                          cursor: 'pointer',
-                          fontSize: '0.9rem',
-                          fontWeight: 'bold'
-                        }}
+                        className="btn-convertir-comprador"
                       >
                         🔄 Convertir a Comprador
                       </button>
@@ -271,92 +158,35 @@ const GestionUsuarios = ({ onBack }) => {
         </div>
 
         {/* Lista de Compradores */}
-        <div style={{ 
-          width: '100%',
-          maxWidth: '800px'
-        }}>
-          <h3 style={{ 
-            textAlign: 'center',
-            color: '#28a745',
-            marginBottom: '20px',
-            fontSize: '1.5rem'
-          }}>
-            🛒 Compradores ({usuariosCompradores.length})
-          </h3>
+        <div className="lista-compradores">
+          <h3>🛒 Compradores ({usuariosCompradores.length})</h3>
           {usuariosCompradores.length === 0 ? (
-            <div style={{ 
-              textAlign: 'center', 
-              color: '#666', 
-              padding: '40px',
-              backgroundColor: '#f8f9fa',
-              borderRadius: '8px'
-            }}>
+            <div className="lista-vacia">
               No hay compradores en el sistema
             </div>
           ) : (
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '15px'
-            }}>
+            <div className="usuarios-grid">
               {usuariosCompradores.map((usuario, index) => (
-                <div key={index} style={{
-                  border: '2px solid #28a745',
-                  borderRadius: '10px',
-                  padding: '20px',
-                  backgroundColor: '#f8fff9',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-                }}>
-                  <div style={{ 
-                    display: 'flex', 
-                    justifyContent: 'space-between', 
-                    alignItems: 'center',
-                    marginBottom: '15px'
-                  }}>
-                    <div style={{ textAlign: 'left' }}>
-                      <strong style={{ fontSize: '1.1rem' }}>👤 {usuario.username}</strong>
+                <div key={index} className="usuario-card comprador-card">
+                  <div className="usuario-header">
+                    <div className="usuario-info">
+                      <strong>👤 {usuario.username}</strong>
                       <br />
-                      <span style={{ 
-                        color: '#28a745', 
-                        fontSize: '0.9rem',
-                        fontWeight: 'bold',
-                        backgroundColor: '#e6ffe6',
-                        padding: '2px 8px',
-                        borderRadius: '12px'
-                      }}>
+                      <span className="badge-comprador">
                         COMPRADOR
                       </span>
                     </div>
                     <button 
                       onClick={() => eliminarUsuario(usuario.username)}
-                      style={{
-                        padding: '8px 16px',
-                        backgroundColor: '#dc3545',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '6px',
-                        cursor: 'pointer',
-                        fontSize: '0.9rem',
-                        fontWeight: 'bold'
-                      }}
+                      className="btn-eliminar"
                     >
                       🗑️ Eliminar
                     </button>
                   </div>
-                  <div style={{ textAlign: 'center' }}>
+                  <div className="usuario-acciones">
                     <button 
                       onClick={() => cambiarTipoUsuario(usuario.username, 'admin')}
-                      style={{
-                        width: '100%',
-                        padding: '10px',
-                        backgroundColor: '#007bff',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '6px',
-                        cursor: 'pointer',
-                        fontSize: '0.9rem',
-                        fontWeight: 'bold'
-                      }}
+                      className="btn-convertir-admin"
                     >
                       👑 Convertir a Administrador
                     </button>
@@ -367,28 +197,11 @@ const GestionUsuarios = ({ onBack }) => {
           )}
         </div>
       </div>
-      <div style={{ textAlign: 'center', marginTop: '30px' }}>
+
+      <div className="volver-container">
         <button 
           onClick={onBack}
-          style={{
-            padding: '12px 30px',
-            backgroundColor: '#6c757d',
-            color: 'white',
-            border: 'none',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            fontSize: '16px',
-            fontWeight: 'bold',
-            transition: 'all 0.3s'
-          }}
-          onMouseEnter={(e) => {
-            e.target.style.backgroundColor = '#545b62';
-            e.target.style.transform = 'translateY(-2px)';
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.backgroundColor = '#6c757d';
-            e.target.style.transform = 'translateY(0)';
-          }}
+          className="btn-volver"
         >
           ↩️ Volver al Inicio
         </button>

@@ -43,61 +43,6 @@ body {
 ======================================= */
 
 
-/* CORRIGE el ancho y el recorte lateral */
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;  /* 🔹 Evita desbordamiento horizontal */
-  font-family: system-ui, Arial, sans-serif;
-}
-
-/* HEADER sin provocar recorte derecho */
-header {
-  position: relative;
-  width: 100%;          /* 🔹 ya no 100vw */
-  background: #fff7ea;  /* tu color original */
-  padding: 10px 20px;
-  box-sizing: border-box;
-  overflow: visible;
-  z-index: 10;
-}
-
-/* Estructura interna */
-header > div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-/* Botones del header */
-header button {
-  margin: 5px;
-}
-
-/* Corrige carrito */
-#carrito-icono {
-  position: relative;
-  cursor: pointer;
-  margin-right: 20px;
-}
-
-#carrito-mini {
-  position: absolute;
-  top: 40px;
-  right: 0;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 5px 8px rgba(0,0,0,0.1);
-  display: none;
-  padding: 10px;
-  width: 220px;
-  z-index: 1000;
-}
-
-
-
 /*titulo de la papeleria y animaciones*/
 #tituloPapeleria {
   font-family: 'Fredoka One', cursive;
@@ -191,7 +136,7 @@ header h1 {
 
 
 
-/*HEADER DE LA PAPELERIA DONDE ESTAN BOTONES Y ETC*/
+/*HEADER DONDE ESTAN LOS BOTOENES*/
 header {
   background: #fff9e6;
   border: 2px solid #d2b48c;
@@ -552,7 +497,7 @@ nav a {
   font-weight: 600;
   color: var(--color-card);
   font-size: 1rem;
-  padding: 10px 16px;
+  padding: 1px 16px;
   border-radius: 30px;
   background: rgba(255,255,255,0.3);
   transition: all 0.3s ease;
@@ -591,6 +536,7 @@ nav a:focus {
 
 
 /* === Sección tipo libreta === */
+/* === Sección tipo libreta === */
 #content {
   background: #fffaf5;
   border-radius: 20px;
@@ -603,9 +549,81 @@ nav a:focus {
   border: 3px dashed #ffd6a5; /* ✏️ estilo tipo libreta */
   background-image: linear-gradient(to bottom, #fff 97%, #ffe5ec 3%);
   background-size: 100% 40px; /* líneas tipo renglones */
-
 }
 
+/* 🔥 ESTILOS RESPONSIVE PARA LA LIBRETA 🔥 */
+
+/* Laptops grandes */
+@media (max-width: 1440px) {
+  #content {
+    max-width: 1200px;
+    padding: 20px 35px;
+  }
+}
+
+/* Laptops */
+@media (max-width: 1200px) {
+  #content {
+    max-width: 1100px;
+    padding: 18px 30px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  #content {
+    max-width: 95%;
+    padding: 16px 25px;
+    margin: 15px auto;
+    min-height: 75vh;
+    background-size: 100% 35px;
+  }
+}
+
+/* Tablets pequeñas */
+@media (max-width: 768px) {
+  #content {
+    width: 92%;
+    padding: 14px 20px;
+    margin: 12px auto;
+    min-height: 70vh;
+    border-radius: 15px;
+    background-size: 100% 30px;
+    border-width: 2px;
+  }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+  #content {
+    width: 90%;
+    padding: 12px 15px;
+    margin: 10px auto;
+    min-height: 65vh;
+    border-radius: 12px;
+    background-size: 100% 25px;
+    border-width: 1px;
+  }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 360px) {
+  #content {
+    width: 88%;
+    padding: 10px 12px;
+    margin: 8px auto;
+    min-height: 60vh;
+    border-radius: 10px;
+    background-size: 100% 22px;
+  }
+}
+
+/* Pantallas muy grandes */
+@media (min-width: 2000px) {
+  #content {
+    max-width: 1400px;
+  }
+}
 /* Si quieres que toque las orillas totalmente: */
 body.fullscreen #content {
   width: 100%;
@@ -815,24 +833,7 @@ body {
   position: relative;
 }
 
-/* Espiral lateral fija - MODIFICADO PARA TODA LA PÁGINA */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 20px;
-  width: 8px;
-  height: 100vh;
-  background: repeating-linear-gradient(
-    to bottom,
-    #aaa 0,
-    #aaa 4px,
-    transparent 4px,
-    transparent 8px
-  );
-  z-index: 1;
-  pointer-events: none;
-}
+
 
 /* =======================================
    HEADER Y NAVEGACIÓN - MODIFICADO PARA CUBRIR BORDES
@@ -851,14 +852,6 @@ header {
   z-index: 10;
 }
 
-
-
-
-.productos-container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
 
 .results-info {
   margin-bottom: 20px;
@@ -1036,351 +1029,156 @@ header {
   }
 }
 
-/* App.css - Mobile First Approach */
 
-/* Variables CSS para consistencia */
-:root {
-  --primary-color: #007bff;
-  --secondary-color: #6c757d;
-  --success-color: #28a745;
-  --danger-color: #dc3545;
-  --light-color: #f8f9fa;
-  --dark-color: #343a40;
-  --breakpoint-sm: 576px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 992px;
-  --breakpoint-xl: 1200px;
-}
+/*====CONTACTO======*/
+/* Contacto.css - Estilos exactos de tu código original */
 
-/* Reset básico */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: #333;
-  background-color: #f5f5f5;
-}
-
-/* Contenedor principal responsive */
-.app-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Header responsive */
-.header {
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  padding: 1rem;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.header-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--primary-color);
-}
-
-.nav-menu {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.nav-item {
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  color: var(--dark-color);
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-
-.nav-item:hover {
-  background-color: var(--light-color);
-}
-
-/* Main content responsive */
-.main-content {
-  flex: 1;
-  padding: 1rem;
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-/* Grid responsive para productos/tarjetas */
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-  padding: 1rem 0;
-}
-
-.product-card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 1rem;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.product-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-/* Formularios responsive */
-.form-container {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  margin: 1rem auto;
-  max-width: 100%;
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.form-input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
-}
-
-/* Botones responsive */
-.btn {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s;
+/* Título Principal */
+.contacto-titulo {
   text-align: center;
+}
+
+/* Botones de Navegación */
+.contacto-botones-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.contacto-boton {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.contacto-boton:hover {
+  background: #f0f0f0;
+}
+
+/* Contenido Principal */
+.contacto-contenido {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #f9f9f9;
+}
+
+.contacto-inicio-texto {
+  text-align: center;
+}
+
+/* WhatsApp */
+.whatsapp-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.whatsapp-link {
   display: inline-block;
-  width: 100%; /* Full width en mobile */
-}
-
-.btn-primary {
-  background-color: var(--primary-color);
+  padding: 10px 20px;
+  background: #25D366;
   color: white;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-}
-
-/* Tablas responsive */
-.responsive-table {
-  width: 100%;
-  overflow-x: auto;
-}
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
   border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.table th,
-.table td {
-  padding: 0.75rem;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+.whatsapp-link:hover {
+  background: #20bd5a;
 }
 
-/* Dashboard grid responsive */
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
-.dashboard-card {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* Carrito responsive */
-.cart-item {
+/* Formulario */
+.formulario-contacto {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-  background: white;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  gap: 10px;
+  max-width: 400px;
+  margin: auto;
 }
 
-.cart-item-image {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
+.formulario-contacto label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.formulario-input,
+.formulario-textarea,
+.formulario-select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 14px;
 }
 
-/* Media Queries para tablets */
-@media (min-width: 768px) {
-  .header-content {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
-  .nav-menu {
-    flex-wrap: nowrap;
-  }
-  
-  .btn {
-    width: auto; /* Ancho automático en tablets y desktop */
-  }
-  
-  .cart-item {
-    flex-direction: row;
-    align-items: center;
-  }
-  
-  .cart-item-image {
-    width: 120px;
-  }
-  
-  .dashboard-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .form-container {
-    max-width: 500px;
-  }
+.formulario-textarea {
+  resize: vertical;
+  min-height: 80px;
 }
 
-/* Media Queries para desktop */
-@media (min-width: 992px) {
-  .main-content {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
-  
-  .dashboard-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  .nav-menu {
-    gap: 1rem;
-  }
+/* Fieldset Preferencias */
+.formulario-fieldset {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 10px 0;
 }
 
-/* Media Queries para pantallas grandes */
-@media (min-width: 1200px) {
-  .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  }
-  
-  .dashboard-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.formulario-fieldset legend {
+  font-weight: bold;
+  padding: 0 5px;
 }
 
-/* Utilidades responsive */
-.hidden-mobile {
-  display: none;
+.formulario-radio-label {
+  display: inline-block;
+  margin-right: 15px;
+  font-weight: normal;
 }
 
-.hidden-desktop {
-  display: block;
+.formulario-radio {
+  margin-right: 5px;
 }
 
-.text-center-mobile {
-  text-align: center;
-}
-
-/* Menu hamburguesa para mobile */
-.mobile-menu-btn {
-  display: block;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0.5rem;
-}
-
-/* Para tablets y desktop, ocultar botón hamburguesa */
-@media (min-width: 768px) {
-  .mobile-menu-btn {
-    display: none;
-  }
-  
-  .hidden-mobile {
-    display: block;
-  }
-  
-  .hidden-desktop {
-    display: none;
-  }
-  
-  .text-center-mobile {
-    text-align: left;
-  }
-}
-
-/* Loading spinner responsive */
-.loading-spinner {
+/* Checkbox */
+.formulario-checkbox-label {
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 2rem;
+  gap: 8px;
+  font-weight: normal;
 }
 
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid var(--primary-color);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.formulario-checkbox {
+  margin: 0;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Botón Enviar */
+.formulario-boton {
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.formulario-boton:hover {
+  background: #0056b3;
+}
+
+/* Mapa */
+.mapa-iframe {
+  border: 0;
+  border-radius: 8px;
+}
+
+/* Calendario */
+.calendario-iframe {
+  border: 0;
+  border-radius: 10px;
 }

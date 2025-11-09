@@ -6,7 +6,7 @@ import Inventario from './sections/Inventario';
 import Contacto from './sections/Contacto';
 import Dashboard from './sections/Dashboard';
 import Tarjetas from './sections/Tarjetas';
-import TarjetaPresentacion from './sections/TarjetaPresentacion';
+import ArticulosTemporada from './sections/ArticulosTemporada';
 import Favoritos from './sections/Favoritos';
 import RegistroVentas from './sections/RegistroVentas'; 
 
@@ -30,9 +30,9 @@ const Content = ({ currentSection, onChangeSection, onUpdateCarrito }) => {
       case 'tarjetas':
         return <Tarjetas />;
       case 'tarjeta':
-        return <TarjetaPresentacion />;
+        return <ArticulosTemporada />;
       default:
-        return <TarjetaPresentacion onChangeSection={onChangeSection} />;
+        return <ArticulosTemporada onChangeSection={onChangeSection} />;
     }
   };
 

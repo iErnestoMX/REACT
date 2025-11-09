@@ -3,6 +3,7 @@ import { obtenerCarrito, guardarCarrito, obtenerInventario, guardarInventario } 
 import { registrarVenta } from '../../utils/ventasUtils';
 import { agregarCliente, buscarClientePorEmail } from '../../utils/clientesUtils';
 import { notificacionExito, notificacionError, notificacionInfo } from '../../utils/notificacionesUtils';
+import '../../Estilos/Carrito.css';
 
 const Carrito = ({ onUpdateCarrito }) => {
   const carrito = obtenerCarrito();
@@ -65,7 +66,7 @@ const Carrito = ({ onUpdateCarrito }) => {
     guardarCarrito(carritoActual);
     onUpdateCarrito();
     
-      notificacionExito('Producto Eliminado', `${itemEliminado.name} eliminado del carrito`);
+    notificacionExito('Producto Eliminado', `${itemEliminado.name} eliminado del carrito`);
   };
 
   const vaciarCarrito = () => {
@@ -85,7 +86,6 @@ const Carrito = ({ onUpdateCarrito }) => {
       return;
     }
 
-
     const total = carrito.reduce((sum, item) => sum + item.price * item.qty, 0);
     const resumen = carrito.map(item => 
       `${item.name} x${item.qty} - $${item.price * item.qty}`
@@ -97,7 +97,6 @@ const Carrito = ({ onUpdateCarrito }) => {
       notificacionError('Email Requerido', 'Se requiere email del cliente para registrar la venta');
       return;
     }
-
 
     // Validar formato de email básico
     if (!clienteEmail.includes('@') || !clienteEmail.includes('.')) {
@@ -158,8 +157,8 @@ const Carrito = ({ onUpdateCarrito }) => {
   if (carrito.length === 0) {
     return (
       <>
-       <h2>Carrito</h2>
-        <div style={{textAlign: 'center', padding: '40px'}}>
+        <h2>Carrito</h2>
+        <div className="carrito-vacio">
           <h3>🛒 Tu carrito está vacío</h3>
           <p>Agrega algunos productos para continuar</p>
         </div>
@@ -169,12 +168,12 @@ const Carrito = ({ onUpdateCarrito }) => {
 
   return (
     <>
-      <h2 style={{textAlign: 'center'}}>Carrito de compras</h2>
+      <h2 className="carrito-title">Carrito de compras</h2>
 
-      <div style={{display: 'flex', justifyContent: 'center'}}>
-        <table border="1" style={{textAlign: 'center', width: '90%', maxWidth: '800px'}}>
+      <div className="carrito-container">
+        <table className="carrito-table">
           <thead>
-            <tr style={{backgroundColor: '#f8f9fa'}}>
+            <tr className="carrito-header">
               <th>Artículo</th>
               <th>Imagen</th>
               <th>Cantidad</th>
@@ -189,53 +188,34 @@ const Carrito = ({ onUpdateCarrito }) => {
               const stockDisponible = productoInventario ? productoInventario.cantidad : 0;
 
               return (
-                <tr key={index}>
-                  <td style={{padding: '10px'}}>
+                <tr key={index} className="carrito-row">
+                  <td className="carrito-item-info">
                     <strong>{item.name}</strong>
                     <br />
-                    <small style={{color: '#666'}}>Stock disponible: {stockDisponible}</small>
+                    <small className="stock-info">Stock disponible: {stockDisponible}</small>
                   </td>
-                  <td style={{padding: '10px'}}>
+                  <td className="carrito-item-image">
                     <img 
                       src={item.img} 
                       alt={item.name} 
-                      style={{
-                        width: '80px',
-                        height: '80px',
-                        objectFit: 'cover',
-                        borderRadius: '5px'
-                      }}
+                      className="product-image"
                     />
                   </td>
-                  <td style={{padding: '10px'}}>
+                  <td className="carrito-item-cantidad">
                     <input 
                       type="number" 
                       min="1" 
                       value={item.qty}
                       onChange={(e) => actualizarCantidad(index, parseInt(e.target.value))}
-                      style={{
-                        width: '60px',
-                        padding: '5px',
-                        textAlign: 'center',
-                        border: '1px solid #ddd',
-                        borderRadius: '3px'
-                      }}
+                      className="cantidad-input"
                     />
                   </td>
-                  <td style={{padding: '10px'}}>${item.price}</td>
-                  <td style={{padding: '10px', fontWeight: 'bold'}}>${item.price * item.qty}</td>
-                  <td style={{padding: '10px'}}>
+                  <td className="carrito-item-precio">${item.price}</td>
+                  <td className="carrito-item-total">${item.price * item.qty}</td>
+                  <td className="carrito-item-acciones">
                     <button 
-                      className="btnEliminar" 
                       onClick={() => eliminarItem(index)}
-                      style={{
-                        padding: '8px 15px',
-                        backgroundColor: '#dc3545',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '3px',
-                        cursor: 'pointer'
-                      }}
+                      className="btn-eliminar"
                     >
                       🗑️ Eliminar
                     </button>
@@ -247,47 +227,24 @@ const Carrito = ({ onUpdateCarrito }) => {
         </table>
       </div>
       
-      <div style={{textAlign: 'center', marginTop: '20px'}}>
-        <h3>💵 Total general: ${total}</h3>
+      <div className="carrito-resumen">
+        <h3 className="total-general">💵 Total general: ${total}</h3>
         
-        <div style={{
-          marginBottom: '20px',
-          padding: '15px',
-          backgroundColor: '#fff3cd',
-          borderRadius: '5px',
-          display: 'inline-block'
-        }}>
+        <div className="nota-info">
           <strong>📝 Nota:</strong> Al realizar la compra se solicitará tus datos como gmail, nombre y telefono 
         </div>
         
-        <div style={{display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '20px', flexWrap: 'wrap'}}>
+        <div className="carrito-botones">
           <button 
             onClick={realizarCompra}
-            style={{
-              padding: '12px 25px',
-              backgroundColor: '#28a745',
-              color: 'white',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              fontSize: '16px',
-              fontWeight: 'bold'
-            }}
+            className="btn-comprar"
           >
             ✅ Realizar Compra
           </button>
           
           <button 
             onClick={vaciarCarrito}
-            style={{
-              padding: '12px 25px',
-              backgroundColor: '#ffc107',
-              color: 'black',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              fontSize: '16px'
-            }}
+            className="btn-vaciar"
           >
             🗑️ Vaciar Carrito
           </button>

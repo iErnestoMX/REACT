@@ -1,7 +1,7 @@
-// components/sections/RegistroVentas.js
 import React, { useState, useEffect } from 'react';
 import { obtenerVentas, obtenerVentasPorCliente, obtenerTotalVentas, obtenerVentasDelDia } from '../../utils/ventasUtils';
 import { obtenerClientes } from '../../utils/clientesUtils';
+import '../../Estilos/RegistroVentas.css';
 
 const RegistroVentas = () => {
   const [ventas, setVentas] = useState([]);
@@ -64,87 +64,37 @@ const RegistroVentas = () => {
 
   return (
     <>
-     
-        <h2>Registro de Ventas</h2>
-      
+      <h2 className="ventas-titulo">Registro de Ventas</h2>
 
       {/* Estadísticas rápidas */}
-      <div style={{
-        display: 'flex',
-        gap: '20px',
-        marginBottom: '30px',
-        flexWrap: 'wrap',
-        justifyContent: 'center'
-      }}>
-        <div style={{
-          background: 'linear-gradient(135deg, #667eea, #764ba2)',
-          color: 'white',
-          padding: '20px',
-          borderRadius: '10px',
-          textAlign: 'center',
-          minWidth: '200px'
-        }}>
+      <div className="estadisticas-ventas">
+        <div className="estadistica-card total-general">
           <h3>💰 Total General</h3>
-          <p style={{ fontSize: '24px', fontWeight: 'bold', margin: '10px 0' }}>
-            ${totalGeneral.toFixed(2)}
-          </p>
+          <p className="estadistica-valor">${totalGeneral.toFixed(2)}</p>
         </div>
 
-        <div style={{
-          background: 'linear-gradient(135deg, #f093fb, #f5576c)',
-          color: 'white',
-          padding: '20px',
-          borderRadius: '10px',
-          textAlign: 'center',
-          minWidth: '200px'
-        }}>
+        <div className="estadistica-card ventas-hoy">
           <h3>📅 Ventas Hoy</h3>
-          <p style={{ fontSize: '24px', fontWeight: 'bold', margin: '10px 0' }}>
-            {ventasDelDia.length}
-          </p>
-          <p>${ventasDelDia.reduce((sum, v) => sum + v.total, 0).toFixed(2)}</p>
+          <p className="estadistica-valor">{ventasDelDia.length}</p>
+          <p className="estadistica-subvalor">${ventasDelDia.reduce((sum, v) => sum + v.total, 0).toFixed(2)}</p>
         </div>
 
-        <div style={{
-          background: 'linear-gradient(135deg, #4facfe, #00f2fe)',
-          color: 'white',
-          padding: '20px',
-          borderRadius: '10px',
-          textAlign: 'center',
-          minWidth: '200px'
-        }}>
+        <div className="estadistica-card total-clientes">
           <h3>👥 Total Clientes</h3>
-          <p style={{ fontSize: '24px', fontWeight: 'bold', margin: '10px 0' }}>
-            {clientes.length}
-          </p>
+          <p className="estadistica-valor">{clientes.length}</p>
         </div>
       </div>
 
       {/* Filtros */}
-      <div style={{
-        background: '#f8f9fa',
-        padding: '20px',
-        borderRadius: '10px',
-        marginBottom: '20px'
-      }}>
+      <div className="filtros-ventas">
         <h3>🔍 Filtros</h3>
-        <div style={{
-          display: 'flex',
-          gap: '15px',
-          flexWrap: 'wrap',
-          alignItems: 'end'
-        }}>
-          <div>
+        <div className="filtros-container">
+          <div className="filtro-grupo">
             <label>Cliente:</label>
             <select 
               value={filtroCliente}
               onChange={(e) => setFiltroCliente(e.target.value)}
-              style={{
-                padding: '8px',
-                borderRadius: '5px',
-                border: '1px solid #ddd',
-                marginLeft: '10px'
-              }}
+              className="filtro-select"
             >
               <option value="">Todos los clientes</option>
               {clientes.map(cliente => (
@@ -155,114 +105,71 @@ const RegistroVentas = () => {
             </select>
           </div>
 
-          <div>
+          <div className="filtro-grupo">
             <label>Desde:</label>
             <input 
               type="date" 
               value={fechaInicio}
               onChange={(e) => setFechaInicio(e.target.value)}
-              style={{
-                padding: '8px',
-                borderRadius: '5px',
-                border: '1px solid #ddd',
-                marginLeft: '10px'
-              }}
+              className="filtro-input"
             />
           </div>
 
-          <div>
+          <div className="filtro-grupo">
             <label>Hasta:</label>
             <input 
               type="date" 
               value={fechaFin}
               onChange={(e) => setFechaFin(e.target.value)}
-              style={{
-                padding: '8px',
-                borderRadius: '5px',
-                border: '1px solid #ddd',
-                marginLeft: '10px'
-              }}
+              className="filtro-input"
             />
           </div>
 
           <button 
             onClick={filtrarVentas}
-            style={{
-              padding: '8px 16px',
-              backgroundColor: '#007bff',
-              color: 'white',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer'
-            }}
+            className="btn-filtrar"
           >
             🔍 Aplicar Filtros
           </button>
 
           <button 
             onClick={limpiarFiltros}
-            style={{
-              padding: '8px 16px',
-              backgroundColor: '#6c757d',
-              color: 'white',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer'
-            }}
+            className="btn-limpiar"
           >
             🗑️ Limpiar
           </button>
         </div>
 
         {ventas.length > 0 && (
-          <div style={{ marginTop: '15px', fontWeight: 'bold' }}>
+          <div className="total-filtrado">
             📈 Total filtrado: ${totalFiltrado.toFixed(2)} ({ventas.length} ventas)
           </div>
         )}
       </div>
 
       {/* Lista de ventas */}
-      <div>
+      <div className="historial-ventas">
         <h3>📋 Historial de Ventas</h3>
         
         {ventas.length === 0 ? (
-          <div style={{
-            textAlign: 'center',
-            padding: '40px',
-            color: '#666'
-          }}>
+          <div className="sin-ventas">
             <p>No hay ventas registradas</p>
           </div>
         ) : (
-          <div style={{
-            maxHeight: '500px',
-            overflowY: 'auto'
-          }}>
+          <div className="lista-ventas">
             {ventas.map((venta) => (
               <div 
                 key={venta.id}
-                style={{
-                  border: '1px solid #e0e0e0',
-                  borderRadius: '8px',
-                  padding: '15px',
-                  marginBottom: '10px',
-                  background: 'white',
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                }}
+                className="venta-card"
               >
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'start',
-                  marginBottom: '10px'
-                }}>
-                  <div>
+                <div className="venta-header">
+                  <div className="venta-info">
                     <strong>🆔 Venta #{venta.id.slice(-6)}</strong>
                     <br />
                     <small>📅 {formatearFecha(venta.fecha)}</small>
                   </div>
-                  <div style={{ textAlign: 'right' }}>
-                    <strong style={{ fontSize: '18px', color: '#28a745' }}>
+                  <div className="venta-total">
+                    <strong className="total-monto">
                       ${venta.total.toFixed(2)}
                     </strong>
                     <br />
@@ -270,15 +177,15 @@ const RegistroVentas = () => {
                   </div>
                 </div>
 
-                <div style={{ marginBottom: '10px' }}>
+                <div className="venta-cliente">
                   <strong>👤 Cliente:</strong> {venta.cliente}
                   <br />
                   <strong>📧 Email:</strong> {venta.clienteEmail}
                 </div>
 
-                <div>
+                <div className="venta-productos">
                   <strong>🛍️ Productos:</strong>
-                  <ul style={{ margin: '5px 0', paddingLeft: '20px' }}>
+                  <ul className="lista-productos">
                     {venta.productos.map((producto, index) => (
                       <li key={index}>
                         {producto.nombre} x{producto.cantidad} - ${producto.total.toFixed(2)}
