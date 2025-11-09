@@ -481,7 +481,7 @@ nav ul {
   padding: 0;
 }
 
-/* 🔥 ESTILOS RESPONSIVE PARA EL NAV 🔥 */
+/* 🔥 ESTILOS RESPONSIVE HORIZONTAL PARA TODOS LOS DISPOSITIVOS 🔥 */
 
 /* Escritorio grande */
 @media (min-width: 1201px) {
@@ -497,14 +497,14 @@ nav ul {
   }
 }
 
-/* Tablets grandes */
+/* Tablets */
 @media (max-width: 1024px) and (min-width: 769px) {
   nav ul {
     gap: 1rem;
   }
 }
 
-/* Tablets */
+/* Tablets pequeñas y móviles grandes */
 @media (max-width: 768px) and (min-width: 481px) {
   nav ul {
     gap: 0.8rem;
@@ -512,56 +512,64 @@ nav ul {
   }
   
   nav ul li {
-    flex: 0 0 calc(33.333% - 0.8rem);
-    text-align: center;
+    flex: 0 0 auto; /* Mantiene tamaño automático */
   }
 }
 
-/* Móviles grandes */
-@media (max-width: 480px) and (min-width: 361px) {
+/* Móviles horizontales */
+@media (max-width: 480px) {
   nav ul {
-    flex-direction: column;
-    gap: 0.6rem;
-    align-items: center;
-  }
-  
-  nav ul li {
-    width: 100%;
-    max-width: 200px;
-  }
-}
-
-/* Móviles pequeños */
-@media (max-width: 360px) {
-  nav ul {
-    flex-direction: column;
     gap: 0.5rem;
-    align-items: center;
+    flex-wrap: nowrap; /* 🔹 IMPORTANTE: Evita que se rompa en varias líneas */
+    overflow-x: auto; /* 🔹 Permite scroll horizontal si es necesario */
+    justify-content: flex-start; /* 🔹 Alinea a la izquierda para scroll */
+    padding: 10px 5px;
+    -webkit-overflow-scrolling: touch; /* 🔹 Scroll suave en iOS */
   }
   
   nav ul li {
-    width: 100%;
-    max-width: 180px;
+    flex: 0 0 auto; /* 🔹 Mantiene el tamaño original de cada item */
+    white-space: nowrap; /* 🔹 Evita que el texto se rompa */
   }
-}
-
-/* Pantallas muy grandes */
-@media (min-width: 1600px) {
-  nav ul {
-    gap: 2rem;
-  }
-}
-
-/* Asegurar que los enlaces sean táctiles en móviles */
-@media (max-width: 768px) {
+  
+  /* Hacer los enlaces más compactos para móviles */
   nav ul li a {
-    padding: 12px 16px;
-    display: block;
-    text-align: center;
-    min-height: 44px; /* Tamaño mínimo para touch */
+    padding: 8px 12px;
+    font-size: 0.85em;
+    min-height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 360px) {
+  nav ul {
+    gap: 0.4rem;
+  }
+  
+  nav ul li a {
+    padding: 6px 10px;
+    font-size: 0.8em;
+    min-height: 38px;
+  }
+}
+
+/* Scroll horizontal personalizado para móviles */
+@media (max-width: 480px) {
+  nav ul::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+  nav ul::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+  }
+  
+  nav ul::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
   }
 }
 
@@ -572,6 +580,13 @@ nav ul {
     transition: transform 0.2s ease;
   }
 }
+
+/* Asegurar que el contenedor nav no se desborde */
+nav {
+  width: 100%;
+  overflow: hidden;
+}
+
 nav li {
   position: relative;
   animation: slideIn 0.6s ease both;
