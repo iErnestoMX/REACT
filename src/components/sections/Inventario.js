@@ -116,8 +116,6 @@ const Inventario = () => {
   return (
     <>
       <h2>Inventario de Productos</h2>
-
-      {/* Resumen del inventario */}
       <div style={{
         display: 'flex',
         justifyContent: 'space-around',

@@ -12,24 +12,20 @@ function App() {
   const [currentView, setCurrentView] = useState('login');
 
   useEffect(() => {
-    // Inicializar datos
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [
       { username: "LMKS", password: "1234", tipo: "admin" },
       { username: "Angel", password: "1234", tipo: "comprador" }
     ];
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-    // Inicializar inventario si no existe
+
     if (!localStorage.getItem("inventario")) {
       localStorage.setItem("inventario", JSON.stringify([]));
     }
 
-    // Inicializar proveedores si no existe
     if (!localStorage.getItem("proveedores")) {
       localStorage.setItem("proveedores", JSON.stringify([]));
     }
-
-    // Inicializar anuncios si no existen
     if (!localStorage.getItem("anuncios")) {
       const anunciosIniciales = [
         { id: 1, texto: "¡Oferta Especial! 50% descuento", tipo: "banner" },
@@ -38,8 +34,6 @@ function App() {
       ];
       localStorage.setItem("anuncios", JSON.stringify(anunciosIniciales));
     }
-
-    // Verificar si ya está loggeado
     if (localStorage.getItem("loggedIn")) {
       setLoggedIn(true);
     }
@@ -58,8 +52,6 @@ function App() {
   if (loggedIn) {
     return <MainApp onLogout={handleLogout} />;
   }
-
-  // Renderizar páginas de autenticación SIN ANUNCIOS
   switch (currentView) {
     case 'registro':
       return (
