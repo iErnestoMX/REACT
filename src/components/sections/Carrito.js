@@ -36,7 +36,6 @@ const Carrito = ({ onUpdateCarrito }) => {
       }
     }
 
-    // Actualizar inventario
     const inventarioActual = inventario.map(prod => {
       if (prod.nombre === item.name) {
         return {
