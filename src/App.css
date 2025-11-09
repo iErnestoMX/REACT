@@ -481,6 +481,97 @@ nav ul {
   padding: 0;
 }
 
+/* 🔥 ESTILOS RESPONSIVE PARA EL NAV 🔥 */
+
+/* Escritorio grande */
+@media (min-width: 1201px) {
+  nav ul {
+    gap: 1.5rem;
+  }
+}
+
+/* Escritorio estándar */
+@media (max-width: 1200px) and (min-width: 1025px) {
+  nav ul {
+    gap: 1.2rem;
+  }
+}
+
+/* Tablets grandes */
+@media (max-width: 1024px) and (min-width: 769px) {
+  nav ul {
+    gap: 1rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) and (min-width: 481px) {
+  nav ul {
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+  
+  nav ul li {
+    flex: 0 0 calc(33.333% - 0.8rem);
+    text-align: center;
+  }
+}
+
+/* Móviles grandes */
+@media (max-width: 480px) and (min-width: 361px) {
+  nav ul {
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: center;
+  }
+  
+  nav ul li {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 360px) {
+  nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  nav ul li {
+    width: 100%;
+    max-width: 180px;
+  }
+}
+
+/* Pantallas muy grandes */
+@media (min-width: 1600px) {
+  nav ul {
+    gap: 2rem;
+  }
+}
+
+/* Asegurar que los enlaces sean táctiles en móviles */
+@media (max-width: 768px) {
+  nav ul li a {
+    padding: 12px 16px;
+    display: block;
+    text-align: center;
+    min-height: 44px; /* Tamaño mínimo para touch */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Efectos hover solo en dispositivos con hover */
+@media (hover: hover) {
+  nav ul li a:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+  }
+}
 nav li {
   position: relative;
   animation: slideIn 0.6s ease both;
