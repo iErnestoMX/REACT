@@ -67,26 +67,52 @@ npm start
 REACT-PROYECTO-PAPELERIA/
 src/
   components/
-    Login.js
-    Registro.js
-    Recuperar.js
-    MainApp.js
-    Header.js
-    Content.js
-    sections/
-      Inicio.js
+      sections/
       Articulos.js
+      ArticulosTemporada.js
       Carrito.js
-      Inventario.js
       Contacto.js
       Dashboard.js
-      Tarjetas.js          
-      MenuPrincipal.js
-      TarjetaPresentacion.js
-      Portafolio.js
+      Favoritos.js
+      GestionUsuarios.js
+      Inventario.js
+      RegistroVentas.js
+      Tarjetas.js
+    AdBanner.css
+    AdBanner.js
+    Content.js
+    Header.js
+    Login.js
+    MainApp.js
+    Notificaciones.js
+    Recuperar.js
+    Registro
+  Estilos/
+    Articulos.css
+    ArticulosTemporada.css
+    Carrito.css
+    Contacto.css
+    Dasboardh.css
+    Favoritos.css
+    GestionUsuarios.css
+    Inventario.css
+    RegistroVentas.css
+    Tarjetas.css
   utils/
     carritoUtils.js
+    clientesUtils.js
     favoritoUtils.js
+    NotificacionesUtils.js
+    storage.js
+    VentasUtils.js
   App.js
   App.css
 
+# Guardar en el git todo
+git add .
+
+# Guardar con descripcion 
+git commit -m "Descripcion"
+
+# Subirlo en el git 
+git push
