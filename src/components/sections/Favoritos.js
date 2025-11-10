@@ -6,33 +6,64 @@ import '../../Estilos/Favoritos.css';
 
 const Favoritos = ({ onUpdateFavoritos }) => {
   const [favoritos, setFavoritos] = useState([]);
+  const [inventario, setInventario] = useState([]);
 
+  // 🔄 NUEVO: Sincronizar favoritos con inventario
   useEffect(() => {
-    const actualizarFavoritos = () => {
-      setFavoritos(obtenerFavoritos());
+    const sincronizarDatos = () => {
+      const favoritosActual = obtenerFavoritos();
+      const inventarioActual = obtenerInventario();
+      
+      // 🔄 Actualizar precios de favoritos con los del inventario
+      const favoritosActualizados = favoritosActual.map(favorito => {
+        const productoInventario = inventarioActual.find(prod => prod.nombre === favorito.nombre);
+        if (productoInventario && productoInventario.precio !== favorito.price) {
+          return {
+            ...favorito,
+            price: productoInventario.precio // 🔥 Precio actualizado
+          };
+        }
+        return favorito;
+      });
+      
+      // Guardar solo si hubo cambios
+      if (JSON.stringify(favoritosActualizados) !== JSON.stringify(favoritosActual)) {
+        localStorage.setItem('favoritos', JSON.stringify(favoritosActualizados));
+      }
+      
+      setFavoritos(favoritosActualizados);
+      setInventario(inventarioActual);
     };
 
-    actualizarFavoritos();
+    sincronizarDatos();
 
-
-    window.addEventListener('favoritosActualizados', actualizarFavoritos);
+    // Escuchar cambios en el almacenamiento
+    window.addEventListener('storage', sincronizarDatos);
+    window.addEventListener('favoritosActualizados', sincronizarDatos);
+    
+    // Verificar cambios cada segundo
+    const interval = setInterval(sincronizarDatos, 1000);
     
     return () => {
-      window.removeEventListener('favoritosActualizados', actualizarFavoritos);
+      window.removeEventListener('storage', sincronizarDatos);
+      window.removeEventListener('favoritosActualizados', sincronizarDatos);
+      clearInterval(interval);
     };
   }, []);
 
   const eliminarFavorito = (nombreProducto) => {
     eliminarDeFavoritos(nombreProducto);
+    setFavoritos(obtenerFavoritos());
     onUpdateFavoritos?.();
+    window.dispatchEvent(new Event('favoritosActualizados'));
     notificacionExito('Favorito Eliminado', `${nombreProducto} eliminado de favoritos`);
   };
 
   const agregarAlCarrito = (producto) => {
     const carrito = obtenerCarrito();
-    const inventario = obtenerInventario();
+    const inventarioActual = obtenerInventario();
   
-    const productoInventario = inventario.find(prod => prod.nombre === producto.nombre);
+    const productoInventario = inventarioActual.find(prod => prod.nombre === producto.nombre);
     if (!productoInventario || productoInventario.cantidad < 1) {
       notificacionError('Sin Stock', `No hay stock disponible de ${producto.nombre}`);
       return;
@@ -41,7 +72,6 @@ const Favoritos = ({ onUpdateFavoritos }) => {
     const itemExistente = carrito.find(item => item.name === producto.nombre);
     
     if (itemExistente) {
-    
       if (productoInventario.cantidad > itemExistente.qty) {
         itemExistente.qty += 1;
       } else {
@@ -52,17 +82,16 @@ const Favoritos = ({ onUpdateFavoritos }) => {
         return;
       }
     } else {
-    
       carrito.push({
         name: producto.nombre,
         qty: 1,
-        price: producto.price,
+        price: producto.price, // 🔄 Ya tiene el precio actualizado
         img: producto.img
       });
     }
 
-   
-    const inventarioActualizado = inventario.map(prod => 
+    // Actualizar inventario
+    const inventarioActualizado = inventarioActual.map(prod => 
       prod.nombre === producto.nombre 
         ? { ...prod, cantidad: prod.cantidad - 1 }
         : prod
@@ -70,13 +99,14 @@ const Favoritos = ({ onUpdateFavoritos }) => {
 
     guardarInventario(inventarioActualizado);
     guardarCarrito(carrito);
-   
+    setInventario(inventarioActualizado);
+    
     window.dispatchEvent(new Event('storage'));
     onUpdateFavoritos?.();
     
     notificacionCarrito(
       'Producto Agregado', 
-      `${producto.nombre} agregado al carrito\nStock restante: ${productoInventario.cantidad - 1}`
+      `${producto.nombre} agregado al carrito\nPrecio: $${producto.price}\nStock restante: ${productoInventario.cantidad - 1}`
     );
   };
 
@@ -84,6 +114,7 @@ const Favoritos = ({ onUpdateFavoritos }) => {
     localStorage.setItem('favoritos', JSON.stringify([]));
     setFavoritos([]);
     onUpdateFavoritos?.();
+    window.dispatchEvent(new Event('favoritosActualizados'));
     notificacionInfo('Lista Vacía', 'Todos los favoritos han sido eliminados');
   };
 
@@ -105,10 +136,8 @@ const Favoritos = ({ onUpdateFavoritos }) => {
         <h2>Favoritos ({favoritos.length})</h2>
       </div>
 
-
       <div className="favoritos-container">
         {favoritos.map((item, index) => {
-          const inventario = obtenerInventario();
           const productoInventario = inventario.find(prod => prod.nombre === item.nombre);
           const stockDisponible = productoInventario ? productoInventario.cantidad : 0;
           const sinStock = stockDisponible <= 0;
@@ -129,7 +158,7 @@ const Favoritos = ({ onUpdateFavoritos }) => {
               </h3>
               
               <p className="favorito-precio">
-                ${item.price}
+                ${item.price} {/* 🔄 Muestra el precio actualizado */}
               </p>
               
               <div className={`favorito-stock ${sinStock ? 'sin-stock' : stockDisponible <= 5 ? 'bajo-stock' : 'en-stock'}`}>
@@ -159,12 +188,15 @@ const Favoritos = ({ onUpdateFavoritos }) => {
           );
         })}
       </div>
+      
+      <div className="vaciar-container">
         <button 
           onClick={vaciarFavoritos}
           className="btn-vaciar-favoritos"
         >
           🗑️ Vaciar Lista
         </button>
+      </div>
     </>
   );
 };

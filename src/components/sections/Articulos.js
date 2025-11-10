@@ -86,7 +86,7 @@ const Articulos = ({ onUpdateCarrito }) => {
       "https://www.costco.com.mx/medias/sys_master/products/h56/hd9/360893566124062.jpg"
     ],
     "Corona Navidad": [
-      "https://i.postimg.cc/kMygWhT5/71Nf-URFBXAL-AC-UF894-1000-QL80.jpg",
+      "https://i.postimg.cc/kMygWhT5/71Nf-URFBXAL-AC_Uf894-1000-QL80.jpg",
       "https://i.etsystatic.com/13909799/r/il/d618b1/5561736651/il_570xN.5561736651_f4t9.jpg",
       "https://waldos.com.mx/cdn/shop/files/100092988COMBI_1.jpg?v=1699039359&width=1214"
     ],
@@ -102,7 +102,57 @@ const Articulos = ({ onUpdateCarrito }) => {
     ]
   };
 
+  const sincronizarConInventario = (articulosData) => {
+    const inventarioExistente = JSON.parse(localStorage.getItem("inventario")) || [];
+    
+    
+    if (inventarioExistente.length === 0) {
+      const inventarioInicial = articulosData.map(articulo => ({
+        nombre: articulo.nombre,
+        precio: articulo.price,
+        cantidad: 10
+      }));
+      localStorage.setItem("inventario", JSON.stringify(inventarioInicial));
+      setInventario(inventarioInicial);
+      setArticulos(articulosData);
+    } else {
+ 
+      const articulosSincronizados = articulosData.map(articulo => {
+        const productoInventario = inventarioExistente.find(item => 
+          item.nombre === articulo.nombre
+        );
+        
+        if (productoInventario) {
+          return {
+            ...articulo,
+            price: productoInventario.precio 
+          };
+        }
+        
+    
+        return articulo;
+      });
+      
+      setInventario(inventarioExistente);
+      setArticulos(articulosSincronizados);
+      localStorage.setItem("articulos", JSON.stringify(articulosSincronizados));
+    }
+
+    const imagenesIniciales = {};
+    articulosData.forEach(articulo => {
+      imagenesIniciales[articulo.nombre] = 0;
+    });
+    setImagenesActuales(imagenesIniciales);
+
+    const favoritosEstado = {};
+    articulosData.forEach(articulo => {
+      favoritosEstado[articulo.nombre] = estaEnFavoritos(articulo.nombre);
+    });
+    setFavoritos(favoritosEstado);
+  };
+
   useEffect(() => {
+   
     const articulosData = [
       { nombre: "Colores", price: 95, img: "https://i.postimg.cc/QMYctmWy/Colores.png", desc: "Pigmentos vivos, punta resistente y trazos uniformes.", categoria: "material-artistico" },
       { nombre: "Cuadernos", price: 28, img: "https://i.postimg.cc/Df4GgC62/Cuaderno-Jean-Book.png", desc: "Pasta dura, diseño moderno y hojas cuadriculadas.", categoria: "cuadernos" },
@@ -117,40 +167,49 @@ const Articulos = ({ onUpdateCarrito }) => {
       { nombre: "Esferas Navideñas", price: 50, img: "https://i.postimg.cc/JzVYmPW1/214620-d.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
       { nombre: "Luces LED", price: 110, img: "https://i.postimg.cc/d0H4YgpH/Imagen-Lucez.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
       { nombre: "Arbol de Navidad", price: 800, img: "https://i.postimg.cc/s2tv0QhT/813arlp-Ns-SL.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
-      { nombre: "Corona Navidad", price: 120, img: "https://i.postimg.cc/kMygWhT5/71Nf-URFBXAL-AC-UF894-1000-QL80.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
+      { nombre: "Corona Navidad", price: 120, img: "https://i.postimg.cc/kMygWhT5/71Nf-URFBXAL-AC_UF894-1000-QL80.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
       { nombre: "Bolsa Navideña", price: 20, img: "https://i.postimg.cc/59LBr4Y6/descarga-removebg-preview.png", desc: "El mejor material de pinceles.", categoria: "papel" },
       { nombre: "Papel Navideño", price: 15, img: "https://i.postimg.cc/LXf1GDsQ/papel-navideno-beumont-couche-70x100cm-9438hr-sku-349031.jpg", desc: "El mejor material de pinceles.", categoria: "papel" }
-      
     ];
-     localStorage.setItem("articulos", JSON.stringify(articulosData));
      
-    setArticulos(articulosData);
   
+    sincronizarConInventario(articulosData);
+  }, []);
 
-    const imagenesIniciales = {};
-    articulosData.forEach(articulo => {
-      imagenesIniciales[articulo.nombre] = 0;
-    });
-    setImagenesActuales(imagenesIniciales);
 
-    const inventarioExistente = JSON.parse(localStorage.getItem("inventario")) || [];
-    if (inventarioExistente.length === 0) {
-      const inventarioInicial = articulosData.map(articulo => ({
-        nombre: articulo.nombre,
-        precio: articulo.price,
-        cantidad: 10
-      }));
-      localStorage.setItem("inventario", JSON.stringify(inventarioInicial));
-      setInventario(inventarioInicial);
-    } else {
-      setInventario(inventarioExistente);
-    }
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const inventarioActualizado = JSON.parse(localStorage.getItem("inventario")) || [];
+      setInventario(inventarioActualizado);
+      
+      const articulosActuales = JSON.parse(localStorage.getItem("articulos")) || [];
+      const articulosActualizados = articulosActuales.map(articulo => {
+        const productoInventario = inventarioActualizado.find(item => 
+          item.nombre === articulo.nombre
+        );
+        
+        if (productoInventario) {
+          return {
+            ...articulo,
+            price: productoInventario.precio 
+          };
+        }
+        
+        return articulo;
+      });
+      
+      setArticulos(articulosActualizados);
+      localStorage.setItem("articulos", JSON.stringify(articulosActualizados));
+    };
 
-    const favoritosEstado = {};
-    articulosData.forEach(articulo => {
-      favoritosEstado[articulo.nombre] = estaEnFavoritos(articulo.nombre);
-    });
-    setFavoritos(favoritosEstado);
+    window.addEventListener('storage', handleStorageChange);
+    
+    const interval = setInterval(handleStorageChange, 1000);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(interval);
+    };
   }, []);
 
   const obtenerCantidadDisponible = useCallback((nombreArticulo) => {
@@ -199,8 +258,6 @@ const Articulos = ({ onUpdateCarrito }) => {
     };
   }, [articulos]);
 
-
-  
   const toggleFavorito = (articulo) => {
     if (favoritos[articulo.nombre]) {
       eliminarDeFavoritos(articulo.nombre);
@@ -221,6 +278,7 @@ const Articulos = ({ onUpdateCarrito }) => {
     }
   };
 
+
   const agregarAlCarrito = (articulo) => {
     const cantidadDisponible = obtenerCantidadDisponible(articulo.nombre);
     
@@ -228,6 +286,9 @@ const Articulos = ({ onUpdateCarrito }) => {
       notificacionError('Producto Agotado', `No hay stock disponible de ${articulo.nombre}`);
       return;
     }
+
+    const productoInventario = inventario.find(item => item.nombre === articulo.nombre);
+    const precioActual = productoInventario ? productoInventario.precio : articulo.price;
 
     const inventarioActualizado = inventario.map(item => {
       if (item.nombre === articulo.nombre) {
@@ -247,11 +308,12 @@ const Articulos = ({ onUpdateCarrito }) => {
     
     if (index >= 0) {
       carrito[index].qty += 1;
+      carrito[index].price = precioActual; 
     } else {
       carrito.push({ 
         name: articulo.nombre, 
         qty: 1, 
-        price: articulo.price, 
+        price: precioActual, 
         img: articulo.img 
       });
     }
@@ -259,7 +321,7 @@ const Articulos = ({ onUpdateCarrito }) => {
     guardarCarrito(carrito);
     notificacionCarrito(
       'Producto Agregado', 
-      `${articulo.nombre} agregado al carrito\nStock restante: ${cantidadDisponible - 1}`
+      `${articulo.nombre} agregado al carrito\nPrecio: $${precioActual}\nStock restante: ${cantidadDisponible - 1}`
     );
     onUpdateCarrito();
     window.dispatchEvent(new Event('storage'));
@@ -288,7 +350,7 @@ const Articulos = ({ onUpdateCarrito }) => {
     <>
       <h2 className="articulos-title">Artículos</h2>
       <p className="articulos-description">
-        Se muestran imágenes de los <strong>artículos en venta</strong> y <em>su costo</em>, de la <abbr title="Papelería Karen">PapeKaren</abbr>
+        Se muestran imágenes de los <strong>artículos en venta</strong> y <em>su costo actual</em>, de la <abbr title="Papelería Karen">PapeKaren</abbr>
       </p>
 
       <div className="filtros-container">

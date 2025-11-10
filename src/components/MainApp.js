@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
+import Content from './Content';
 import GestionUsuarios from './sections/GestionUsuarios';
 import { actualizarContadorCarrito } from '../utils/carritoUtils';
-import Content from './Content';
 import Notificaciones from './Notificaciones';
 import AdBanner from './AdBanner';
 

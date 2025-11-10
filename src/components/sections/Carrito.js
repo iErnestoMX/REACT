@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { obtenerCarrito, guardarCarrito, obtenerInventario, guardarInventario } from '../../utils/carritoUtils';
 import { registrarVenta } from '../../utils/ventasUtils';
 import { agregarCliente, buscarClientePorEmail } from '../../utils/clientesUtils';
@@ -6,8 +6,49 @@ import { notificacionExito, notificacionError, notificacionInfo } from '../../ut
 import '../../Estilos/Carrito.css';
 
 const Carrito = ({ onUpdateCarrito }) => {
-  const carrito = obtenerCarrito();
-  const inventario = obtenerInventario();
+  const [carrito, setCarrito] = useState([]);
+  const [inventario, setInventario] = useState([]);
+
+  // 🔄 NUEVO: Sincronizar carrito con inventario
+  useEffect(() => {
+    const sincronizarDatos = () => {
+      const carritoActual = obtenerCarrito();
+      const inventarioActual = obtenerInventario();
+      
+      // 🔄 Actualizar precios del carrito con los del inventario
+      const carritoActualizado = carritoActual.map(item => {
+        const productoInventario = inventarioActual.find(prod => prod.nombre === item.name);
+        if (productoInventario && productoInventario.precio !== item.price) {
+          return {
+            ...item,
+            price: productoInventario.precio // 🔥 Precio actualizado
+          };
+        }
+        return item;
+      });
+      
+      // Guardar solo si hubo cambios
+      if (JSON.stringify(carritoActualizado) !== JSON.stringify(carritoActual)) {
+        guardarCarrito(carritoActualizado);
+      }
+      
+      setCarrito(carritoActualizado);
+      setInventario(inventarioActual);
+    };
+
+    sincronizarDatos();
+
+    // Escuchar cambios en el almacenamiento
+    window.addEventListener('storage', sincronizarDatos);
+    
+    // Verificar cambios cada segundo
+    const interval = setInterval(sincronizarDatos, 1000);
+    
+    return () => {
+      window.removeEventListener('storage', sincronizarDatos);
+      clearInterval(interval);
+    };
+  }, []);
 
   const reintegrarAlInventario = (nombreProducto, cantidad) => {
     const inventarioActual = obtenerInventario();
@@ -16,6 +57,7 @@ const Carrito = ({ onUpdateCarrito }) => {
     if (productoIndex !== -1) {
       inventarioActual[productoIndex].cantidad += cantidad;
       guardarInventario(inventarioActual);
+      setInventario(inventarioActual);
     }
   };
 
@@ -46,35 +88,47 @@ const Carrito = ({ onUpdateCarrito }) => {
       }
       return prod;
     });
+    
     guardarInventario(inventarioActual);
+    setInventario(inventarioActual);
+    
     carritoActual[index].qty = nuevaCantidad;
     guardarCarrito(carritoActual);
+    setCarrito(carritoActual);
+    
     onUpdateCarrito();
+    window.dispatchEvent(new Event('storage'));
   };
 
   const eliminarItem = (index) => {
     const carritoActual = obtenerCarrito();
     const itemEliminado = carritoActual[index];
     
-
+    // Reintegrar al inventario
     reintegrarAlInventario(itemEliminado.name, itemEliminado.qty);
     
-
+    // Eliminar del carrito
     carritoActual.splice(index, 1);
     guardarCarrito(carritoActual);
+    setCarrito(carritoActual);
+    
     onUpdateCarrito();
+    window.dispatchEvent(new Event('storage'));
     
     notificacionExito('Producto Eliminado', `${itemEliminado.name} eliminado del carrito`);
   };
 
   const vaciarCarrito = () => {
-
+    // Reintegrar todos los productos al inventario
     carrito.forEach(item => {
       reintegrarAlInventario(item.name, item.qty);
     });
     
     guardarCarrito([]);
+    setCarrito([]);
     onUpdateCarrito();
+    window.dispatchEvent(new Event('storage'));
+    
     notificacionInfo('Carrito Vaciado', 'Todos los productos reintegrados al inventario');
   };
 
@@ -89,13 +143,11 @@ const Carrito = ({ onUpdateCarrito }) => {
       `${item.name} x${item.qty} - $${item.price * item.qty}`
     ).join('\n');
 
- 
     const clienteEmail = prompt('📧 Ingrese el email del cliente:');
     if (!clienteEmail) {
       notificacionError('Email Requerido', 'Se requiere email del cliente para registrar la venta');
       return;
     }
-
 
     if (!clienteEmail.includes('@') || !clienteEmail.includes('.')) {
       notificacionError('Email Inválido', 'Por favor ingrese un email válido');
@@ -108,7 +160,7 @@ const Carrito = ({ onUpdateCarrito }) => {
     if (window.confirm(`🛒 RESUMEN DE COMPRA:\n\n👤 Cliente: ${clienteNombre}\n📧 Email: ${clienteEmail}\n\n${resumen}\n\n💵 TOTAL: $${total}\n\n¿Confirmar compra?`)) {
       
       try {
-    
+        // Registrar cliente
         let cliente = buscarClientePorEmail(clienteEmail);
         if (!cliente) {
           cliente = agregarCliente({
@@ -118,7 +170,7 @@ const Carrito = ({ onUpdateCarrito }) => {
           });
         }
 
-   
+        // Registrar venta
         const venta = registrarVenta({
           cliente: clienteNombre,
           clienteEmail: clienteEmail,
@@ -133,15 +185,16 @@ const Carrito = ({ onUpdateCarrito }) => {
           items: carrito.length
         });
 
-    
+        // Limpiar carrito
         guardarCarrito([]);
+        setCarrito([]);
         onUpdateCarrito();
+        window.dispatchEvent(new Event('storage'));
         
         notificacionExito(
           '¡Compra Exitosa!', 
           `Venta #${venta.id.slice(-6)} registrada\nCliente: ${clienteNombre}\nTotal: $${total}`
         );
-        window.dispatchEvent(new Event('storage'));
         
       } catch (error) {
         notificacionError('Error en Compra', 'Por favor intente nuevamente');

@@ -57,44 +57,69 @@
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: end;
 }
 
 .campo-nombre {
-  padding: 8px;
+  padding: 10px 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  flex: 1;
-  min-width: 150px;
+  flex: 2;
+  min-width: 200px;
+  font-size: 14px;
 }
 
 .campo-precio {
-  padding: 8px;
+  padding: 10px 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 100px;
+  flex: 1;
+  min-width: 120px;
+  font-size: 14px;
 }
 
 .campo-cantidad {
-  padding: 8px;
+  padding: 10px 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 100px;
+  flex: 1;
+  min-width: 130px; /* Más ancho para cantidades grandes */
+  font-size: 14px;
 }
 
 .btn-agregar {
-  padding: 8px 15px;
+  padding: 10px 20px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  flex: 1;
+  min-width: 140px;
+  font-size: 14px;
+  height: 40px;
 }
 
 .btn-agregar:hover {
   background-color: #0056b3;
 }
 
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .formulario-campos {
+    flex-direction: column;
+  }
+  
+  .campo-nombre,
+  .campo-precio,
+  .campo-cantidad,
+  .btn-agregar {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+/* El resto de tu CSS se mantiene igual */
 .tabla-inventario {
   width: 100%;
   margin-top: 20px;
@@ -207,3 +232,45 @@
 .btn-reiniciar:hover {
   background-color: #545b62;
 }
+
+.inventario-resumen {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.resumen-item {
+  text-align: center;
+}
+
+.resumen-item h4 {
+  margin: 0;
+  color: #666;
+}
+
+.resumen-total {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  margin: 5px 0;
+}
+
+.resumen-unidades {
+  font-size: 24px;
+  font-weight: bold;
+  color: #28a745;
+  margin: 5px 0;
+}
+
+.resumen-valor {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffc107;
+  margin: 5px 0;
+}
+
