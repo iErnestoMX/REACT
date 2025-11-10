@@ -7,7 +7,7 @@ const Inventario = () => {
   const [precio, setPrecio] = useState('');
   const [cantidad, setCantidad] = useState('');
 
-  // Cargar inventario al iniciar
+  
   useEffect(() => {
     const cargarInventario = () => {
       try {
@@ -32,13 +32,12 @@ const Inventario = () => {
 
   const guardarInventario = (nuevoInventario) => {
     try {
-      console.log('Guardando:', nuevoInventario); // 🔍 DEBUG
+      console.log('Guardando:', nuevoInventario); 
       localStorage.setItem("inventario", JSON.stringify(nuevoInventario));
-      setInventario(nuevoInventario); // 🔄 Actualizar estado inmediatamente
-      
-      // Verificar que se guardó correctamente
+      setInventario(nuevoInventario); 
+     
       const verificado = localStorage.getItem("inventario");
-      console.log('Verificado después de guardar:', verificado); // 🔍 DEBUG
+      console.log('Verificado después de guardar:', verificado);
     } catch (error) {
       console.error('Error guardando inventario:', error);
       alert('Error al guardar el inventario');
@@ -91,8 +90,7 @@ const Inventario = () => {
 
   const editarProducto = (index) => {
     const producto = inventario[index];
-    
-    // Crear un modal personalizado para editar ambos campos
+  
     const nuevoPrecio = prompt(
       `Editar "${producto.nombre}":\n\nPrecio unitario actual: $${producto.precio}\nCantidad actual: ${producto.cantidad} unidades\n\nNuevo precio:`, 
       producto.precio
@@ -107,7 +105,7 @@ const Inventario = () => {
     
     if (nuevaCantidad === null) return;
     
-    // Validar los nuevos valores
+   
     const precioNum = parseFloat(nuevoPrecio);
     const cantidadNum = parseInt(nuevaCantidad);
     
@@ -121,7 +119,7 @@ const Inventario = () => {
       return;
     }
 
-    // Actualizar el producto
+
     const inventarioActual = [...inventario];
     inventarioActual[index].precio = precioNum;
     inventarioActual[index].cantidad = cantidadNum;
@@ -131,7 +129,7 @@ const Inventario = () => {
     alert(`✅ "${producto.nombre}" actualizado:\n• Precio: $${precioNum.toFixed(2)}\n• Cantidad: ${cantidadNum} unidades`);
   };
 
-  // Función alternativa para editar solo un campo específico
+  
   const editarPrecioProducto = (index) => {
     const producto = inventario[index];
     const nuevoPrecio = prompt(

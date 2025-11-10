@@ -102,7 +102,6 @@ const Articulos = ({ onUpdateCarrito }) => {
     ]
   };
 
-  // REF para el intervalo global del carrusel
   const intervaloGlobalRef = useRef(null);
 
   const sincronizarConInventario = (articulosData) => {
@@ -138,7 +137,6 @@ const Articulos = ({ onUpdateCarrito }) => {
       localStorage.setItem("articulos", JSON.stringify(articulosSincronizados));
     }
 
-    // INICIALIZAR IMAGENES ACTUALES
     const imagenesIniciales = {};
     articulosData.forEach(articulo => {
       imagenesIniciales[articulo.nombre] = 0;
@@ -175,21 +173,19 @@ const Articulos = ({ onUpdateCarrito }) => {
     sincronizarConInventario(articulosData);
   }, []);
 
-  // CARRUSEL SIMPLIFICADO Y FUNCIONAL
+
   useEffect(() => {
     console.log('🎠 INICIANDO CARRUSEL GLOBAL');
     
-    // Limpiar intervalo anterior si existe
+ 
     if (intervaloGlobalRef.current) {
       clearInterval(intervaloGlobalRef.current);
     }
 
-    // Crear un solo intervalo global que rote todas las imágenes
     intervaloGlobalRef.current = setInterval(() => {
       setImagenesActuales(prev => {
         const nuevoEstado = { ...prev };
-        
-        // Rotar imagen para cada artículo que tenga múltiples imágenes
+ 
         Object.keys(imagenesExtra).forEach(nombreArticulo => {
           const imagenes = imagenesExtra[nombreArticulo];
           if (imagenes && imagenes.length > 1) {
@@ -201,17 +197,16 @@ const Articulos = ({ onUpdateCarrito }) => {
         
         return nuevoEstado;
       });
-    }, 3000); // Cambiar cada 3 segundos
+    }, 3000); 
 
-    // Cleanup
+    
     return () => {
       if (intervaloGlobalRef.current) {
         clearInterval(intervaloGlobalRef.current);
       }
     };
-  }, []); // Se ejecuta solo una vez al montar
+  }, []); 
 
-  // Función manual para cambiar imagen (opcional)
   const cambiarImagenManual = (nombreArticulo, direccion) => {
     const imagenes = imagenesExtra[nombreArticulo];
     if (!imagenes || imagenes.length <= 1) return;
@@ -531,7 +526,7 @@ const Articulos = ({ onUpdateCarrito }) => {
                           />
                         ))}
                       </div>
-                      {/* Botones manuales para navegación (opcional) */}
+              
                       <div className="carousel-controls">
                         <button 
                           className="carousel-btn prev-btn"

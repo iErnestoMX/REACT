@@ -219,6 +219,12 @@ const GestorProveedores = ({ onBack }) => {
       { nombre: "PritBuy", precio: 7, unidad: 15 },
       { nombre: "Pritt", precio: 17, unidad: 16 }
     ],
+        "Proveedor Engrapadoras": [
+      { nombre: "Engrapadoras", precio: 4, unidad: 11 },
+      { nombre: "Mini Engrapadora", precio: 5, unidad: 14 },
+      { nombre: "Engrapadora grande", precio: 7, unidad: 15 },
+      { nombre: "Engrapadorass", precio: 17, unidad: 16 }
+    ],
   };
 
   const agregarProveedor = (e) => {
