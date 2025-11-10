@@ -72,7 +72,7 @@ const Articulos = ({ onUpdateCarrito }) => {
     ],
     "Esferas Navideñas": [
       "https://i.postimg.cc/JzVYmPW1/214620-d.jpg",
-      "https://resources.sanborns.com.mx/medios-plazavip/t1/1734401243DNQNP976451MLM79985864992102024Ojpg?scale=50&qlty=75",
+      "https://resources.sanborns.com.mx/medios-plazavip/t1/1734401243DNQNP976451MLM7998586499210204Ojpg?scale=50&qlty=75",
       "https://http2.mlstatic.com/D_NQ_NP_769807-MLU74023754004_012024-O.webp"
     ],
     "Luces LED": [
@@ -102,9 +102,11 @@ const Articulos = ({ onUpdateCarrito }) => {
     ]
   };
 
+  // REF para el intervalo global del carrusel
+  const intervaloGlobalRef = useRef(null);
+
   const sincronizarConInventario = (articulosData) => {
     const inventarioExistente = JSON.parse(localStorage.getItem("inventario")) || [];
-    
     
     if (inventarioExistente.length === 0) {
       const inventarioInicial = articulosData.map(articulo => ({
@@ -116,7 +118,6 @@ const Articulos = ({ onUpdateCarrito }) => {
       setInventario(inventarioInicial);
       setArticulos(articulosData);
     } else {
- 
       const articulosSincronizados = articulosData.map(articulo => {
         const productoInventario = inventarioExistente.find(item => 
           item.nombre === articulo.nombre
@@ -129,7 +130,6 @@ const Articulos = ({ onUpdateCarrito }) => {
           };
         }
         
-    
         return articulo;
       });
       
@@ -138,6 +138,7 @@ const Articulos = ({ onUpdateCarrito }) => {
       localStorage.setItem("articulos", JSON.stringify(articulosSincronizados));
     }
 
+    // INICIALIZAR IMAGENES ACTUALES
     const imagenesIniciales = {};
     articulosData.forEach(articulo => {
       imagenesIniciales[articulo.nombre] = 0;
@@ -152,7 +153,6 @@ const Articulos = ({ onUpdateCarrito }) => {
   };
 
   useEffect(() => {
-   
     const articulosData = [
       { nombre: "Colores", price: 95, img: "https://i.postimg.cc/QMYctmWy/Colores.png", desc: "Pigmentos vivos, punta resistente y trazos uniformes.", categoria: "material-artistico" },
       { nombre: "Cuadernos", price: 28, img: "https://i.postimg.cc/Df4GgC62/Cuaderno-Jean-Book.png", desc: "Pasta dura, diseño moderno y hojas cuadriculadas.", categoria: "cuadernos" },
@@ -169,13 +169,68 @@ const Articulos = ({ onUpdateCarrito }) => {
       { nombre: "Arbol de Navidad", price: 800, img: "https://i.postimg.cc/s2tv0QhT/813arlp-Ns-SL.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
       { nombre: "Corona Navidad", price: 120, img: "https://i.postimg.cc/kMygWhT5/71Nf-URFBXAL-AC_UF894-1000-QL80.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
       { nombre: "Bolsa Navideña", price: 20, img: "https://i.postimg.cc/59LBr4Y6/descarga-removebg-preview.png", desc: "El mejor material de pinceles.", categoria: "papel" },
-      { nombre: "Papel Navideño", price: 15, img: "https://i.postimg.cc/LXf1GDsQ/papel-navideno-beumont-couche-70x100cm-9438hr-sku-349031.jpg", desc: "El mejor material de pinceles.", categoria: "papel" }
+      { nombre: "Papel Navideño", price: 15, img: "https://i.postimg.cc/LXf1GDsQ/papel-navideno-beumont-couche-70x100cm-9438hr-sku-349031.jpg", desc: "El mejor material of pinceles.", categoria: "papel" }
     ];
      
-  
     sincronizarConInventario(articulosData);
   }, []);
 
+  // CARRUSEL SIMPLIFICADO Y FUNCIONAL
+  useEffect(() => {
+    console.log('🎠 INICIANDO CARRUSEL GLOBAL');
+    
+    // Limpiar intervalo anterior si existe
+    if (intervaloGlobalRef.current) {
+      clearInterval(intervaloGlobalRef.current);
+    }
+
+    // Crear un solo intervalo global que rote todas las imágenes
+    intervaloGlobalRef.current = setInterval(() => {
+      setImagenesActuales(prev => {
+        const nuevoEstado = { ...prev };
+        
+        // Rotar imagen para cada artículo que tenga múltiples imágenes
+        Object.keys(imagenesExtra).forEach(nombreArticulo => {
+          const imagenes = imagenesExtra[nombreArticulo];
+          if (imagenes && imagenes.length > 1) {
+            const indiceActual = nuevoEstado[nombreArticulo] || 0;
+            const siguienteIndice = (indiceActual + 1) % imagenes.length;
+            nuevoEstado[nombreArticulo] = siguienteIndice;
+          }
+        });
+        
+        return nuevoEstado;
+      });
+    }, 3000); // Cambiar cada 3 segundos
+
+    // Cleanup
+    return () => {
+      if (intervaloGlobalRef.current) {
+        clearInterval(intervaloGlobalRef.current);
+      }
+    };
+  }, []); // Se ejecuta solo una vez al montar
+
+  // Función manual para cambiar imagen (opcional)
+  const cambiarImagenManual = (nombreArticulo, direccion) => {
+    const imagenes = imagenesExtra[nombreArticulo];
+    if (!imagenes || imagenes.length <= 1) return;
+
+    setImagenesActuales(prev => {
+      const nuevoEstado = { ...prev };
+      const indiceActual = nuevoEstado[nombreArticulo] || 0;
+      let nuevoIndice;
+      
+      if (direccion === 'siguiente') {
+        nuevoIndice = (indiceActual + 1) % imagenes.length;
+      } else {
+        nuevoIndice = (indiceActual - 1 + imagenes.length) % imagenes.length;
+      }
+      
+      nuevoEstado[nombreArticulo] = nuevoIndice;
+      return nuevoEstado;
+    });
+  };
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -238,26 +293,6 @@ const Articulos = ({ onUpdateCarrito }) => {
     return filtrados;
   }, [articulos, busqueda, categoria, soloEnStock, soloFavoritos, favoritos, obtenerCantidadDisponible]);
 
-  useEffect(() => {
-    const intervalos = {};
-    
-    articulos.forEach(articulo => {
-      const imagenes = imagenesExtra[articulo.nombre];
-      if (imagenes && imagenes.length > 1) {
-        intervalos[articulo.nombre] = setInterval(() => {
-          setImagenesActuales(prev => ({
-            ...prev,
-            [articulo.nombre]: (prev[articulo.nombre] + 1) % imagenes.length
-          }));
-        }, 2500);
-      }
-    });
-
-    return () => {
-      Object.values(intervalos).forEach(interval => clearInterval(interval));
-    };
-  }, [articulos]);
-
   const toggleFavorito = (articulo) => {
     if (favoritos[articulo.nombre]) {
       eliminarDeFavoritos(articulo.nombre);
@@ -277,7 +312,6 @@ const Articulos = ({ onUpdateCarrito }) => {
       }
     }
   };
-
 
   const agregarAlCarrito = (articulo) => {
     const cantidadDisponible = obtenerCantidadDisponible(articulo.nombre);
@@ -461,7 +495,8 @@ const Articulos = ({ onUpdateCarrito }) => {
             const sinStock = cantidadDisponible <= 0;
             const esFavorito = favoritos[articulo.nombre];
             const imagenes = imagenesExtra[articulo.nombre] || [articulo.img];
-            const imagenActual = imagenes[imagenesActuales[articulo.nombre] || 0];
+            const indiceImagen = imagenesActuales[articulo.nombre] || 0;
+            const imagenActual = imagenes[indiceImagen];
             const tieneCarrusel = imagenes.length > 1;
 
             return (
@@ -487,14 +522,37 @@ const Articulos = ({ onUpdateCarrito }) => {
                     className="articulo-image"
                   />
                   {tieneCarrusel && (
-                    <div className="carousel-indicators">
-                      {imagenes.map((_, imgIndex) => (
-                        <div
-                          key={imgIndex}
-                          className={`carousel-dot ${imgIndex === imagenesActuales[articulo.nombre] ? 'active' : ''}`}
-                        />
-                      ))}
-                    </div>
+                    <>
+                      <div className="carousel-indicators">
+                        {imagenes.map((_, imgIndex) => (
+                          <div
+                            key={imgIndex}
+                            className={`carousel-dot ${imgIndex === indiceImagen ? 'active' : ''}`}
+                          />
+                        ))}
+                      </div>
+                      {/* Botones manuales para navegación (opcional) */}
+                      <div className="carousel-controls">
+                        <button 
+                          className="carousel-btn prev-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            cambiarImagenManual(articulo.nombre, 'anterior');
+                          }}
+                        >
+                          ‹
+                        </button>
+                        <button 
+                          className="carousel-btn next-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            cambiarImagenManual(articulo.nombre, 'siguiente');
+                          }}
+                        >
+                          ›
+                        </button>
+                      </div>
+                    </>
                   )}
                 </div>
 
