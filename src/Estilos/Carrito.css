@@ -261,7 +261,6 @@
   box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .carrito-table {
     width: 100%;
@@ -304,7 +303,6 @@
   }
 }
 
-/* Efectos de animación */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -324,7 +322,6 @@
   animation: fadeIn 0.8s ease-out;
 }
 
-/* Estados de stock */
 .stock-bajo {
   color: #e74c3c;
   background: #ffeaea;

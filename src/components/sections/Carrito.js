@@ -99,8 +99,7 @@ const Carrito = ({ onUpdateCarrito }) => {
   const eliminarItem = (index) => {
     const carritoActual = obtenerCarrito();
     const itemEliminado = carritoActual[index];
-    
-    // Reintegrar al inventario
+  
     reintegrarAlInventario(itemEliminado.name, itemEliminado.qty);
     
    

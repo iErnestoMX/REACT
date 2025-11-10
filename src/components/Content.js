@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Articulos from './sections/Articulos';
 import Carrito from './sections/Carrito';

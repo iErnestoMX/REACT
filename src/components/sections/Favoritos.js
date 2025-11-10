@@ -8,25 +8,23 @@ const Favoritos = ({ onUpdateFavoritos }) => {
   const [favoritos, setFavoritos] = useState([]);
   const [inventario, setInventario] = useState([]);
 
-  // 🔄 NUEVO: Sincronizar favoritos con inventario
   useEffect(() => {
     const sincronizarDatos = () => {
       const favoritosActual = obtenerFavoritos();
       const inventarioActual = obtenerInventario();
       
-      // 🔄 Actualizar precios de favoritos con los del inventario
       const favoritosActualizados = favoritosActual.map(favorito => {
         const productoInventario = inventarioActual.find(prod => prod.nombre === favorito.nombre);
         if (productoInventario && productoInventario.precio !== favorito.price) {
           return {
             ...favorito,
-            price: productoInventario.precio // 🔥 Precio actualizado
+            price: productoInventario.precio 
           };
         }
         return favorito;
       });
       
-      // Guardar solo si hubo cambios
+
       if (JSON.stringify(favoritosActualizados) !== JSON.stringify(favoritosActual)) {
         localStorage.setItem('favoritos', JSON.stringify(favoritosActualizados));
       }
@@ -37,11 +35,11 @@ const Favoritos = ({ onUpdateFavoritos }) => {
 
     sincronizarDatos();
 
-    // Escuchar cambios en el almacenamiento
+
     window.addEventListener('storage', sincronizarDatos);
     window.addEventListener('favoritosActualizados', sincronizarDatos);
     
-    // Verificar cambios cada segundo
+
     const interval = setInterval(sincronizarDatos, 1000);
     
     return () => {
@@ -85,12 +83,12 @@ const Favoritos = ({ onUpdateFavoritos }) => {
       carrito.push({
         name: producto.nombre,
         qty: 1,
-        price: producto.price, // 🔄 Ya tiene el precio actualizado
+        price: producto.price, 
         img: producto.img
       });
     }
 
-    // Actualizar inventario
+
     const inventarioActualizado = inventarioActual.map(prod => 
       prod.nombre === producto.nombre 
         ? { ...prod, cantidad: prod.cantidad - 1 }
@@ -158,7 +156,7 @@ const Favoritos = ({ onUpdateFavoritos }) => {
               </h3>
               
               <p className="favorito-precio">
-                ${item.price} {/* 🔄 Muestra el precio actualizado */}
+                ${item.price} 
               </p>
               
               <div className={`favorito-stock ${sinStock ? 'sin-stock' : stockDisponible <= 5 ? 'bajo-stock' : 'en-stock'}`}>

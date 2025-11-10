@@ -1,4 +1,4 @@
-// Utilidades seguras para localStorage que funcionan con SSR
+
 
 export const getLocalStorage = (key, defaultValue = null) => {
   if (typeof window === 'undefined') return defaultValue;

@@ -200,8 +200,6 @@
   font-size: 13px;
 }
 
-/* SOLO AGREGAR ESTOS ESTILOS PARA EL DISEÑO HORIZONTAL */
-
 .lista-ventas-horizontal {
   display: flex;
   flex-direction: column;
