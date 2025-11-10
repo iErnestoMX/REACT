@@ -72,7 +72,7 @@ const Articulos = ({ onUpdateCarrito }) => {
     ],
     "Esferas Navideñas": [
       "https://i.postimg.cc/JzVYmPW1/214620-d.jpg",
-      "https://resources.sanborns.com.mx/medios-plazavip/t1/1734401243DNQNP976451MLM7998586499210204Ojpg?scale=50&qlty=75",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVfyqJFv_xuHMWawB2hyLYqdcsVtt7DMnHcQ&s",
       "https://http2.mlstatic.com/D_NQ_NP_769807-MLU74023754004_012024-O.webp"
     ],
     "Luces LED": [
@@ -162,12 +162,12 @@ const Articulos = ({ onUpdateCarrito }) => {
       { nombre: "Plastilina", price: 18, img: "https://i.postimg.cc/3wTtxMPQ/Plastilina.png", desc: "Colores vibrantes y textura suave.", categoria: "material-artistico" },
       { nombre: "Pegamento blanco", price: 25, img: "https://i.postimg.cc/JzWNbNK0/Pegamento-Blanco.png", desc: "Adhesivo fuerte y de secado rápido.", categoria: "adhesivos" },
       { nombre: "Pincel", price: 15, img: "https://i.postimg.cc/5tvCJSb1/Pincel.png", desc: "El mejor material de pinceles.", categoria: "escritura" },
-      { nombre: "Esferas Navideñas", price: 50, img: "https://i.postimg.cc/JzVYmPW1/214620-d.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
-      { nombre: "Luces LED", price: 110, img: "https://i.postimg.cc/d0H4YgpH/Imagen-Lucez.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
-      { nombre: "Arbol de Navidad", price: 800, img: "https://i.postimg.cc/s2tv0QhT/813arlp-Ns-SL.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
-      { nombre: "Corona Navidad", price: 120, img: "https://i.postimg.cc/kMygWhT5/71Nf-URFBXAL-AC_UF894-1000-QL80.jpg", desc: "El mejor material de pinceles.", categoria: "material-artistico" },
-      { nombre: "Bolsa Navideña", price: 20, img: "https://i.postimg.cc/59LBr4Y6/descarga-removebg-preview.png", desc: "El mejor material de pinceles.", categoria: "papel" },
-      { nombre: "Papel Navideño", price: 15, img: "https://i.postimg.cc/LXf1GDsQ/papel-navideno-beumont-couche-70x100cm-9438hr-sku-349031.jpg", desc: "El mejor material of pinceles.", categoria: "papel" }
+      { nombre: "Esferas Navideñas", price: 50, img: "https://i.postimg.cc/JzVYmPW1/214620-d.jpg", desc: "Esferas unicas para sus casas.", categoria: "material-artistico" },
+      { nombre: "Luces LED", price: 110, img: "https://i.postimg.cc/d0H4YgpH/Imagen-Lucez.jpg", desc: "Luces LED que iluminan y se modifican mediante la App.", categoria: "material-artistico" },
+      { nombre: "Arbol de Navidad", price: 800, img: "https://i.postimg.cc/s2tv0QhT/813arlp-Ns-SL.jpg", desc: "El mejor arbol sitentico para tu casa.", categoria: "material-artistico" },
+      { nombre: "Corona Navidad", price: 120, img: "https://i.postimg.cc/kMygWhT5/71Nf-URFBXAL-AC_UF894-1000-QL80.jpg", desc: "Corona Navideña grande, pequeño a un buen precio.", categoria: "material-artistico" },
+      { nombre: "Bolsa Navideña", price: 20, img: "https://i.postimg.cc/59LBr4Y6/descarga-removebg-preview.png", desc: "Bolsa navideña diferentes tamaños.", categoria: "papel" },
+      { nombre: "Papel Navideño", price: 15, img: "https://i.postimg.cc/LXf1GDsQ/papel-navideno-beumont-couche-70x100cm-9438hr-sku-349031.jpg", desc: "Papel navideño de diferentes figuras.", categoria: "papel" }
     ];
      
     sincronizarConInventario(articulosData);
