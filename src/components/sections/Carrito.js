@@ -9,25 +9,23 @@ const Carrito = ({ onUpdateCarrito }) => {
   const [carrito, setCarrito] = useState([]);
   const [inventario, setInventario] = useState([]);
 
-  // 🔄 NUEVO: Sincronizar carrito con inventario
   useEffect(() => {
     const sincronizarDatos = () => {
       const carritoActual = obtenerCarrito();
       const inventarioActual = obtenerInventario();
       
-      // 🔄 Actualizar precios del carrito con los del inventario
+   
       const carritoActualizado = carritoActual.map(item => {
         const productoInventario = inventarioActual.find(prod => prod.nombre === item.name);
         if (productoInventario && productoInventario.precio !== item.price) {
           return {
             ...item,
-            price: productoInventario.precio // 🔥 Precio actualizado
+            price: productoInventario.precio
           };
         }
         return item;
       });
       
-      // Guardar solo si hubo cambios
       if (JSON.stringify(carritoActualizado) !== JSON.stringify(carritoActual)) {
         guardarCarrito(carritoActualizado);
       }
@@ -38,10 +36,8 @@ const Carrito = ({ onUpdateCarrito }) => {
 
     sincronizarDatos();
 
-    // Escuchar cambios en el almacenamiento
     window.addEventListener('storage', sincronizarDatos);
-    
-    // Verificar cambios cada segundo
+
     const interval = setInterval(sincronizarDatos, 1000);
     
     return () => {
@@ -107,7 +103,7 @@ const Carrito = ({ onUpdateCarrito }) => {
     // Reintegrar al inventario
     reintegrarAlInventario(itemEliminado.name, itemEliminado.qty);
     
-    // Eliminar del carrito
+   
     carritoActual.splice(index, 1);
     guardarCarrito(carritoActual);
     setCarrito(carritoActual);
@@ -119,7 +115,7 @@ const Carrito = ({ onUpdateCarrito }) => {
   };
 
   const vaciarCarrito = () => {
-    // Reintegrar todos los productos al inventario
+
     carrito.forEach(item => {
       reintegrarAlInventario(item.name, item.qty);
     });
@@ -160,7 +156,7 @@ const Carrito = ({ onUpdateCarrito }) => {
     if (window.confirm(`🛒 RESUMEN DE COMPRA:\n\n👤 Cliente: ${clienteNombre}\n📧 Email: ${clienteEmail}\n\n${resumen}\n\n💵 TOTAL: $${total}\n\n¿Confirmar compra?`)) {
       
       try {
-        // Registrar cliente
+    
         let cliente = buscarClientePorEmail(clienteEmail);
         if (!cliente) {
           cliente = agregarCliente({
@@ -170,7 +166,7 @@ const Carrito = ({ onUpdateCarrito }) => {
           });
         }
 
-        // Registrar venta
+
         const venta = registrarVenta({
           cliente: clienteNombre,
           clienteEmail: clienteEmail,
@@ -185,7 +181,6 @@ const Carrito = ({ onUpdateCarrito }) => {
           items: carrito.length
         });
 
-        // Limpiar carrito
         guardarCarrito([]);
         setCarrito([]);
         onUpdateCarrito();

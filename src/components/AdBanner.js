@@ -28,7 +28,7 @@ const AdBanner = ({ size = 'banner', content, image, link }) => {
           <span className="ad-text">{content || 'Espacio Publicitario'}</span>
         </div>
       )}
-      <span className="ad-label"></span>
+      <span className="ad-label">Publicidad</span>
     </div>
   );
 };

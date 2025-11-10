@@ -38,6 +38,7 @@ export const obtenerTodosLosCarritos = () => {
   return todosLosCarritos;
 };
 
+
 export const obtenerEstadisticasDashboard = () => {
   const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
   const clientesCompradores = usuarios.filter(u => u.tipo === "comprador").length;
